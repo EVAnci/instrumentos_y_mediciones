@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{report}
 
 % Set lang (support for xelatex and lualatex)
 \usepackage{fontspec}
@@ -10,91 +10,46 @@
 \setsansfont{CMU Sans Serif}
 \setmonofont{CMU Typewriter Text}
 
+% Bibliography stuff
+\usepackage[backend=biber, style=authoryear-icomp]{biblatex}
+\addbibresource{main.bib}
+
+% Math stuff
 \usepackage{amsmath}
 
-\title{Glosario}
+% Colors
+\usepackage{xcolor}
+\definecolor{soft_blue}{rgb}{0.39, 0.58, 0.93} % dark_blue
+\definecolor{soft_red}{rgb}{0.8, 0.31, 0.36} % red
+\definecolor{soft_green}{RGB}{100,180,100} % green
+\definecolor{url}{rgb}{0.45, 0.29, 0.58} % purple
+
+% Urls and hyperref
+\usepackage[colorlinks=true,
+    linkcolor=url,
+    urlcolor=soft_blue,
+    citecolor=soft_blue,
+    hypertexnames=false]{hyperref}
+
+% SI units (V,A,m,kg)
+\usepackage{siunitx}
+\sisetup{
+  locale = FR,         % El estilo francés usa la coma decimal, igual que el español técnico
+  separate-uncertainty = true, % Útil para mediciones: 10,0 +- 0,1
+  per-mode = symbol    % Para usar V/m en lugar de V m^{-1}
+}
+\DeclareSIUnit{\div}{div}
+
+\title{Instrumentos y mediciones}
 \author{Elio Valentino Anci}
 
 \begin{document}
 \maketitle
 
+\tableofcontents
 
-\section{Capítulo I: Introducción}
+\include{chapters/1_unit/main}
 
-\begin{enumerate}
-  \item Magnitud (\(X\)): se mide en la unidad física (V,A,\(\Omega\)). Usualmente en literatura ingenieril, se utiliza la letra \(U\) para hablar de diferencia de potencial (o tensión).
-
-  \item Sensibilidad de un instrumento: Relación efecto/causa. Esto se refiere puramente a la transferencia del dispositivo. Causa es la magnitud física que quiere medir (\(X\)). Por ejemplo: Tensión, Corriente o Temperatura. Efecto es la respuesta observable del instrumento (\(Y\)). Por ejemplo desplazamiento de la aguja en \texttt{mm}.
-    \[
-      S_i = \frac{\Delta\text{Efecto}}{\Delta\text{Causa}} = \frac{\Delta Y}{\Delta X}
-    \]
-    Por ejemplo: tiene un termómetro de mercurio y por cada \(1^\circ\)C que sube la temperatura (causa), la columna de mercurio sube 2\texttt{cm} (efecto), la sensibilidad del instrumento es de \(2\text{\texttt{cm}}/^\circ \text{C}\).
-
-    Si un instrumento (por ejemplo de imán permanente y bobina móvil) tiene una ley de respuesta
-    \[
-      I=k\alpha
-    \]
-    se puede ver claramente que para una pequeña variación de corriente \(\delta I\) habrá una pequeña variación de deflexión \(\delta\alpha\). Y a cada pequeño incremento de corriente le corresponderá el mismo cambio en la deflexión. Entonces se dice que la sensibilidad del instrumento es constante:
-    \begin{equation}\label{eq_sensibilidad_constante}
-      S=\frac{\delta \alpha}{\delta I}
-    \end{equation}
-
-    Por otro lado, si la deflexión responde a una ley alineal, entonces el cociente \eqref{eq_sensibilidad_constante} no es constante y varía punto a punto, donde su expresión matemática será 
-    \[
-      \lim_{\Delta I \to 0} \frac{\Delta \alpha}{\Delta I} \approx \frac{d\alpha}{dI}
-    \]
-
-  \item Sensibilidad de una técnica de medida: Se define como el cociente entre la magnitud total y el cambio más pequeño que es capaz de detectar. Por ejemplo si desea medir con un calibre muy sensible, pero lo utiliza para medir una pieza vibratoria o en un ambiente con muy mala iluminación, su capacidad para distinguir una pequeña variación disminuye. La \emph{técnica} se vuelve menos sensible aunque el instrumento siga siendo el mismo.
-    
-  \item Medir: Significa comparar una magnitud correspondiente con una unidad apropiada. El valor de la medida queda expresado como el producto entre el valor medido y la unidad correspondiente.
-
-  \item Deflexión (\(\alpha\)): Cantidad de divisiones o grados que se desvía la aguja indicadora sobre una escala de un determinado instrumento. La deflexión suele ser un ángulo de giro o la cantidad de divisiones que ha recorrido la aguja. Se denomina \(\alpha\) al valor actual en donde se detiene la aguja y \(\alpha_\text{max}\) al límite físico del instrumento (fondo de la escala).
-
-    Un ejemplo: si tiene un voltímetro con una escala de 0 a 50 divisiones y lo usa para medir en un rango de 0 a 500V, \(\alpha_{\text{max}}=50\)div. Si al realizar una medida la aguja se clava a la mitad, la \emph{deflexión} es de 25, consecuentemente la lectura será de 250V.
-
-  \item Campo nominal de referencia: Indica el \emph{rango} de un determinado parámetro en el cual el instrumento mantiene su clase (exactitud). Por ejemplo un voltímetro para corriente alterna tiene una leyenda que dice 40Hz-60Hz quiere decir que su exactitud en la medida se mantiene siempre y cuando se respete ese rango de la frecuencia.
-
-  \item Clase: se define como el error absoluto máximo \(E_{\text{max}}\) que puede cometer el instrumento en cualquier parte de su escala, referido a su alcance expresado en valor porcentual:
-    \[
-      c = \frac{E_{\text{max}}}{\text{Alcance}}\cdot 100
-    \]
-    La definición de alcance se presentará en las próximas definiciones.
-
-  \item Cuadrante: es la cara frontal del instrumento que permite interpretar la magnitud medida. Contiene la escala graduada que es el conjunto de trazos y números que representan los valores de magnitud, la aguja indicadora (o índice) que se desplaza sobre el cuadrante para indicar el valor medido y un espejo antiparo que es una franja de espejo situada bajo la escala que sirve para evitar el error de paralaje.
-
-    El cuadrante del instrumento puede contener un número acompañado con un símbolo indicando el principio de funcionamiento. Dicho número representa la clase del instrumento que, cuanto menor sea, mejor será la exactitud de las medidas. Si el instrumento no cuenta con el número de clase, el fabricante no garantiza la clase del instrumento.
-
-  \item Rango de medida: Se define así al tramo de la escala en el cuadrante donde las medidas son confiables. 
-    \[
-      \text{Rango de medida} = [X_{\text{min}},X_{\text{max}}]
-    \]
-    El valor máximo del rango de medida (máxima magnitud: \(X_{\text{max}}\)) queda definido como el \emph{alcance} del instrumento. 
-
-    Por ejemplo si se tiene un voltímetro que presenta en la escala del cuadrante 0V a 500V ese es su rango de medida (todos los valores entre 0V y 500V).
-
-    Si el instrumento responde a una ley de deflexión lineal, entonces el rango de medida será coincidente con el alcance. Para instrumentos cuya ley de deflexión es cuadrática, la escala será lineal. De modo que el fabricante tratará (mediante dispositivos constructivos) de que sea así. No obstante, estos últimos aparatos suelen representar los primeros valores de la escala de forma comprimida, debido a la imposibilidad de su correcta calibración. Así, el alcance del instrumento no considera correctas (o con la exactitud dada por la clase) a los primeros valores más comprimidos. 
-
-  \item Rango de deflexión: similar al rango de medida, pero relacionado a la deflexión. Se define como 
-    \[\text{Rango de deflexión}=[\alpha_\text{min},\alpha_\text{max}]\]
-    Así, corresponde a el movimiento que puede tener la aguja del instrumento sobre el cuadrante.
-
-    No necesariamente el rango de deflexión y el rango de medida coinciden en su totalidad. Algunos instrumentos presentan un pequeño desborde al llegar a los límites de deflexión, garantizando ser precisos en el rango de medida.
-
-  \item Margen de la indicación: Toda la escala del cuadrante.
-
-  \item Constante de lectura: Se define como el cociente entre el alcance (\(X_{\text{max}}\)) y la máxima deflexión en divisiones (\(\alpha_{\text{max}}\)).
-    \[
-      C_E = \frac{\text{Alcance}}{\alpha_{max}}
-    \]
-    Cuando la aguja se deflexiona una cantidad \(\alpha\), la magnitud que está midiendo será:
-    \[
-      X_{\text{medido}} = \alpha \, C_E
-    \]
-
-  \item Consumo propio: Es la potencia absorbida por el propio instrumento para provocar su propia deflexión. Un voltímetro tendrá idealmente una resistencia infinita. Un amperímetro, idealmente, tendrá una resistencia nula. 
-
-    Un voltímetro es conectado usualmente en paralelo. Así, su potencia de consumo será menor siempre que la resistencia sea mayor: \(P=\frac{U^2}{R}\). Para un amperímetro, que se conecta en serie, su potencia de consumo será menor siempre y cuando la resistencia sea menor: \(P=I^2R\)\footnote{Recuerde que \(U\) representa la tensión.}.
-
-\end{enumerate}
+\printbibliography
 
 \end{document}
