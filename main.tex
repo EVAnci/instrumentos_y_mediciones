@@ -1,44 +1,6 @@
 \documentclass{report}
 
-% Set lang (support for xelatex and lualatex)
-\usepackage{fontspec}
-\usepackage{polyglossia}
-\setdefaultlanguage{spanish}
-
-% Enhanced font: Computer Modern Unicode
-\setmainfont{CMU Serif}
-\setsansfont{CMU Sans Serif}
-\setmonofont{CMU Typewriter Text}
-
-% Bibliography stuff
-\usepackage[backend=biber, style=authoryear-icomp]{biblatex}
-\addbibresource{main.bib}
-
-% Math stuff
-\usepackage{amsmath}
-
-% Colors
-\usepackage{xcolor}
-\definecolor{soft_blue}{rgb}{0.39, 0.58, 0.93} % dark_blue
-\definecolor{soft_red}{rgb}{0.8, 0.31, 0.36} % red
-\definecolor{soft_green}{RGB}{100,180,100} % green
-\definecolor{url}{rgb}{0.45, 0.29, 0.58} % purple
-
-% Urls and hyperref
-\usepackage[colorlinks=true,
-    linkcolor=url,
-    urlcolor=soft_blue,
-    citecolor=soft_blue,
-    hypertexnames=false]{hyperref}
-
-% SI units (V,A,m,kg)
-\usepackage{siunitx}
-\sisetup{
-  locale = FR,         % El estilo francés usa la coma decimal, igual que el español técnico
-  separate-uncertainty = true, % Útil para mediciones: 10,0 +- 0,1
-  per-mode = symbol    % Para usar V/m en lugar de V m^{-1}
-}
-\DeclareSIUnit{\div}{div}
+\input{preamble.tex}
 
 \title{Instrumentos y mediciones}
 \author{Elio Valentino Anci}

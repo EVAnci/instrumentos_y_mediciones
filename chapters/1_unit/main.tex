@@ -7,11 +7,11 @@ Este capítulo pretende ser una guía general para el resto de capítulos. Se bu
 A continuación se enumera el vocabulario y las definiciones básicas que se requieren a lo largo del libro.
 
 \begin{enumerate}
-  \item Magnitud (\(X\)): se mide en la unidad física (\unit{\volt}, \unit{\ampere}, \unit{\ohm}). Usualmente en literatura ingenieril, se utiliza la letra \(U\) para hablar de diferencia de potencial (o tensión) como variable.\footnote{Note que las unidades son rectas, mientras que las variables itálicas.}
+  \item Magnitud (\(X\)): se mide en la unidad física (\unit{\volt}, \unit{\ampere}, \unit{\ohm}). Usualmente en literatura ingenieril, se utiliza la letra \(U\) para hablar de diferencia de potencial (o tensión) como variable, \(I\) la corriente y \(R\) la resistencia.\footnote{Note que las unidades son rectas, mientras que las variables itálicas.}
 
   \item Exactitud: La proximidad del valor medido con el real.
 
-  \item Precisión: La repetibilidad de las lecturas en el mismo. Así, un instrumento puede ser muy preciso pero poco exacto si las medidas tienen alta tasa de repeetibilidad pero, son lejanas del valor real. Sin embargo, todo instrumento exacto es preciso.
+  \item Precisión: La repetibilidad de las lecturas en el mismo. Así, un instrumento puede ser muy preciso pero poco exacto si las medidas tienen alta tasa de repetibilidad pero, son lejanas del valor real. Sin embargo, todo instrumento exacto es preciso.
 
   \item Sensibilidad de un instrumento: Relación efecto/causa. Esto se refiere puramente a la transferencia del dispositivo. Causa es la magnitud física que quiere medir (\(X\)). Por ejemplo: Tensión, Corriente o Temperatura. Efecto es la respuesta observable del instrumento (\(Y\)). Por ejemplo desplazamiento de la aguja en \unit{\milli\metre}.
     \[
@@ -39,9 +39,9 @@ A continuación se enumera el vocabulario y las definiciones básicas que se req
 
   \item Deflexión (\(\alpha\)): Cantidad de divisiones o grados que se desvía la aguja indicadora sobre una escala de un determinado instrumento. La deflexión suele ser un ángulo de giro o la cantidad de divisiones\footnote{Para la unidad no estándar ``divisiones'' que recorre la aguja de un instrumento cuando se deflexiona usaremos la unidad \unit{\div}.} que ha recorrido la aguja. Se denomina \(\alpha\) al valor actual en donde se detiene la aguja y \(\alpha_\text{max}\) al límite físico del instrumento (fondo de la escala).
 
-    Un ejemplo: si tiene un voltímetro con una escala de \qty{0}{\div} a \qty{50}{\div} y lo usa para medir en un rango de \qty{0}{\volt} a \qty{500}{\volt}, entonces \(\alpha_{\text{max}}=\qty{50}{\div}\). Si al realizar una medida la aguja se clava a la mitad, la \emph{deflexión} es de \qty{25}{\div}, consecuentemente la lectura será de \qty{250}{\volt}.
+    Un ejemplo: si tiene un voltímetro con una escala de \qtyrange{0}{50}{\div} y lo usa para medir en un rango de \qty{0}{\volt} a \qty{500}{\volt}, entonces \(\alpha_{\text{max}}=\qty{50}{\div}\).\footnote{Vea, que se dice \qtyrange{0}{50}{\div} ya que hay instrumentos que permiten deflexión hacia dos lados, de modo que, a modo de ejemplo, un voltímetro puede indicar \qtyrange{-25}{25}{\volt} y tener \qtyrange{-10}{10}{\div}.} Si al realizar una medida la aguja se clava a la mitad, la \emph{deflexión} es de \qty{25}{\div}, consecuentemente la lectura será de \qty{250}{\volt}.
 
-  \item Campo nominal de referencia: Indica el \emph{rango} de un determinado parámetro en el cual el instrumento mantiene su clase (exactitud). Por ejemplo un voltímetro para corriente alterna tiene una leyenda que dice \qtyrange{40}{60}{\hertz} quiere decir que su exactitud en la medida se mantiene siempre y cuando se respete ese rango de la frecuencia.
+  \item Campo nominal de referencia: Indica el \emph{rango} de un determinado parámetro en el cual el instrumento mantiene su clase (exactitud). Por ejemplo un voltímetro para corriente alterna que tiene una leyenda indicando \qtyrange{40}{60}{\hertz} quiere decir que su exactitud en la medida se mantiene siempre y cuando se respete ese rango de la frecuencia.
 
   \item Clase: se define como el error absoluto máximo \(E_{\text{max}}\) que puede cometer el instrumento en cualquier parte de su escala, referido a su alcance expresado en valor porcentual:
     \[
@@ -84,11 +84,11 @@ A continuación se enumera el vocabulario y las definiciones básicas que se req
 
     Un voltímetro es conectado usualmente en paralelo\footnote{Recuerde que \(U\) representa la tensión.}. Así, su potencia de consumo será menor siempre que la resistencia sea mayor: \(P=\frac{U^2}{R}\). Para un amperímetro, que se conecta en serie, su potencia de consumo será menor siempre y cuando la resistencia sea menor: \(P=I^2R\).
 
-  \item Resolución instrumental: es la variación de magnitud que provoca un mínimo cambio apreciable en la medición. Este valor suele valer desde \(1/5\) a \(1/10\) de división. Por ejemplo en un voltímetro con un rango de medida de 0V a 500V y 50 divisiones, asumiendo que el voltímetro tiene una resolución instrumental de \(1/5\) entonces el mínimo cambio apreciable en la medición es de 2V.
+  \item Resolución instrumental: es la variación de magnitud que provoca un mínimo cambio apreciable en la medición. Este valor suele valer desde \(1/5\) a \(1/10\) de división. Por ejemplo en un voltímetro con un rango de medida de \qtyrange{0}{500}{\volt} y \qty{50}{\div}, asumiendo que el voltímetro tiene una resolución instrumental de \(1/5\) entonces el mínimo cambio apreciable en la medición es de \qty{2}{\volt}.
 
   \item Sobrecarga: Es la máxima cantidad destructiva que tolera el instrumento sobre la máxima cantidad nominal (alcance).
     \[\text{Sobrecarga}=\frac{X_{\text{destructiva}}}{X_{\text{max}}}\]
-    Si un voltímetro tiene un alcance de 100V y una sobrecarga del \(150\%\) significa que el voltímetro puede tolerar 150V sin destruirse.
+    Si un voltímetro tiene un alcance de \qty{100}{\volt} y una sobrecarga del \(150\%\) significa que el voltímetro puede tolerar \qty{150}{\volt} sin destruirse.
 
 \end{enumerate}
 
@@ -96,12 +96,73 @@ Con estas definiciones y vocabulario puede comenzar a interpretar conceptos fund
 
 \section{Unidades de medida}
 
-El sistema de unidades de medida que se prefiere utilizar es el denominado Sistema Internacional (SI)\footnote{Más sobre el SI en \url{https://es.wikipedia.org/wiki/Sistema_Internacional_de_Unidades}.}. 
+El sistema de unidades de medida que se prefiere utilizar es el denominado Sistema Internacional (SI)\footnote{Más sobre el SI en \url{https://es.wikipedia.org/wiki/Sistema_Internacional_de_Unidades}.}. La tabla \ref{tab_sistema_internacional} muestra las unidades elementales del sistema internacional.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Magnitud física} & \textbf{Nombre de la unidad} & \textbf{Símbolo} \\
+    \midrule
+    Longitud                 & metro                       & \unit{m}   \\
+    Masa                     & kilogramo                   & \unit{kg}  \\
+    Tiempo                   & segundo                     & \unit{s}   \\
+    Corriente eléctrica      & amperio                     & \unit{A}   \\
+    Temperatura              & kelvin                      & \unit{K}   \\
+    Cantidad de sustancia    & mol                         & \unit{mol} \\
+    Intensidad luminosa      & candela                     & \unit{cd}  \\
+    \bottomrule
+  \end{tabular}
+  \caption{Unidades básicas del Sistema Internacional de Unidades (SI)}
+  \label{tab_sistema_internacional}
+\end{table}
+A continuación se desarrollará conceptualmente la obtención de las unidades que se requieren.
+
+La comprensión plena de las deducciones requiere nociones previas sobre el flujo de carga y el potencial eléctrico. Un desarrollo extenso de estos principios físicos fundamentales, así como de las leyes que rigen el campo eléctrico, se encuentra disponible en el recurso complementario \citetitle{f2elio} \parencite{f2elio}.
 
 \subsection{Definición de Ampère}
 
-El Ampère (o amperio) es la unidad de medida de la corriente eléctrica. La corriente eléctrica es el flujo de carga eléctrica a través de un conductor. En un circuito eléctrico, la corriente se define como la cantidad de carga eléctrica que pasa por unidad de área en un tiempo determinado.
+El Ampère (o amperio) es la unidad de medida de la corriente eléctrica. La corriente eléctrica es el flujo de carga eléctrica a través de un conductor. En un circuito eléctrico, la corriente se define como la cantidad de carga eléctrica que pasa por unidad de área en un tiempo determinado. La unidad de medida de la corriente es el amperio (\unit{\ampere}), que equivale a un culombio por segundo (\unit{\coulomb\per\second}).
 
-La carga eléctrica (llámese \(Q\)) se mide en 
+\begin{tcolorbox}[
+    sidebyside, sidebyside align=top, sidebyside gap=0.5cm,
+    lower separated=false, lefthand width=0.6\textwidth,
+    frame empty, colback=white, sharp corners, boxrule=0pt,
+    left=0pt, right=0pt, top=0pt
+  ]
+  Cuando hablamos de \emph{flujo de carga} (\(\Phi_Q\)) nos referimos a la cantidad de carga que se mueve a través de una sección transversal del conductor en un tiempo determinado.
 
-La comprensión plena del Ampère requiere nociones previas sobre el flujo de carga y el potencial eléctrico. Un desarrollo extenso de estos principios físicos fundamentales, así como de las leyes que rigen el campo eléctrico, se encuentra disponible en el recurso complementario \citetitle{f2elio} \parencite{f2elio}.
+  Para definir la corriente con mayor precisión, suponga que las cargas tienen un movimiento perpendicular a una superficie \(A\), según se observa en la figura \ref{fig_current}. La corriente se define como la tasa a la cual circula la carga a través de la superficie. Si \(\Delta Q\) es la carga que pasa a través de la superficie \(A\) en un intervalo de tiempo \(\Delta t\), la corriente promedio \(I_{prom}\) se define como se muestra en la ecuación \eqref{eq_i_prom}.
+
+  \tcblower
+  \centering
+  \begin{tikzpicture}[>=stealth]
+    \draw[orange!70!black,fill=orange!70!black!20,name=conductor] (0,0) ellipse (0.7 and 1.5) node[below=1]{\(A\)};
+    \draw[very thick,gray,->] (-1,-2) -- (1,-2) node[right]{\(I\)};
+
+    \foreach \x\y in {-1.1/0.5,-1.3/-0.6,1/0.8,1.3/0,0.9/-0.8} {
+      \shade[inner color=white!80!red, outer color=orange!50!red!70!lightgray] (\x,\y) node{\footnotesize\textbf{+}} circle (.2) [radius=1pt];
+      \draw[very thick,color=red!70!gray,->] ({\x+0.3},\y) -- ({\x+0.9},\y);
+    }
+
+  \end{tikzpicture}
+  \captionof{figure}{Cargas en movimiento a través de un área \(A\).}
+  \label{fig_current}
+\end{tcolorbox}
+\begin{equation}\label{eq_i_prom}
+    I_{prom} = \frac{\Delta Q}{\Delta t}
+\end{equation}
+
+Si la tasa a la que pasan las cargas varía en el tiempo, la corriente instantánea \(I\) se define como:
+\[
+  I = \lim_{\Delta t \to 0} \frac{\Delta Q}{\Delta t} = \frac{dQ}{dt}
+\]
+Para que exista un movimiento de cargas, es necesario que exista una fuerza que actúe sobre ellas. Esta fuerza es la fuerza eléctrica o ley de Coulomb, como muestra la ecuación \eqref{eq_coulomb}\footnote{En la ecuación \eqref{eq_coulomb} \(k_e=\qty{8.9876d9}{\newton\metre\squared\per\coulomb\squared}\) es la constante de Coulomb, \(q_1\) y \(q_2\) son las cargas y \(r\) es la distancia entre cargas.},
+\begin{equation}\label{eq_coulomb}
+  F=k_e \frac{\lvert q_1 \rvert \cdot \lvert q_2 \rvert}{r^2}
+\end{equation}
+que actúa sobre las cargas libres (electrones) debido a la presencia de un campo eléctrico \(E\). Es decir, para que haya corriente eléctrica, debe existir un campo eléctrico que actúe sobre las cargas libres en el conductor. Este campo eléctrico puede ser generado por una diferencia de potencial entre dos puntos del conductor, como en el caso de una batería o una fuente de alimentación.
+
+Cuando hay un campo eléctrico en un conductor, las cargas libres se aceleran y adquieren una velocidad. En palabras simples, podemos asociar la corriente eléctrica con el movimiento de cargas libres en un conductor.
+
+En un conductor, los electrones libres se mueven en direcciones aleatorias debido a la temperatura del material. Sin embargo, cuando se aplica un campo eléctrico, estos electrones adquieren una velocidad de arrastre o \textbf{velocidad de deriva} \(v_d\) en la dirección del campo eléctrico. La velocidad de deriva es la velocidad promedio de las cargas (electrones en el caso de un conductor).
