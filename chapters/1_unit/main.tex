@@ -136,16 +136,7 @@ El Ampère (o amperio) es la unidad de medida de la corriente eléctrica. La cor
 
   \tcblower
   \centering
-  \begin{tikzpicture}[>=stealth]
-    \draw[orange!70!black,fill=orange!70!black!20,name=conductor] (0,0) ellipse (0.7 and 1.5) node[below=0.8]{\(A\)};
-    \draw[very thick,gray,->] (-1,-2) -- (1,-2) node[right]{\(I\)};
-
-    \foreach \x\y in {-1.1/0.5,-1.3/-0.6,1/0.8,1.3/0,0.9/-0.8} {
-      \shade[inner color=white!80!red, outer color=orange!50!red!70!lightgray] (\x,\y) node{\footnotesize\textbf{+}} circle (.2) [radius=1pt];
-      \draw[very thick,color=red!70!gray,->] ({\x+0.3},\y) -- ({\x+0.9},\y);
-    }
-
-  \end{tikzpicture}
+  \input{chapters/1_unit/media/flujo_electrico.tex}
   \captionsetup{hypcap=false} % Disable hycap for this fig
   \captionof{figure}{Cargas en movimiento a través de un área \(A\).}
   \label{fig_current}
@@ -162,72 +153,61 @@ Para que exista un movimiento de cargas, es necesario que exista una fuerza que 
 \begin{equation}\label{eq_coulomb}
   F=k_e \frac{\lvert q_1 \rvert \cdot \lvert q_2 \rvert}{r^2}
 \end{equation}
-que actúa sobre las cargas libres (electrones) debido a la presencia de un campo eléctrico \(E\). Es decir, para que haya corriente eléctrica, debe existir un campo eléctrico que actúe sobre las cargas libres en el conductor. Este campo eléctrico puede ser generado por una diferencia de potencial entre dos puntos del conductor, como en el caso de una batería o una fuente de alimentación.
+Esta fuerza se manifiesta en un conductor en forma de campo eléctrico \(E\), que actúa sobre las cargas libres (electrones). Al provocar una diferencia de potencial\footnote{La diferencia de potencial es provocada mediante una reacción química (como en una batería), o mediante una fuente eléctrica.}, se crea este campo eléctrico que actúa sobre las cargas libres en el conductor. 
 
 Cuando hay un campo eléctrico en un conductor, las cargas libres se aceleran y adquieren una velocidad. En palabras simples, podemos asociar la corriente eléctrica con el movimiento de cargas libres en un conductor.
 
 En un conductor, los electrones libres se mueven en direcciones aleatorias debido a la temperatura del material. Sin embargo, cuando se aplica un campo eléctrico, estos electrones adquieren una velocidad de arrastre o velocidad de deriva \(v_d\) en la dirección del campo eléctrico. La velocidad de deriva es la velocidad promedio de las cargas (electrones en el caso de un conductor).
-\begin{figure}[ht]
-  \centering
-  \begin{tikzpicture}[>=stealth]
-    \def\rx{0.5}
-    \def\ry{1}
-    \def\lle{1.5}
-    \def\curv{0.5}
+\input{chapters/1_unit/media/movimiento_de_cargas.tex}
 
-    \shade[top color=orange!70!black!10, bottom color=orange!70!black!50] 
-      (-\lle, \ry) -- (\lle, \ry)
-      arc (90:-90:\rx cm and \ry cm)
-      -- (-\lle, -\ry)
-      arc (-90:90:\rx cm and \ry cm);
+Recordando que \(\Delta Q\) es la cantidad de carga que pasa a través de la sección transversal \(A\), si toma un pedazo de conductor de longitud \(\Delta x\) como se muestra en la figura \ref{fig_movimiento_de_cargas}, puede expresar el volumen de este segmento de conductor como \(A\cdot\Delta x=A\cdot v_d\cdot \Delta t\). Si \(n\) es la densidad de cargas (número de cargas por unidad de volumen), el número de cargas en el segmento es \(nAv_d\Delta t\). Entonces la carga total de esa sección es
+\begin{equation}\label{eq_carga_en_el_conductor}
+  \Delta Q = (n\, A\, v_d\, \Delta t) q
+\end{equation}
+donde \(q\) es la carga de cada portador (electrones). Así se puede obtener la expresión de la corriente operando sobre la expresión \eqref{eq_carga_en_el_conductor}. Si divide ambos lados de la ecuación por \(\Delta t\) resulta
+\begin{equation}\label{eq_corriente_promedio}
+  I_\text{prom}=\frac{\Delta Q}{\Delta t} = n \, A\, v_d\, q
+\end{equation}
+que es la expresión de la corriente promedio.
 
-    \shade (-\lle-2,0) .. controls (-\lle-2+\curv, 0.3) .. (-\lle-2, \ry) .. controls (-\lle-2-\curv+0.3, 0.4) .. (-\lle-2, 0);
-    \shade (\lle+2,0) .. controls (\lle+2-\curv, 0.3) .. (\lle+2, \ry) .. controls (\lle+2+\curv-0.3, 0.4) .. (\lle+2, 0);
+\input{chapters/1_unit/media/corriente_convencional.tex}
 
-    \shade[top color=white, bottom color=white!70!black!60] 
-      (-\lle,-\ry) -- (-\lle-2,-\ry) .. controls (-\lle-2-\curv, -0.3) and (-\lle-2+\curv, 0.3) .. (-\lle-2, \ry) -- (-\lle,\ry);
-    \shade[top color=white, bottom color=white!70!black!60] 
-      (\lle,-\ry) -- (\lle+2,-\ry) .. controls (\lle+2+\curv, -0.3) and (\lle+2-\curv, 0.3) .. (\lle+2, \ry) -- (\lle,\ry);
+La figura \ref{fig_corriente_convencional} presenta segmentos de material conductor. En la figura \ref{fig:flujo_de_cargas_positivas}, las cargas en movimiento son positivas, la fuerza eléctrica ocurre en la misma dirección que \(E\), y la velocidad de deriva \(v_d\) es de izquierda a derecha. En la figura \ref{fig:flujo_de_cargas_negativas} las cargas son negativas, la fuerza eléctrica es opuesta a \(E\), y la velocidad de deriva \(v_d\) es de derecha a izquierda. Definimos que la corriente, denotada por \(I\), va en la dirección en la que hay un flujo de carga positiva. Por ello, las corrientes se describen como si consistieran por completo en un flujo de cargas positivas, aun en los casos en que se sabe que la corriente real se debe a electrones. Así, en las figuras \ref{fig:flujo_de_cargas_positivas} y \ref{fig:flujo_de_cargas_negativas} la corriente es hacia la derecha. Esta convención sobre la dirección del flujo de la corriente se llama \emph{corriente convencional}. Aunque la dirección de la corriente convencional no es necesariamente la misma en que se desplazan en realidad las partículas con carga, veremos que el signo de las cargas en movimiento tiene poca importancia en el análisis de los circuitos eléctricos.
 
-    \draw[thick] 
-      (-\lle, \ry) -- (\lle, \ry)
-      arc (90:-90:\rx cm and \ry cm)
-      -- (-\lle, -\ry)
-      arc (-90:90:\rx cm and \ry cm);
+La ecuación \eqref{eq_corriente_promedio} muestra una expresión para el cálculo de la corriente promedio en un intervalo de tiempo dado. Así, el amperio se deriva de \unit{\coulomb\per\second} (Coulomb por segundo) pero, ¿qué significa esto en términos fundamentales?
+
+Desde la redefinición del SI en 2019, la unidad se basa en valores fijos de constantes naturales. Se fija la carga elemental (la carga de un electrón) exactamente en:
+\begin{equation}
+    e = \qty{1.602176634d-19}{\coulomb}
+\end{equation}
+
+Para comprender la magnitud de un amperio, podemos invertir esta relación para determinar cuántas cargas elementales constituyen un Coulomb:
+\begin{align*}
+    \qty{1}{\coulomb} &= \frac{1}{1.602176634\times 10^{-19}} e \\
+    \qty{1}{\coulomb} &\approx \qty{6.241509d18}{} \text{ cargas elementales}
+\end{align*}
+Por lo tanto, sustituyendo esto en la definición de corriente ($I = q/t$), un amperio queda definido formalmente como:
+\begin{equation}
+    \qty{1}{\ampere} = \frac{\qty{1}{\coulomb}}{\qty{1}{\second}} \approx \frac{\qty{6.2415d18}{} \text{ electrones}}{\qty{1}{\second}}
+\end{equation}
+O, dicho de otra forma más fundamental: un amperio es el flujo de aproximadamente \num{6.2415d18} cargas elementales por segundo a través de una sección transversal determinada.
+
+\subsubsection{Evolución del estándar: De la fuerza al flujo}
+
+Es fundamental distinguir entre la definición histórica, que rigió la metrología durante gran parte del siglo XX, y la definición moderna basada en constantes fundamentales.
+
+Anteriormente, el amperio se definía mediante un experimento idealizado de fuerza magnética. Se basaba en la Ley de Ampère para la fuerza entre dos conductores paralelos:
+\begin{equation}
+    \frac{F}{L} = \frac{\mu_0 I_1 I_2}{2\pi d}
+\end{equation}
+Para que esta definición fuera válida, el Sistema Internacional fijaba el valor exacto de la permeabilidad magnética del vacío en \(\mu_0 = 4\pi \times10^{-7}\unit{\henry\per\meter}\). Así, si la distancia \(d\) era \qty{1}{\meter} y la fuerza resultante era \qty{2d-7}{\newton} por metro, la corriente se definía como \qty{1}{\ampere}.
+
+Esta definición dependía de una configuración geométrica ideal (cables infinitos, sección despreciable) difícil de replicar con alta precisión en un laboratorio.
+
+La redefinición eliminó la dependencia de la geometría y la fuerza mecánica. Ahora, el amperio se define fijando la carga elemental \(e\) (un contador de partículas) y el segundo (basado en el reloj atómico de cesio).
+
+Al fijar la carga elemental \(e\) como exacta, la permeabilidad del vacío \(\mu_0\) dejó de ser una constante exacta. En el sistema actual, \(\mu_0\) es un valor que debe determinarse experimentalmente, con una incertidumbre asociada (proporcional a la constante de estructura fina \(\alpha\)).
+
+\subsection{Definición de Voltio}
 
 
-    \shade[outer color=orange!60!black!36, inner color=orange!60!black!20] (\lle,0) ellipse (\rx cm and \ry cm);
-    \shade[outer color=orange!60!black!36, inner color=orange!60!black!20] (-\lle,0) ellipse (\rx cm and \ry cm);
-
-    \draw[black,thick] (-\lle-2,-\ry) .. controls (-\lle-2-\curv, -0.3) and (-\lle-2+\curv, 0.3) .. (-\lle-2, \ry) .. controls (-\lle-2-\curv+0.3, 0.4) .. (-\lle-2, 0);
-    \draw[black,thick] (\lle+2,-\ry) .. controls (\lle+2+\curv, -0.3) and (\lle+2-\curv, 0.3) .. (+\lle+2, \ry) .. controls (\lle+2+\curv-0.3, 0.4) .. (\lle+2, 0);
-    \draw[black,thick] (-\lle,\ry) -- (-\lle-2,\ry);
-    \draw[black,thick] (-\lle,-\ry) -- (-\lle-2,-\ry);
-    \draw[black,thick] (\lle,\ry) -- (\lle+2,\ry);
-    \draw[black,thick] (\lle,-\ry) -- (\lle+2,-\ry);
-
-    \draw[thick, dotted] (-\lle,\ry) arc (90:270:\rx cm and \ry cm);
-    \draw[thick, dotted] (\lle,\ry) arc (90:270:\rx cm and \ry cm);
-
-    \node at (\lle, 0) {\color{orange!40!black}\(A\)};
-
-    \draw[thin] (-\lle,\ry+0.2) -- (-\lle,\ry+1);
-    \draw[thin] (\lle,\ry+0.2) -- (\lle,\ry+1);
-    \draw[thin,->] (-0.4,\ry+0.8) -- (-\lle,\ry+0.8);
-    \draw[thin,->] (0.4,\ry+0.8) -- (\lle,\ry+0.8);
-    \node at (0,\ry+0.8) {\(\Delta x\)};
-
-    \draw[thin] (-\lle,-\ry-0.2) -- (-\lle,-\ry-1);
-    \draw[thin] (\lle,-\ry-0.2) -- (\lle,-\ry-1);
-    \draw[thin,->] (-0.5,-\ry-0.8) -- (-\lle,-\ry-0.8);
-    \draw[thin,->] (0.5,-\ry-0.8) -- (\lle,-\ry-0.8);
-    \node at (0,-\ry-0.8) {\(v_d \Delta t\)};
-
-    \shade[inner color=white!80!red, outer color=orange!50!red!70!lightgray] (-0.4,0.4) node{\footnotesize\textbf{+}} circle (.2) [radius=1pt];
-    \draw[very thick,color=red!70!gray,->] (-0.1,0.4) node[above right=3pt] {\(v_d\)}-- (0.4,0.4) ;
-    \shade[inner color=white!80!red, outer color=orange!50!red!70!lightgray] (-0.5,-0.3) node{\footnotesize\textbf{+}} node[below left=4pt] {\(q\)} circle (.2) [radius=1pt];
-    \draw[very thick,color=red!70!gray,->] (-0.2,-0.3) -- (0.3,-0.3);
-  \end{tikzpicture}
-  \caption{Movimiento de cargas en un conductor.}
-  \label{fig_movimiento_de_cargas}
-\end{figure}
