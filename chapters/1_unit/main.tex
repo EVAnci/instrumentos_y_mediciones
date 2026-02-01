@@ -87,10 +87,52 @@ A continuación se enumera el vocabulario y las definiciones básicas que se req
   \item Resolución instrumental: es la variación de magnitud que provoca un mínimo cambio apreciable en la medición. Este valor suele valer desde \(1/5\) a \(1/10\) de división. Por ejemplo en un voltímetro con un rango de medida de \qtyrange{0}{500}{\volt} y \qty{50}{\div}, asumiendo que el voltímetro tiene una resolución instrumental de \(1/5\) entonces el mínimo cambio apreciable en la medición es de \qty{2}{\volt}.
 
   \item Sobrecarga: Es la máxima cantidad destructiva que tolera el instrumento sobre la máxima cantidad nominal (alcance).
-    \[\text{Sobrecarga}=\frac{X_{\text{destructiva}}}{X_{\text{max}}}\]
+    \[\text{Sobrecarga}=\frac{X_{\text{destructiva}}}{X_{\text{max}}}~ 100\%\]
     Si un voltímetro tiene un alcance de \qty{100}{\volt} y una sobrecarga del \(150\%\) significa que el voltímetro puede tolerar \qty{150}{\volt} sin destruirse.
 
 \end{enumerate}
+
+Antes de continuar con las unidades de medida, se realiza una distinción entre fuerza electromotriz y potencial eléctrico, ya que, suele ser motivo de confusión.
+
+\subsection{Fuerza Electromotriz (FEM) y Potencial Eléctrico}
+
+En el estudio de la metrología eléctrica, es crucial distinguir entre la energía suministrada al sistema y la energía disipada por los componentes del circuito.
+
+\begin{definition}(FEM)
+La Fuerza Electromotriz (FEM) se define como el trabajo total realizado por una fuente de energía (química, magnética o térmica) por unidad de carga positiva que atraviesa dicha fuente de un terminal de menor potencial a uno de mayor potencial. A pesar de su nombre histórico, no es una fuerza mecánica, sino una magnitud escalar de energía:
+\begin{equation}
+\mathcal{E} = \frac{dW}{dq}
+\end{equation}
+Donde:
+\begin{itemize}
+  \item \(\mathcal{E}\) es la FEM medida en Voltios (\(V\)).
+  \item \(dW\) es el trabajo realizado sobre la carga en Julios (\(J\)).
+  \item \(dq\) es la carga eléctrica en Coulombs (\(C\)).
+\end{itemize}
+\end{definition}
+
+Es importante diferenciar el potencial eléctrico de la fuerza electromotriz. Aunque ambas magnitudes se miden en voltios, su origen físico y comportamiento en la instrumentación difieren significativamente. El cuadro \ref{tab_fem_vs_potencial} muestra una síntesis de las diferencias principales entre ambos conceptos.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+    \toprule
+    \textbf{Fuerza Electromotriz (\(\mathcal{E}\))} & \textbf{Diferencia de Potencial (\(V\))} \\ 
+    \midrule
+    Es la causa: energía que entra al circuito. & Es el efecto: energía que se consume o cae entre dos puntos. \\ 
+    Se mantiene incluso si el circuito está abierto (corriente cero). & Es nula si no hay corriente o una fuente activa conectada. \\ 
+    Está asociada a campos no conservativos dentro de la fuente. & Está asociada a campos electrostáticos conservativos. \\ 
+    \bottomrule
+    \end{tabular}
+  \caption{Comparativa entre FEM y Diferencia de Potencial}
+  \label{tab_fem_vs_potencial}
+\end{table}
+
+Desde la perspectiva de la medición, un voltímetro conectado a los bornes de una fuente no mide necesariamente su FEM, sino el voltaje terminal (\(V_t\)). Debido a la resistencia interna (\(R_i\)) de cualquier fuente real, la relación se expresa como:
+\begin{equation}
+V_t = \mathcal{E} - I \cdot R_i
+\end{equation}
+En condiciones de circuito abierto (\(I = 0\)), el instrumento de medición ideal registraría \(V_t = \mathcal{E}\). Por el contrario, en condiciones de carga, la caída de potencial interna \(I \cdot R_i\) reduce el voltaje disponible para el resto del sistema.
 
 Con estas definiciones y vocabulario puede comenzar a interpretar conceptos fundamentales como las definiciones de las unidades de medida.
 
@@ -118,7 +160,7 @@ El sistema de unidades de medida que se prefiere utilizar es el denominado Siste
 \end{table}
 A continuación se desarrollará conceptualmente la obtención de las unidades que se requieren.
 
-La comprensión plena de las deducciones requiere nociones previas sobre el flujo de carga y el potencial eléctrico. Un desarrollo extenso de estos principios físicos fundamentales, así como de las leyes que rigen el campo eléctrico, se encuentra disponible en el recurso complementario \citetitle{f2elio} \parencite{f2elio}.
+La comprensión plena de las deducciones requiere nociones previas sobre el flujo eléctrico, el potencial eléctrico y conceptos relacionados a la electrostática. Un desarrollo extenso de estos principios físicos fundamentales, así como de las leyes que rigen el campo eléctrico, se encuentra disponible en el recurso complementario \citetitle{f2elio} \parencite{f2elio}.
 
 \subsection{Definición de Ampère}
 
@@ -157,7 +199,7 @@ Esta fuerza se manifiesta en un conductor en forma de campo eléctrico \(E\), qu
 
 Cuando hay un campo eléctrico en un conductor, las cargas libres se aceleran y adquieren una velocidad. En palabras simples, podemos asociar la corriente eléctrica con el movimiento de cargas libres en un conductor.
 
-En un conductor, los electrones libres se mueven en direcciones aleatorias debido a la temperatura del material. Sin embargo, cuando se aplica un campo eléctrico, estos electrones adquieren una velocidad de arrastre o velocidad de deriva \(v_d\) en la dirección del campo eléctrico. La velocidad de deriva es la velocidad promedio de las cargas (electrones en el caso de un conductor).
+En un conductor, los electrones libres se mueven en direcciones aleatorias debido a la temperatura del material. Sin embargo, cuando se aplica un campo eléctrico, estos electrones adquieren una velocidad de arrastre o velocidad de deriva \(v_d\) en sentido opuesto al campo eléctrico. La velocidad de deriva es la velocidad promedio de las cargas (electrones en el caso de un conductor).
 \input{chapters/1_unit/media/movimiento_de_cargas.tex}
 
 Recordando que \(\Delta Q\) es la cantidad de carga que pasa a través de la sección transversal \(A\), si toma un pedazo de conductor de longitud \(\Delta x\) como se muestra en la figura \ref{fig_movimiento_de_cargas}, puede expresar el volumen de este segmento de conductor como \(A\cdot\Delta x=A\cdot v_d\cdot \Delta t\). Si \(n\) es la densidad de cargas (número de cargas por unidad de volumen), el número de cargas en el segmento es \(nAv_d\Delta t\). Entonces la carga total de esa sección es
@@ -177,22 +219,24 @@ La figura \ref{fig_corriente_convencional} presenta segmentos de material conduc
 La ecuación \eqref{eq_corriente_promedio} muestra una expresión para el cálculo de la corriente promedio en un intervalo de tiempo dado. Así, el amperio se deriva de \unit{\coulomb\per\second} (Coulomb por segundo) pero, ¿qué significa esto en términos fundamentales?
 
 Desde la redefinición del SI en 2019, la unidad se basa en valores fijos de constantes naturales. Se fija la carga elemental (la carga de un electrón) exactamente en:
-\begin{equation}
+\begin{equation}\label{eq_relacion_coulomb}
     e = \qty{1.602176634d-19}{\coulomb}
 \end{equation}
 
-Para comprender la magnitud de un amperio, podemos invertir esta relación para determinar cuántas cargas elementales constituyen un Coulomb:
+\begin{definition}[Amperio]
+  Para comprender la magnitud de un amperio, puede invertir la relación \eqref{eq_relacion_coulomb} para determinar cuántas cargas elementales constituyen un Coulomb:
 \begin{align*}
-    \qty{1}{\coulomb} &= \frac{1}{1.602176634\times 10^{-19}} e \\
+    \qty{1}{\coulomb} &= \frac{1}{1.602176634\times 10^{-19}} ~ e \\
     \qty{1}{\coulomb} &\approx \qty{6.241509d18}{} \text{ cargas elementales}
 \end{align*}
-Por lo tanto, sustituyendo esto en la definición de corriente ($I = q/t$), un amperio queda definido formalmente como:
+Por lo tanto, sustituyendo esto en la definición de corriente (\(I = q/t\)), un amperio queda definido formalmente como:
 \begin{equation}
     \qty{1}{\ampere} = \frac{\qty{1}{\coulomb}}{\qty{1}{\second}} \approx \frac{\qty{6.2415d18}{} \text{ electrones}}{\qty{1}{\second}}
 \end{equation}
 O, dicho de otra forma más fundamental: un amperio es el flujo de aproximadamente \num{6.2415d18} cargas elementales por segundo a través de una sección transversal determinada.
+\end{definition}
 
-\subsubsection{Evolución del estándar: De la fuerza al flujo}
+\subsubsection{Historia de la definición de Amperio}
 
 Es fundamental distinguir entre la definición histórica, que rigió la metrología durante gran parte del siglo XX, y la definición moderna basada en constantes fundamentales.
 
@@ -210,4 +254,97 @@ Al fijar la carga elemental \(e\) como exacta, la permeabilidad del vacío \(\mu
 
 \subsection{Definición de Voltio}
 
+Desde el punto de vista de la metrología eléctrica y la teoría de circuitos, el Volt (\unit{\volt}) se define frecuentemente en términos de potencia y corriente, magnitudes que son observables macroscópicamente en un laboratorio.
 
+\begin{definition}[Voltio]
+    El Volt es la diferencia de potencial eléctrico entre dos puntos de un conductor que transporta una corriente constante de \qty{1}{\ampere}, cuando la potencia disipada entre estos puntos es igual a \qty{1}{\watt}.
+    \[
+      U~\unit{\volt} = \frac{P}{I}~\unit{\watt\per\ampere}
+    \]
+\end{definition}
+
+Esta definición operativa es consistente con la definición conceptual de energía por unidad de carga (\unit{\joule\per\coulomb}). Podemos demostrar esta equivalencia mediante el análisis dimensional, recordando que la potencia (\unit{\watt}) es la tasa de cambio de energía (\unit{\joule\per\second}) y la corriente (\unit{\ampere}) es la tasa de flujo de carga (\unit{\coulomb\per\second}):
+\begin{equation}
+    \qty{1}{\volt} = \frac{\qty{1}{\watt}}{\qty{1}{\ampere}} = \frac{\qty{1}{\joule\per\second}}{\qty{1}{\coulomb\per\second}} = \frac{\qty{1}{\joule}}{\qty{1}{\coulomb}}
+\end{equation}
+Por lo tanto, la definición de instrumentación (basada en potencia) y la definición física (basada en trabajo y campo electrostático) son numéricamente y dimensionalmente idénticas.
+
+\subsubsection*{Efecto Josephson}
+Como dato adicional, al igual que con el amperio, es importante notar que para mediciones de alta precisión, la definición práctica del volt se realiza actualmente mediante un fenómeno de mecánica cuántica conocido como el Efecto Josephson.
+
+Este efecto relaciona una diferencia de potencial con una frecuencia de radiación \(f\) a través de la constante de Josephson \(K_J\):
+\begin{equation}
+    V = \frac{f}{K_J} \quad \text{donde} \quad K_J = \frac{2e}{h} \approx \qty{483597.8484}{\giga\hertz\per\volt}
+\end{equation}
+Donde \(e\) es la carga elemental y \(h\) es la constante de Planck. Este estándar permite calibrar voltímetros con una precisión de hasta una parte en \(10^{10}\), muy superior a la definición basada en la disipación de potencia térmica.
+
+\subsection{Definición de Ohm (Resistencia)}
+
+Mientras que en física la resistencia suele analizarse desde la geometría y las propiedades del material (\(\rho\)), en instrumentación se define de manera operativa basándose en la relación causa-efecto entre tensión y corriente.
+
+\begin{definition}[Resistencia]
+    El Ohm (\unit{\ohm}) es la resistencia eléctrica que existe entre dos puntos de un conductor cuando una diferencia de potencial constante de \qty{1}{\volt} aplicada entre estos puntos produce en el conductor una corriente de \qty{1}{\ampere}, siempre que dicho conductor no sea fuente de fuerza electromotriz.
+\end{definition}
+
+Esta definición corresponde matemáticamente a la Ley de Ohm macroscópica:
+\begin{equation}
+    \qty{1}{\ohm} = \frac{\qty{1}{\volt}}{\qty{1}{\ampere}}
+\end{equation}
+
+Es crucial notar la condición final de la definición: \textit{``siempre que dicho conductor carezca de fuerza electromotriz''}. En metrología, esto asegura que el objeto medido sea un elemento pasivo puro. Si el componente generara su propio voltaje (como una batería o un termopar activo), la relación \(V/I\) no reflejaría la resistencia óhmica real del material, introduciendo errores de medición sistemáticos.
+
+Aunque el ohm se define por la relación \(V/I\), el \emph{valor} de la resistencia de un componente depende de sus características físicas. Como se detalla en textos de física fundamental, para un conductor óhmico uniforme:
+\begin{equation*}
+    R = \rho \frac{L}{A}
+\end{equation*}
+Esta relación es fundamental en el diseño de sensores resistivos (como las galgas extensiométricas o RTDs), donde la medición de \(R\) se utiliza para inferir cambios en la longitud \(L\) o en la resistividad \(\rho\) debidos a la temperatura.
+
+\subsubsection*{Efecto Hall Cuántico}
+
+Para completar la tríada de los estándares eléctricos modernos (junto con el Amperio y el Volt), el patrón primario de resistencia ya no se basa en artefactos de alambre, sino en el Efecto Hall Cuántico.
+
+Este fenómeno ocurre en sistemas de electrones bidimensionales a bajas temperaturas y fuertes campos magnéticos, donde la conductancia se cuantiza. Esto define la constante de von Klitzing (\(R_K\)), que se relaciona con constantes fundamentales:
+\begin{equation*}
+    R_K = \frac{h}{e^2} \approx \qty{25812.807}{\ohm}
+\end{equation*}
+Esto permite realizar el ohm con una incertidumbre extremadamente baja, independiente de las propiedades del material del semiconductor usado, basándose únicamente en la constante de Planck (\(h\)) y la carga elemental (\(e\)).
+
+\subsection{Definición de carga eléctrica}
+
+El Coulomb (\(C\)) es la unidad de carga eléctrica. Aunque se ha usado para definir el Amperio, el Coulomb se define como la cantidad de cargas eléctricas elementales (\(e\)) que son transportadas por una corriente de \qty{1}{\ampere} durante un segundo. Es posible definir así al Coulomb ya que, el Sistema Internacional fija la carga elemental y el segundo.
+
+\subsection{Definición Flujo Magnético (Weber)}
+
+Mientras que en el análisis de campos estáticos el flujo magnético se define geométricamente como el producto del campo por el área (\unit{\tesla\meter\squared}), en metrología e instrumentación es más práctico definir la unidad a partir de los efectos de la inducción electromagnética descritos por la Ley de Faraday.\footnote{Recuerde conceptualmente que el flujo magnético \(\Phi_B\) representa la cantidad de líneas de campo magnético que atraviesan un área determinada.}
+
+\begin{definition}[Definición basada en la Inducción]
+    El Weber (\unit{\weber}) es el flujo magnético que, al atravesar un circuito de una sola espira y reducirse uniformemente a cero en el intervalo de \qty{1}{\second}, induce en dicho circuito una fuerza electromotriz constante de \qty{1}{\volt}.
+\end{definition}
+
+Esta definición operativa se fundamenta en la relación diferencial entre el voltaje inducido \(\mathcal{E}\) y la tasa de cambio del flujo magnético:
+\begin{equation}
+    |\mathcal{E}| = \left| \frac{d\Phi_B}{dt} \right|
+\end{equation}
+Si analizamos las unidades de esta ecuación, podemos establecer la equivalencia dimensional entre la definición de ingeniería (voltaje-tiempo) y la definición física (campo-área):
+\begin{equation}
+    \qty{1}{\volt} = \frac{\qty{1}{\weber}}{\qty{1}{\second}} \implies \boxed{\qty{1}{\weber} = \qty{1}{\volt\second}}
+\end{equation}
+Esto demuestra que un weber no es más que un voltio-segundo. Esta equivalencia es crucial en instrumentación, ya que los \emph{fluxómetros} modernos no miden el campo magnético directamente, sino que integran el voltaje inducido en una bobina exploradora a lo largo del tiempo:
+\[
+\Phi_B = \int \mathcal{E} \, dt
+\]
+
+\subsubsection*{El Cuanto de Flujo}
+
+Siguiendo la redefinición del SI, el Weber está íntimamente ligado a constantes fundamentales. En sistemas superconductores, el flujo magnético no es continuo, sino que está cuantizado. El cuanto de flujo magnético (\(\Phi_0\)) es una combinación de la constante de Planck y la carga elemental:
+\begin{equation}
+    \Phi_0 = \frac{h}{2e} \approx \qty{2.067833848d-15}{\weber}
+\end{equation}
+Esta constante es la inversa exacta de la constante de Josephson (\(K_J\)) utilizada para definir el voltio. Esto cierra el círculo de coherencia metrológica: definimos el Voltio mediante el efecto Josephson y el Segundo mediante el reloj atómico, quedando el Weber automáticamente definido como el producto de ambos.
+
+\subsection{Energía}
+
+La unidad de energía resulta de la expresión 
+\[
+  
+\]
