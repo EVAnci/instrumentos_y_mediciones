@@ -344,7 +344,182 @@ Esta constante es la inversa exacta de la constante de Josephson (\(K_J\)) utili
 
 \subsection{Energía}
 
-La unidad de energía resulta de la expresión 
+El Joule (\unit{\joule}) es la unidad de energía. Partiendo de la potencia \(P\) en relación al trabajo \(w\), la expresión de energía resulta de 
+\begin{gather*}
+  P=\frac{w}{t}  \quad \text{La potencia es trabajo por unidad de tiempo,}\\
+  IV=\frac{w}{t} \quad \implies \quad w=IVt
+\end{gather*}
+Quedando así definido en función de unidades ya definidas: Amperio, Voltio y segundo.
+
+Por otro lado, el desarrollo de unidades resulta
 \[
-  
+  \unit{\joule}=\unit{\watt\per\second}=\unit{\volt\ampere\second}
 \]
+
+\subsection{Coeficiente de autoinducción (Henry)}
+
+La autoinducción (o inductancia propia) es la medida de la inercia eléctrica de un circuito: su oposición a cualquier cambio en la corriente que fluye a través de él.
+
+\begin{definition}[Definición dinámica del Henry]
+  El Henry (\unit{\henry}) se define como la inductancia eléctrica de un circuito cerrado en el que se induce una fuerza electromotriz de \qty{1}{\volt} cuando la corriente que lo recorre varía uniformemente a razón de \qty{1}{\ampere} por segundo.
+\end{definition}
+
+Esta definición operativa surge de la relación constitutiva del inductor ideal:
+\begin{equation}
+  \mathcal{E} = -L \frac{dI}{dt} \implies L = \frac{|\mathcal{E}|}{|dI/dt|}
+\end{equation}
+Dimensionalmente:
+\[
+  \qty{1}{\henry} = \frac{\qty{1}{\volt}}{\qty{1}{\ampere\per\second}} = \qty{1}{\volt\second\per\ampere} = \qty{1}{\ohm\second}
+\]
+Un Henry es un Ohm-segundo. Esto ayuda mucho a entender por qué la inductancia afecta la impedancia en función de la frecuencia.
+
+Alternativamente, desde un punto de vista estático o geométrico, la inductancia representa la capacidad de un circuito para enlazar flujo magnético por unidad de corriente. Si el circuito tiene \(N\) espiras y el flujo magnético a través de cada una es \(\Phi_B\):
+\begin{equation}
+    L = \frac{N \Phi_B}{I}
+\end{equation}
+Esta dualidad es importante en instrumentación:
+\begin{itemize}
+    \item La definición de flujo (\(Wb/A\)) es útil para el diseño de bobinas y transformadores (saturación del núcleo).
+    \item La definición de voltaje (\(V \cdot s / A\)) es útil para el análisis de circuitos y la medición de impedancia (\(Z = j\omega L\)).
+\end{itemize}
+\begin{tcolorbox}[
+  colback=red!5!white,colframe=red!75!black!66,title=La Sobretensión Inductiva
+  ]
+	Como ha visto, la inductancia \(L\) actúa como una inercia electromagnética. Si intentamos interrumpir instantáneamente la corriente en un circuito altamente inductivo (abriendo un interruptor), la derivada de la corriente respecto al tiempo se vuelve enorme:
+	\[
+	\frac{dI}{dt} \to -\infty \quad \implies \quad \mathcal{E} = -L \frac{dI}{dt} \to \infty
+	\]
+	
+	Esto provoca que la bobina genere un pico de voltaje transitorio (conocido como \textit{fuerza contra-electromotriz} o \textit{kickback}) que puede alcanzar miles de voltios, mucho mayor que la fuente de alimentación original. Esto puede tener consecuencias en instrumentación:
+	\begin{itemize}
+		\item Arco eléctrico: Se produce una chispa entre los contactos del interruptor, dañándolos.
+		\item Destrucción de equipos: Si hay instrumentos de medición o semiconductores (transistores, microcontroladores) conectados, este pico de tensión puede perforar sus aislamientos y destruirlos instantáneamente.
+	\end{itemize}
+	
+	Para medir o controlar cargas inductivas de forma segura, se coloca un diodo en paralelo con la bobina (polarizado en inversa respecto a la fuente). Cuando se abre el interruptor, la bobina invierte su polaridad y el diodo conduce, permitiendo que la corriente recircule y se disipe suavemente en la resistencia interna de la bobina, evitando el pico de tensión.
+\end{tcolorbox}
+
+\subsection{Capacidad eléctrica (Farad)}
+
+Si la autoinducción representa la inercia a la corriente, la capacidad eléctrica representa la \textit{elasticidad} del circuito frente a la tensión. Un capacitor almacena energía en forma de campo eléctrico.
+
+\begin{definition}[Definición estática del Farad]
+  El farad (\unit{\farad}) es la capacidad de un conductor eléctrico que, al ser cargado con una carga de \qty{1}{\coulomb}, adquiere un potencial eléctrico de \qty{1}{\volt}.
+  \begin{equation}
+    C = \frac{Q}{V} \quad \implies \quad \qty{1}{\farad} = \frac{\qty{1}{\coulomb}}{\qty{1}{\volt}}
+  \end{equation}
+\end{definition}
+
+Esta definición es útil para electrostática, pero en instrumentación y análisis de señales, es más útil la definición dinámica que describe cómo varía el voltaje en el tiempo.
+
+\begin{definition}[Definición dinámica]
+  El farad es la capacidad de un circuito en el que, al circular una corriente constante de \qty{1}{\ampere}, la diferencia de potencial entre sus terminales varía a razón de \qty{1}{\volt} por segundo.
+\end{definition}
+
+Esta definición surge de la ecuación constitutiva del capacitor ideal:
+\begin{equation}
+  I = C \frac{dV}{dt} \implies C = \frac{I}{dV/dt}
+\end{equation}
+
+Nótese la simetría perfecta con el inductor:
+\begin{itemize}
+    \item En el inductor, el voltaje depende del cambio de corriente (\(V = L \cdot dI/dt\)).
+    \item En el capacitor, la corriente depende del cambio de voltaje (\(I = C \cdot dV/dt\)).
+\end{itemize}
+
+Mientras que el valor del farad se define por la relación \(Q/V\), la capacidad física de un componente depende de su construcción. Para un capacitor de placas paralelas:
+\begin{equation}
+    C = \varepsilon \frac{A}{d}
+\end{equation}
+Donde \(\varepsilon\) es la permitividad del dieléctrico, \(A\) el área de las placas y \(d\) la distancia entre ellas. En instrumentación, los sensores capacitivos aprovechan esta ecuación: al variar la distancia \(d\) o el dieléctrico, cambia \(C\), permitiendo medir desplazamientos micrométricos o niveles de líquidos.
+
+\begin{tcolorbox}[
+    colback=red!5!white,colframe=red!75!black!66,title=La Corriente de Inserción
+  ]
+
+Un capacitor se opone a los cambios bruscos de voltaje. Si conectamos un capacitor descargado directamente a una fuente de voltaje (o cortocircuitamos uno cargado), estamos forzando un cambio de tensión instantáneo (\(dt \to 0\)).
+
+Según la ecuación \(I = C \frac{dV}{dt}\), esto demanda una corriente teóricamente infinita. Esto tiene importantes consecuencias en instrumentación:
+\begin{itemize}
+    \item Chispa y soldadura: Al cortocircuitar un capacitor de gran capacidad, la corriente puede ser de cientos de amperios, fundiendo los contactos del cable.
+    \item Daño a fuentes: Al encender un equipo con muchos capacitores, la fuente de alimentación ve un cortocircuito momentáneo que puede activar protecciones o quemar fusibles.
+\end{itemize}
+\end{tcolorbox}
+
+\subsection{Otras magnitudes derivadas de interés}
+
+Para complementar las unidades fundamentales de tensión, corriente e impedancia, el ingeniero en instrumentación debe estar familiarizado con magnitudes auxiliares que describen propiedades del medio o fenómenos ópticos. A continuación se describen magnitudes adicionales que serán de utilidad.
+
+\subsubsection{Magnitudes Electromagnéticas Adicionales}
+
+\begin{description}
+  \item[Conductancia (\(G\))]
+  Es el recíproco de la resistencia (\(G = 1/R\)). Mientras la resistencia mide la oposición al flujo, la conductancia mide la facilidad para conducir corriente.
+  \[ \qty{1}{\siemens} = \qty{1}{\ampere\per\volt} = \qty{1}{\ohm^{-1}} \]
+
+  \textit{Uso:} Es matemáticamente superior para analizar circuitos en paralelo. Unidad: Siemens (\unit{\siemens}).
+
+  \item[Intensidad de Campo Eléctrico (\(E\))]
+  Mide la fuerza que experimentaría una carga unitaria en el espacio o el gradiente de potencial entre dos puntos.
+
+  \textit{Uso:} Fundamental en compatibilidad electromagnética (EMC) para medir ruido irradiado o potencia de antenas. Unidad: Volt por metro (\unit{\volt\per\meter}).
+
+  \item[Inducción Magnética (\(B\))]
+  También llamada densidad de flujo magnético. Representa la concentración de líneas de flujo por unidad de área.
+  \[ \qty{1}{\tesla} = \qty{1}{\weber\per\meter^2} \]
+
+  \textit{Uso:} Es lo que realmente genera fuerza sobre un cable o induce voltaje en una bobina. Unidad: Tesla (\unit{\tesla}).
+
+  \item[Intensidad de Campo Magnético (\(H\))]
+  A diferencia de \(B\) (que depende del material del núcleo), \(H\) depende únicamente de la corriente y la geometría de la bobina externa, sin importar el medio.
+
+  \textit{Uso:} Se utiliza para caracterizar las fuentes de campo magnético independientes del material. Unidad: Ampere por metro (\unit{\ampere\per\meter}).
+
+  \item[Fuerza Magnetomotriz (\(\mathcal{F}\))]
+  Es la causa que establece el flujo magnético en un circuito magnético (análogo al voltaje en un circuito eléctrico). Aunque dimensionalmente es corriente (\unit{\ampere}), en ingeniería a menudo se le llama Ampere-vuelta (\unit{A\cdot v}) para denotar que es el producto del número de espiras \(N\) por la corriente \(I\).
+  \[ \mathcal{F} = N \cdot I \]
+  Unidad: Ampere (\unit{\ampere}).
+\end{description}
+
+\subsubsection{Magnitudes Fotométricas}
+
+Es común confundir la potencia de la fuente con la luz recibida. La distinción es vital en diseño de iluminación y sensores ópticos.
+
+\begin{description}
+  \item[Flujo Luminoso (\(\Phi_v\))]
+  Mide la cantidad total de luz visible emitida por una fuente en todas direcciones. Es la potencia luminosa percibida por el ojo humano. Unidad: Lumen (\unit{\lumen}).
+
+  \textit{Ejemplo:} Una bombilla LED de 10W puede emitir \qty{800}{\lumen}. 
+
+  \item[Iluminancia (\(E_v\))]
+  Mide la cantidad de flujo luminoso que incide sobre una superficie específica. Unidad: Lux (\unit{\lux}).
+  \[ \qty{1}{\lux} = \qty{1}{\lumen\per\meter^2} \]
+  La iluminancia decrece con el cuadrado de la distancia. Así, mientras más lejos este la superficie, menor será la cantidad de iluminación que llegue.
+\end{description}
+
+\subsection{Tabla de múltiplos y submúltiplos}
+
+A continuación, la tabla \ref{tab:prefijos_si} muestra algunos de los prefijos utilizados en el sistema internacional.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{p{0.45\textwidth}p{0.45\textwidth}}
+    \toprule
+    \textbf{Múltiplos} & \textbf{Submúltiplos} \\
+    \midrule
+    \textbf{Giga (G)}: \(10^9\) \newline (Mil millones) & \textbf{Mili (m)}: \(10^{-3}\) \newline (Milésima) \\
+    \addlinespace
+    \textbf{Mega (M)}: \(10^6\) \newline (Un millón) & \textbf{Micro (\(\mu\))}: \(10^{-6}\) \newline (Millonésima) \\
+    \addlinespace
+    \textbf{Kilo (k)}: \(10^3\) \newline (Mil) & \textbf{Nano (n)}: \(10^{-9}\) \newline (Milmillonésima) \\
+    \addlinespace
+    & \textbf{Pico (p)}: \(10^{-12}\) \newline (Billonésima) \\
+    \bottomrule
+  \end{tabular}
+  \caption{Prefijos del Sistema Internacional (SI) más utilizados en ingeniería}
+  \label{tab:prefijos_si}
+  
+  \vspace{0.2cm}
+  \footnotesize{Para consultar la tabla completa, incluyendo exa, zetta, femto y atto, visite: \\ \url{https://es.wikipedia.org/wiki/Sistema_Internacional_de_Unidades#Tabla_de_m%C3%BAltiplos_y_subm%C3%BAltiplos}}
+\end{table}
