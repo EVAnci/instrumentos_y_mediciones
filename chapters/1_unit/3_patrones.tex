@@ -1,0 +1,49 @@
+\section{Materialización de los patrones: Patrones secundarios}
+
+Si bien, como se definió en la sección \ref{sec_unidades}, el patrón primario de resistencia se basa en el Efecto Hall Cuántico por su inmutabilidad frente al tiempo, su implementación requiere condiciones de laboratorio extremas (criogenia y altos campos magnéticos). Para transferir esa exactitud a los laboratorios de calibración industrial y al uso cotidiano, se utilizan \emph{patrones secundarios} o de trabajo.
+
+Estos son dispositivos físicos (resistores) diseñados para mantener un valor de resistencia lo más estable posible frente a variaciones ambientales (temperatura, humedad) y al paso del tiempo (envejecimiento).
+
+\subsection{Arquitectura del patrón: La conexión Kelvin}
+
+Para resistores de bajo valor (típicamente \(R < \qty{10}{\ohm}\)), la resistencia de los propios cables de conexión y de los puntos de contacto puede ser comparable o superior al valor que se desea definir, introduciendo un error grosero inaceptable.
+
+Para mitigar esto, los patrones de resistencia adoptan una configuración de cuatro terminales, conocida como conexión Kelvin:
+\begin{itemize}
+    \item \textbf{Bornes de Corriente ($C_1, C_2$):} Son de mayor sección y por ellos circula la corriente de excitación.
+    \item \textbf{Bornes de Potencial ($P_1, P_2$):} Son de menor sección y se utilizan para medir la caída de tensión exclusivamente sobre el elemento resistivo calibrado.
+\end{itemize}
+
+Al medir la tensión mediante un voltímetro de alta impedancia en los bornes $P$, no circula corriente por estos contactos, eliminando virtualmente la caída de tensión en los contactos y aislando la medida de la resistencia del cableado.
+
+\subsection{Materiales de construcción}
+
+La estabilidad térmica es el desafío principal en la construcción de un patrón físico. Se busca que el coeficiente de temperatura ($\alpha$) sea lo más cercano a cero posible en el rango de operación. Para ello se emplean aleaciones específicas:
+
+\begin{description}
+    \item[Manganina:] Es la aleación por excelencia para patrones de alta precisión. Compuesta típicamente por 84\% cobre, 12\% manganeso y 4\% níquel.
+    \begin{itemize}
+        \item Posee una fuerza electromotriz térmica (f.e.m. Seebeck) muy baja respecto al cobre (\qty{2}{\micro\volt\per\kelvin}), lo que evita errores por pares termoeléctricos en los bornes.
+        \item Su curva de resistencia vs. temperatura es parabólica, con un máximo estable alrededor de los \qty{25}{\degreeCelsius}.
+    \end{itemize}
+    
+    \item[Constantán:] Aleación de 55\% cobre y 45\% níquel. Aunque tiene un $\alpha$ muy bajo, genera una f.e.m. térmica alta contra el cobre (\(\approx \qty{40}{\micro\volt\per\kelvin}\)). Por ello, se prefiere su uso en resistencias de potencia o calefacción y no tanto en patrones de precisión de CD, aunque es aceptable en CA.
+\end{description}
+
+Los patrones de alta jerarquía suelen sumergirse en baños de aceite termostáticos y poseen orificios centrales para la inserción de termómetros, garantizando que la temperatura de trabajo sea aquella en la que fueron calibrados. La corriente máxima admisible ($I_{\text{max}}$) está limitada por la capacidad de disipación de potencia ($P$) del aire o aceite:
+\begin{equation}
+    I_{\text{max}} = \sqrt{\frac{P_{\text{disipable}}}{R}}
+\end{equation}
+
+\subsection{Comportamiento en Corriente Alterna}
+
+Un resistor real no es un componente ideal. Geométricamente, el arrollamiento de alambre forma una bobina (inductancia parásita $L$) y la proximidad entre espiras genera una capacidad distribuida ($C$).
+
+En corriente continua (CD), estos efectos son despreciables una vez alcanzado el régimen permanente. Sin embargo, en corriente alterna (CA), la impedancia del patrón se ve afectada:
+\[ Z = R + j\omega L + \frac{1}{j\omega C} \]
+Para minimizar el error de fase y mantener la impedancia puramente resistiva en altas frecuencias, se emplean técnicas de bobinado que cancelan los campos magnéticos:
+
+\begin{enumerate}
+    \item \textbf{Bobinado Bifilar (Ayrton-Perry):} El alambre se pliega por la mitad antes de arrollarse, de modo que las corrientes de ida y vuelta circulan en direcciones opuestas pero físicamente adyacentes. Esto hace que los flujos magnéticos se cancelen mutuamente, reduciendo drásticamente la autoinducción.
+    \item \textbf{Bobinado Plano (Tarjeta o Rowland):} Utilizado para reducir la capacidad parásita en resistencias de alto valor. El hilo se enrolla en una tarjeta plana aislante, reduciendo la diferencia de potencial entre espiras adyacentes y, por ende, el efecto capacitivo.
+\end{enumerate}
