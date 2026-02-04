@@ -1,0 +1,189 @@
+% Este archivo no es definitivo. Solo cuenta con el material que 
+% me pareció más importante y que debo estudiar. 
+% A falta de tiempo, solo dejaré lo más importante en cada caso.
+
+\section{Dinámica de los instrumentos indicadores de rotación}
+
+Un instrumento indicador está constituido básicamente de dos partes: una fija y otra móvil, comúnmente llamada a esta última rotor. El rotor, mediante una fuerza que depende del principio de funcionamiento del instrumento, se deflexiona provocando finalmente una medida.
+
+La función que liga la magnitud a medir con la posición adoptada, se llama \emph{ley del instrumento} y puede ser lineal, cuadrática o logarítmica. Así, los instrumentos, pueden resumirse por su principio de funcionamiento.
+\begin{description}
+  \item \textbf{Imán permanente y bovina móvil}
+    \begin{itemize}
+      \item Magnitud a medir: Corriente y tensión
+      \item Tipo de corriente: Corriente Continua
+      \item Ley de respuesta: \(\alpha=Ki\)
+    \end{itemize}
+  \item \textbf{Hierro móvil}
+    \begin{itemize}
+      \item Magnitud a medir: Corriente, tensión 
+      \item Tipo de corriente: Corriente continua y corriente alterna 
+      \item Ley de respuesta: \(\alpha=\frac{dL}{d\alpha}I^2\)
+    \end{itemize}
+  \item \textbf{Electrodinámico}
+    \begin{itemize}
+      \item Magnitud a medir: Corriente, tensión, potencia, etc. 
+      \item Tipo de corriente: Corriente continua y corriente alterna 
+      \item Ley de respuesta: \(\alpha = \frac{dM}{d\alpha}I_fI_m \cos(\beta)\)
+    \end{itemize}
+  \item \textbf{Inducción}
+    \begin{itemize}
+      \item Magnitud a medir: Potencia y energía 
+      \item Tipo de corriente: Corriente alterna 
+      \item Ley de respuesta: \(\alpha = K I_1 I_2 \sin(\beta)\)
+    \end{itemize}
+\end{description}
+
+%%% Texto a revisión
+
+\subsection{Ecuación de las cuplas en los instrumentos indicadores}
+
+Cualquiera sea el medio usado para producir la desviación del sistema móvil, la cupla resultante de dicha fuerza debe ser equilibrada por la acción de una cupla opuesta (originada en general, por un resorte) que es función de la desviación del sistema.
+Bajo la acción de estas cuplas opuestas, el sistema llega a una posición de equilibrio. Simultáneamente debe haber un medio de absorver la energía del movimiento, para que el sistema se detenga en su posición de equilibrio.
+
+\subsection{Cupla de inercia}
+
+ Si varía la magnitud a medir, se mueve el sistema móvil, aparecen pares dinámicos de giro que se oponen al movimiento. Esta cupla es debido a la forma geométrica y peso del sistema móvil y está dada por la expresión:
+\[
+  C_i=J\gamma = J\frac{d\omega}{dt}=J\frac{d^2\alpha}{dt^2}
+\]
+donde \(\gamma\) es la aceleración angular, \(J\) el movimiento de inercia del sistema con respecto al eje de rotación, \(\omega\) la velocidad angular y \(\alpha\) la desviación angular del sistema móvil (deflexión).
+
+\subsection{Cupla directriz, antagónica o de restitución}
+
+ Si debido a la excitación eléctrica o por un medio mecánico cualquiera, el sistema móvil del instrumento es movido o apartado de su posición de cero, un par o cupla mecánica que normalmente se logra con el desarrollo de un resorte en espiral, una cinta en suspensión o una cinta tensa, contrarresta el par de giro. 
+Esta cupla es el producto de la constante del resorte y del ángulo de giro:
+\[
+  C_d = K_r \alpha
+\]
+donde \(K\) es la constante elástica del resorte y \(\alpha\) es el ángulo de giro.
+
+Si suponemos por un instante que la cupla de inercia \(C_i\) es nula, tendríamos que al conectar el instrumento, la cupla motora en ese instante (\(\alpha=0\)) es cero y cero la antagónica. Cuando el rotor comienza a girar describiendo un ángulo \(\alpha\), con el crecer de \(\alpha\) va aumentando la cupla antagónica (\(C_d\)) opuesta a la motora. De este modo, cuando el ángulo descripto por el rotor alcanza un valor -por ejemplo \(\alpha_{A-}\) el balance de las cuplas es el siguiente:
+
+\begin{enumerate}
+  \item La cupla motora -cuyo valor suponemos constante- está representada en la figura \ref{fig_cuplas_instrumentales} por \(MQ\).
+  \item La cupla directriz (antagónica), de sentido opuesto al de la motora, tiene un valor representado por el segmento \(MP\).
+  \item La cupla actuante está dada por \(PQ\). 
+\end{enumerate}
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[>=stealth]
+    % Esto sería mejor hacerlo con \begin{axis}\end{axis}
+    % pero no tengo mucho tiempo y me siento más comodo con
+    % tikz
+
+    % Axis
+    \draw[->] (-0.2,0) -- (4,0) node[right] {$\alpha$};
+    \draw[->] (0,-0.2) -- (0,4) node[above] {C};
+
+    % cd curve 
+    \draw[red,thick] (0,0) -- (40:4.5) node[above right] {\scriptsize{$C_d$}};
+    % intersections to cd
+    \draw[dashed] (40:2) -- ++(-1.54,0) node[left] {\scriptsize{$C_{m_1}$}}; % -2cos(40)=-1.54
+    \draw[dashed] (40:4) -- ++(-3.06,0) node[left] {\scriptsize{$C_{m_2}$}}; % -4cos(40)=-3.06
+    \draw[dashed] (40:2) -- ++(0,-1.29) node[below] {\scriptsize{$\alpha_1$}}; % -2sin(40)=-1.29
+    \draw[dashed] (40:4) -- ++(0,-2.57) node[below] {\scriptsize{$\alpha_2$}}; % -4sin(40)=-2.57
+    % antagonic intersection
+    \draw[dashed] (0.8,0) node[below]{\scriptsize{$M=\alpha_A$}} -- node[left]{\scriptsize{$P$}} (0.8,1.29) node[above]{\scriptsize{$Q$}};
+  \end{tikzpicture}
+  \caption{}
+  \label{fig_cuplas_instrumentales}
+\end{figure}
+
+Como el resultado general el rotor sigue girando en sentido de la motora, pero la cupla actuante es cada vez menor, hasta que, cuando el ángulo llega al valor \(\alpha_1\) se cumple que:
+\[
+  C_d = K\alpha = C_{m_1}
+\]
+ahora la cupla motora aumentará el valor de \(C_{m_2}\) se rompe el equilibrio: el exceso en el sentido de la cupla motora impulsa al rotor en el sentido de ángulos crecientes, hasta el valor final tal que:
+\[
+  K\alpha_2 = C_d = C_{m_2}
+\]
+
+Se ve que para cada valor de la cupla motora corresponde un valor bien determinado de \(\alpha\). 
+
+Recordar que no se ha considerado en este estudio la cupla de inercia \(C_i\), ni otras cuplas que se verán más adelante.
+
+En el caso que el instrumento tenga resorte en espiral -uno de cuyos extremos es solidario al eje móvil- la cupla directriz vale:
+\[
+  C_d = E\frac{ae^3_s}{121}\alpha = K\alpha
+\]
+siendo \(E\) el módulo de elasticidad del material, \(a\) el ancho de la cinta, \(e_s\) el espesor de la cinta y \(l\) la longitud de la cinta.
+
+Estos resortes en espiral no deben tener efectos secundarios elásticos, ni envejecimiento y deberán depender poco de la temperatura. El material que se usa es \emph{bronce-fosforoso} o bien aleaciones especiales de acero.
+
+En el caso de usar suspensión con cinta tensa -se estudiará más adelante- la cupla directriz viene dada por las reacciones elásticas que se desarrollan como consecuencia de la torsión de la cinta de suspensión al actuar la cupla motora.
+
+\subsection{Cuplas de amortiguamiento}
+
+Para disminuir la inevitable inercia de las oscilaciones del sistema móvil, cerca de la posición establecida de equilibrio, cada instrumento tiene un dispositivo especial denominado amortiguador.
+
+La cupla amortiguante tiene pues por objeto, absorber energía del sistema oscilante y llevarlo rápidamente a su posición de equilibrio, para que pueda ser leída su indicación.
+
+Los amortiguamientos pueden ser de dos tipos, según su característica predominante: conservativos o disipativos.
+
+El amortiguamiento conservativo es tal que la mayor parte de la energía del sistema móvil es devuelta al circuito por acción regeneradora. Esto sucede, por ejemplo, en el galvanómetro, en el que el frenado es debido al aire es solamente una pequeña parte del amortiguamiento total del sistema móvil.
+
+En la mayor parte de los instrumentos eléctricos se usa un amortiguamiento disipativo, que tiene como ventaja sobre el anterior que no depende mayormente de las características del circuito al cual está conectado.
+
+Hay tres clases principales de amortiguamiento disipativo: por rozamiento, fluido y magnético.
+\begin{enumerate}
+  \item El rozamiento entre dos superficies genera una cupla que es función de la compresión recíproca, pero no de la velocidad. Este rozamiento está siempre presente en los soportes de la parte móvil del instrumento y tiene cierta influencia -aunque pequeña- en la detención del sistema móvil. Por esta razón, el sistema móvil no se detendrá en \(\alpha_p\) sino en \(\alpha+\delta\), siendo \(\delta\) un desplazamiento indeterminado, debido al rozamiento.
+    
+    Si se supone que solamente hay rozamiento, la amplitud de la oscilación disminuye linealmente, mientras que lo hará según una exponencial si el amortiguamiento es fluido. En el caso real se tiene una combinación de ambos, y el sistema se detiene antes que en cualquiera de los dos casos anteriores, aunque la diferencia es poco notable. En definitiva lo importante es la aparición de indeterminación introducida por \(\delta\).
+
+  \item El amortiguamiento fluido es proporcional a la velocidad. En la actualidad se usa únicamente el amortiguamiento por aire, en un dispositivo cerrado. Este generalmente consiste en un aspa móvil liviana de aluminio que se mueve en una cámara cerrada en forma de sector, comprimiendo el aire, que fluye por sus bordes para equilibrar la presión. Este flujo de aire cesa apenas el aspa deja de moverse.
+
+  \item El amortiguamiento magnético también es proporcional a la velocidad. Se produce por las corrientes parásitas inducidas en un disco o sector de aluminio fijado al eje y situado en el entrehierro de un imán permanente cuando el eje gira por la acción de la cupla motora. Estas corrientes reaccionan con el campo del imán y producen un par resultante que se opone al movimiento. La magnitud aproximada del amortiguamiento se calcula como sigue: 
+    \[e=Blv\]
+    Si \(B\) es la densidad de flujo constante -y supuesta uniforme- en el entrehierro y \(v\) la velocidad lineal del elemento de disco bajo el entrehierro del imán; en el disco se induce una f.e.m; siendo \(l\) la longitud del polo.
+
+    Esta f.e.m. produce una corriente:
+    \[i=\frac{Blv}{R_0}\]
+    Siendo \(R_0\) la resistencia efectiva del disco.
+
+    La reacción entre esta corriente y el campo produce una cupla amortiguante:
+    \[C_a = Fr = BlIr = \frac{B^2l^2\omega r^2}{R_0}\]
+    Siendo \(r\) el radio y \(\omega\) la velocidad angular. El coeficiente de amortiguamiento será:
+    \[
+      D=\frac{B^2l^2r^2}{R_0}
+    \]
+    Como el valor de \(R_0\) debe ser lo menor posible (para tener un buen valor de \(D\)) los discos se construyen de aluminio, y el imán se coloca algo alejado del borde (pero no mucho, ya que al mismo tiempo disminuye el brazo \(r\) y por ende el valor de la cupla) para permitir una mejor distribución de las líneas de corriente.
+
+    En ciertos instrumentos (como los de bobina móvil: galvanómetros, voltímetros, etc.) la cupla amortiguante se obtiene por la acción de corrientes inducidas en la bobina móvil cuando rota en el campo magnético.
+
+    La f.e.m. inducida en la bobina tiene un valor instantáneo dado por:
+    \[e=2Blv=2Bl\omega\frac{a}{2}=Bla\frac{d\alpha}{dt}\]
+    siendo \(l\) el alto de la bobina móvil y \(a\) el ancho de la bobina.
+
+    Para \(N\) espiras: 
+    \[e=NBla\frac{d\alpha}{dt}\]
+    Esta f.e.m. origina una corriente:
+    \[i=\frac{e}{R}\]
+    siendo \(R\) la resistencia total del circuito incluyendo la de la propia bobina. La interacción entre el campo y corriente origina la cupla amortiguante:
+    \begin{gather*}
+      C_a=Fa=\frac{B^2l^2a^2N^2}{R}\frac{d\alpha}{dt} \\ 
+      C_a = D\frac{d\alpha}{dt}
+    \end{gather*}
+    Si \(R\) es grande (como en el caso de los voltímetros) la bobina móvil se arrolla sobre un resorte de aluminio -de muy baja resistencia- con lo que se consigue aumentar el amortiguamiento hasta un valor óptimo. En este último caso sería:
+    \[D=B^2l^2a^2\left(\frac{N^2}{R}+\frac{S_{Al}}{2\rho_{Al}(l+a)}\right)\]
+\end{enumerate}
+
+\subsection{Sistemas de suspensión}
+
+Ya hemos citado a la cupla de rozamiento, diciendo que la misma se origina en el roce del eje del sistema móvil con su cojinete. Hemos dicho que su valor es prácticamente independiente de la velocidad angular y además se opone al sentido de desplazamiento, es por ello que se debe afectarla del doble signo: \(\pm C_r\)
+
+En muchos instrumentos el sistema móvil se monta sobre pivotes. Este montaje puede ser vertical u horizontal. En los instrumentos de laboratorio portátiles, como regla, el sistema móvil está dispuesto verticalmente, mientras que en los de tableros es horizontal.
+
+A pesar del reducido peso del sistema móvil, la presión del pivote sobre el cojinete alcanza grandes valores, teniendo en cuenta el pequeñísimo radio de curvatura del pivote (\qtyrange{0.01}{0.15}{\milli\meter}). Por esta razón los cojinetes de los instrumentos de medidas eléctricas se elaboran al igual que en los relojes. Se usan piedras preciosas (ágata, rubí, zafiro, etc.) y los pivotes de acero de la mejor calidad: acero-plata, al cobalto-tungsteno, etc. Las monturas o engastes para cojinetes, en instrumentos portátiles y redondos sin filetes. En algunos instrumentos se utilizan monturas redondas con resortes para amortiguar los golpes.
+
+En los instrumentos de alta sensibilidad esta cupla de rozamiento debe ser prácticamente nula, es por ello que el sistema u órgano móvil está tensado con un hilo (oro o cobre-fósforo) a través de los resortes.
+
+Cuando todavía se requiere mayor sensibilidad, el sistema móvil adopta la disposición colgante o suspendido. Este es el sistema generalmente adoptado por el galvanómetro donde una sensibilidad aún mayor se logra por medio del sistema óptico.
+
+El indicador es el rayo luminoso, libre de masa e inercia, permitiendo sistemas móviles con pequeños momentos de inercia. Si se emplea una escala plana y con un ángulo de desviación \(\alpha\) del sistema móvil, el número total de divisiones responderá a la expresión:
+\[
+  d=l\tan 2\alpha
+\]
+Con reflexiones sucesivas utilizando varios espejos se obtiene todavía mayor sensibilidad.
+
