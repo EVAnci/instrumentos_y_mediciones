@@ -23,12 +23,12 @@ Al medir la tensión mediante un voltímetro de alta impedancia en los bornes \(
 
 \subsection{Materiales de construcción}
 
-La estabilidad térmica es el desafío principal en la construcción de un patrón físico. Se busca que el coeficiente de temperatura (\(\alpha\)) sea lo más cercano a cero posible en el rango de operación. Para ello se emplean aleaciones específicas:
+La estabilidad térmica es el desafío principal en la construcción de un patrón físico. Se busca que el coeficiente de temperatura (\(\theta\)) sea lo más cercano a cero posible en el rango de operación. Para ello se emplean aleaciones específicas:
 
 \begin{description}
     \item[Manganina:] Es la aleación por excelencia para patrones de alta precisión. Compuesta típicamente por 84\% cobre, 12\% manganeso y 4\% níquel. Posee una fuerza electromotriz térmica muy baja respecto al cobre (\qty{2}{\micro\volt\per\kelvin}), lo que evita errores por pares termoeléctricos en los bornes. Su curva de resistencia contra temperatura es parabólica, con un máximo estable alrededor de los \qty{25}{\degreeCelsius}.
     
-    \item[Constantán:] Aleación de 55\% cobre y 45\% níquel. Aunque tiene un \(\alpha\) muy bajo, genera una f.e.m. térmica alta contra el cobre (\(\approx \qty{40}{\micro\volt\per\kelvin}\)). Por ello, se prefiere su uso en resistencias de potencia o calefacción y no tanto en patrones de precisión de corriente continua, es aceptable en corriente alterna.
+    \item[Constantán:] Aleación de 55\% cobre y 45\% níquel. Aunque tiene un \(\theta\) muy bajo, genera una f.e.m. térmica alta contra el cobre (\(\approx \qty{40}{\micro\volt\per\kelvin}\)). Por ello, se prefiere su uso en resistencias de potencia o calefacción y no tanto en patrones de precisión de corriente continua, es aceptable en corriente alterna.
 \end{description}
 
 Los patrones de alta jerarquía suelen sumergirse en baños de aceite termostáticos y poseen orificios centrales para la inserción de termómetros, garantizando que la temperatura de trabajo sea aquella en la que fueron calibrados. La corriente máxima admisible (\(I_{\text{max}}\)) está limitada por la capacidad de disipación de potencia (\(P\)) del aire o aceite:
@@ -88,7 +88,7 @@ Dado que la frecuencia \(\omega\) es una variable externa que no controlamos, el
 Para lograr la anulación de los componentes reactivos descritos anteriormente, se emplean técnicas de bobinado especiales que cancelan los campos magnéticos y eléctricos:
 
 \begin{enumerate}
-  \item \textbf{Bobinado Bifilar (Ayrton-Perry):} El alambre se pliega por la mitad antes de arrollarse sobre el núcleo. De esta forma, dos corrientes de igual magnitud circulan en direcciones opuestas (\(\vec{I}\) y \(-\vec{I}\)) por conductores adyacentes. El efecto en \(L\) es que los flujos magnéticos generados por cada mitad del alambre se oponen entre sí, cancelándose mutuamente y reduciendo la autoinducción a valores despreciables.
+  \item \textbf{Bobinado Bifilar (Ayrton-Perry):} El alambre se pliega por la mitad antes de arrollarse sobre el núcleo. De esta forma, dos corrientes de igual magnitud circulan en direcciones opuestas por conductores adyacentes. El efecto en \(L\) es que los flujos magnéticos generados por cada mitad del alambre se oponen entre sí, cancelándose mutuamente y reduciendo la autoinducción a valores despreciables.
   
   \item \textbf{Bobinado Plano (Tarjeta o Rowland):} Se utiliza principalmente para reducir la capacidad parásita en resistencias de alto valor. El hilo se enrolla en una tarjeta plana aislante de forma delgada. El efecto en \(C\) es que al disponer el alambre de forma plana, se reduce la superficie enfrentada entre espiras con gran diferencia de potencial, minimizando así el efecto de capacitor de placas paralelas distribuidas.
 \end{enumerate}
