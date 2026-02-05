@@ -117,7 +117,7 @@ Todos estos sistemas de amortiguamiento, y cuplas se encuentran materializados e
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.5\textwidth]{chapters/1_unit/media/bin/galvanometro.pdf}
+  \includegraphics[height=7cm]{chapters/1_unit/media/bin/galvanometro.pdf}
   \caption{Galvanómetro de imán permanente y bobina móvil.}
   \label{fig_galvanometro}
 \end{figure}
@@ -127,141 +127,143 @@ Para minimizar el error por rozamiento sólido, se utilizan pivotes de alta cali
 
 \section{Estudio de la ecuación del movimiento}
 
-\subsection{Ecuación del movimiento de un sistema móvil alrededor de un eje}
+El comportamiento dinámico de un instrumento indicador analógico se modela considerando el sistema móvil como un cuerpo rígido con un solo grado de libertad: la rotación alrededor de su eje. Aplicando la segunda ley de Newton para la rotación, la suma de las cuplas actuantes debe igualar al momento de inercia (\(J\)) por la aceleración angular (\(\ddot{\theta}\))\footnote{Se ha usado la notación de Newton para las derivadas: \(\ddot{\theta}=\theta''\)}:
 
-El estudio de la ecuación del movimiento en un instrumento eléctrico indicador, conduce a la obtención de la respuesta del mismo relacionada con los distintos parámetros que lo constituyen en función del tiempo. 
-
-Por la simplicidad y conveniencia de su diseño eléctrico y mecánico, el movimiento del sistema indicador de un instrumento eléctrico es generalmente un movimiento de rotación. Se puede considerar que estos dispositivos mecánicos tienen un solo grado de libertad: el de rotación alrededor de su eje. La ecuación mecánica a plantear es la que determina que la suma de los pares actuantes sobre un cuerpo rígido con un solo grado de libertad, es igual a la variación del momento angular del sistema móvil
 \[
-  \sum_{k=1}^n C_k = \frac{d\bar{H}}{dt}
-\]
-el vector \(H\), tiene una sola componente a lo largo del eje de rotación, por lo que su expresión se reduce: donde \(J\) es el momento de inercia del sistema móvil y \(\theta\) es la posición angular instantánea del sistema móvil.
-\[
-  \sum{k=1}^n c_k = J\frac{d^2\theta}{dt^2} = J\gamma = C_i
-\]
-Es decir que la sumatoria de las cuplas actuantes iguala a la cupla de inercia:
-\begin{gather*}
-  H=J\frac{d\theta}{dt} \\ 
-  C_m - C_a - C_d \pm C_r = C_i
-\end{gather*}
-Reemplazando por sus respectivas expresiones y ordenando términos se tendrá:
-\[
-  J\frac{d^2\theta}{dt^2} + D\frac{d\theta}{dt} + K\theta \pm C_r = C_m
-\]
-Suponiendo despreciable al rozamiento:
-\[
-  C_m = J\frac{d^2\theta}{dt^2} + D\frac{d\theta}{dt} + K\theta
-\]
-que resulta la ecuación diferencial del movimiento de un instrumento.
-
-Es decir que la cupla motora iguala a la suma de las cuplas de inercia, de amorguamiento y del resorte.
-
-\subsection{Solución de la ecuación diferencial}
-
-Es fundamental tener noción básica (o superficial) de ecuaciones diferenciales y funciones de variable compleja para comprender este apartado. En el libro \citetitle{c4elio} de \textcite{c4elio} se presentan las funciones de variable compleja en los primeros capítulos.
-
-Las ecuaciones diferenciales lineales de segundo orden en coeficientes constantes, se encuentran a menudo en los estudios técnicos. Un ejemplo ya conocido en teoría de circuitos lo representa la corriente de malla del circuito serie RLC.
-
-Para resolver la ecuación del movimiento del instrumento de rotación, podemos determinar que \(\theta=f_t\). Esta función es importante ya que nos permitirá determinar en qué forma se produce el movimiento en los instrumentos de rotación en función del tiempo.
-
-La solución general de una EDO lineal con coeficientes constantes consiste en la suma de una solución particular \(\theta_p\) (que representa el estado permanente o estacionario final e independiente del tiempo) y una solución homogénea \(\theta_h\) (representativa del estado transitorio), que tiende a desaparecer con el tiempo.
-\[
-  \theta = \theta_p + \theta_h
+  \sum C = C_m - C_d - C_a = J \frac{d^2\theta}{dt^2}
 \]
 
-La solución general debe tener las constantes arbitrarias que indique el orden de la ecuación diferencial (en nuestro caso dos, ya que es de segundo orden). Para hallar la solución homogénea se plantea la ecuación homogénea:
+Reemplazando cada cupla por su expresión constitutiva (donde \(D\) es la constante de amortiguamiento y \(K\) la del resorte), y reordenando, obtenemos la ecuación diferencial de segundo orden que rige el movimiento:
+
 \begin{equation}\label{eq:edo_instrumento}
-  J\frac{d^2\theta}{dt^2} + D\frac{d\theta}{dt} + K\theta = J\ddot{\theta} + D\dot{\theta} + K\theta = 0
+  J\frac{d^2\theta}{dt^2} + D\frac{d\theta}{dt} + K\theta = C_m
 \end{equation}
 
-\begin{tcolorbox}[title=Recordatorio]
-  La notación \(\ddot{\theta}\) es conocida como la notación de Newton para las derivadas. Así, \(\ddot{\theta}=\theta''\) y, de la misma manera \(\dot{\theta}=\theta'\).
-  % He colocado esta nota según mis conocimientos. Dime si esto es incorrecto.
-\end{tcolorbox}
+Esta ecuación nos dice que la energía entregada por la cupla motora \(C_m\) se distribuye en vencer la inercia, la fricción (amortiguamiento) y la restitución del resorte.
 
-Entonces, propone la solución de la EDO homogénea,
-\[
-  \theta_h = Ae^{rt}
-\]
-siendo \[A\] una constante arbitraria y \(r\) una constante a determinar.
-\[
-  \dot{\theta} = Are^{rt} \qquad \text{y} \quad \ddot{\theta} = Ar^2e^{rt}
-\]
-Reemplazando en la ecuación \eqref{eq:edo_instrumento} con la solución homogénea,
-\begin{equation}\label{eq:solucion_de_edo}
-  Ae^{rt}(Jr^2+Dr+K) = 0
-\end{equation}
-Para encontrar los valores de \(r\) para los cuales la ecuación \eqref{eq:solucion_de_edo} se cumple, entonces:
-\[
-  Jr^2 + Dr + K = 0
-\]
-ya que \(A\neq0\) y \(e^{rt}\) no puede ser cero. Así, 
-\begin{align}\label{eq_solucion_caracteristica_1}
-  r_1 &= -\frac{D}{2J} + \sqrt{\frac{D^2}{4J^2}-\frac{K}{J}} \\ \label{eq_solucion_caracteristica_2}
-  r_1 &= -\frac{D}{2J} - \sqrt{\frac{D^2}{4J^2}-\frac{K}{J}}
-\end{align}
-y entonces la solución del régimen libre estará formada por dos términos:
-\[
-  \boxed{\theta_h=Ae^{r_1t}+Be^{r_2t}}
-\]
-Siendo \(B\) otra constante arbitraria y \(r_1\) distinta de \(r_2\).
+\subsection{Respuesta transitoria y regímenes de movimiento}
 
-La solución particular \(\theta_p\) en el régimen permanente o estacionario se encuentra haciendo \(\theta_p=E=\text{constante}\), y reemplazando en la ecuación diferencial. Así, 
-\[
-  K\theta_p=C_m
-\]
-Luego la solución general será:
-\[
-  \theta = \theta_p + \theta_h = \frac{C_m}{K}+Ae^{r_1t}+Be^{r_2t}
-\]
-donde \(r_1\) y \(r_2\) son las soluciones \eqref{eq_solucion_caracteristica_1} y \eqref{eq_solucion_caracteristica_2} de la ecuación característica. Por tanto \(A\) y \(B\) dependen de las condiciones iniciales.
+La solución de la ecuación \eqref{eq:edo_instrumento} se compone de dos partes: \(\theta(t) = \theta_p + \theta_h(t)\).
+\begin{itemize}
+    \item \textbf{Solución Permanente (\(\theta_p\)):} Es la posición final de equilibrio donde la aguja se detiene. Se obtiene cuando las derivadas temporales son nulas: \(\theta_p = C_m / K\).
+    \item \textbf{Solución Transitoria (\(\theta_h\)):} Describe la trayectoria de la aguja desde el cero hasta \(\theta_p\). Su comportamiento depende de las raíces de la ecuación característica (\(Jr^2 + Dr + K = 0\)).
+\end{itemize}
 
-Podemos establecer que para \(t=0\),
-\[
-  \theta_i = 0 \qquad \text{y}\qquad \frac{d\theta}{dt}=0
-\]
-Así, calculamos \(A\) y \(B\). Para la primera condición:
-\begin{equation}\label{eq_theta}
-  \theta=\theta_p + Ae^{r_1\theta}+Be^{r_2\theta}
-\end{equation}
-Para la segunda, calcule la derivada e iguale a cero:
-\begin{equation}\label{eq_theta_derivada}
-  \frac{d\theta}{dt}=0 + r_1Ae^{r_1 0}+r_2Be^{r_2 0}
-\end{equation}
-De \eqref{eq_theta} y \eqref{eq_theta_derivada} obtenemos:
-\begin{align*}
-  A &= -\frac{r_2}{r_2-r_1}\theta_p \\ 
-  B &= -\frac{r_1}{r_2-r_1}\theta_p
-\end{align*}
-Entonces, reemplazando \(A\) y \(B\) en \eqref{eq_theta}
-\[
-  \theta = \theta_p (1-\frac{r_2}{r_2-r_1}e^{r_1t}-\frac{r_1}{r_2-r_1 e^{r_2t}})
-\]
-Analicemos ahora los valores que pueden tomar las raíces de la ecuación característica (ecuaciones \eqref{eq_solucion_caracteristica_1} y \eqref{eq_solucion_caracteristica_2}).
+Dependiendo de la magnitud del amortiguamiento \(D\) respecto a la inercia y el resorte, definimos el \emph{factor de amortiguamiento}. Esto da lugar a tres casos físicos claramente diferenciados:
+
 \begin{enumerate}
-  \item Movimiento Periódico: Si 
-    \[
-      \frac{D^2}{4J^2} < \frac{K}{J}
-    \]
-    tendremos raíces complejas conjugadas,
-    \begin{align*}
-      r_1 &= -\frac{D}{2J}+j\sqrt{\frac{K}{J}-\frac{D^2}{4J^2}} \\ 
-      r_2 &= -\frac{D}{2J}-j\sqrt{\frac{K}{J}-\frac{D^2}{4J^2}} 
-    \end{align*}
-    que al reemplazar estas soluciones en la expresión de \(\theta\) y operar algebráicamente, se puede obtener que
-    \[
-      \theta = \theta_p \left[1+e^{-at}\left(-\frac{a}{b}\cdot \frac{e^{jbt}-e^{-jbt}}{2j}\right)+\left(\frac{e^{jbt}+e^{-jbt}}{2}\right)\right]
-    \]
-    De tal forma que se pueden usar las relaciones de Euler,
-    \[
-      \theta = \theta_p \left[a \sin(bt)+ b\cos(bt)\right]
-    \]
-    Esta expresión presenta una función armónica de amplitud decreciente con el tiempo, y pulsación mecánica de valor \(b\).
+  \item \textbf{Movimiento Subamortiguado (Oscilatorio)} \\
+  Ocurre cuando el amortiguamiento es pequeño (\(\frac{D^2}{4J^2} < \frac{K}{J}\)). Las raíces son complejas conjugadas.
+  
+  La aguja sobrepasa el valor final \(\theta_p\) y oscila alrededor de él con una amplitud que decrece exponencialmente hasta detenerse.
+  
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[width=7cm]{chapters/1_unit/media/bin/amortiguamiento.png}
+    \caption{Respuesta subamortiguada: la aguja oscila antes de detenerse.}
+    \label{fig:subamortiguamiento}
+  \end{figure}
 
-    Este es el caso oscilatorio o subamortiguado y desde el punto de vista práctico es el de mayor utilidad. En los instrumentos se requiere para llegar a la posición permanente un movimiento \emph{ligeramente subamortiguado}.
-    % Se debe realizar un gráfico de \theta/\theta_p
-  \item Movimiento crítico:
-  \item Movimiento aperiódico: 
+  \emph{Importancia práctica:} La mayoría de los instrumentos se diseñan para ser \textbf{ligeramente subamortiguados}. Esa pequeña oscilación inicial asegura al operador que el sistema móvil no está atascado por rozamiento estático (fricción en los pivotes).
+
+  \item \textbf{Movimiento Crítico} \\
+  Ocurre en el límite matemático exacto donde las raíces son reales e iguales (\(\frac{D^2}{4J^2} = \frac{K}{J}\)).
+  
+  Es la condición teórica donde la aguja llega al valor final en el \textbf{menor tiempo posible} sin sobrepasarlo (sin oscilar).
+
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[width=7cm]{chapters/1_unit/media/bin/critico.png}
+    \caption{Amortiguamiento crítico: respuesta más rápida sin sobrepaso.}
+    \label{fig:critico}
+  \end{figure}
+  
+  Aunque parece ideal por su velocidad, es difícil de fabricar y mantener, ya que cualquier envejecimiento de los materiales podría llevar al instrumento al estado sobreamortiguado, volviéndolo lento.
+
+  \item \textbf{Movimiento Sobreamortiguado (Aperiódico)} \\
+  Ocurre cuando el amortiguamiento es excesivo (\(\frac{D^2}{4J^2} > \frac{K}{J}\)). Las raíces son reales y distintas.
+  
+  La aguja se aproxima al valor final \(\theta_p\) de manera asintótica y muy lenta. El sistema parece ``pesado'' o ``perezoso''.
+  
+  \begin{figure}[!ht]
+    \centering
+    \includegraphics[width=5cm]{chapters/1_unit/media/bin/sobreamortiguado.png}
+    \caption{Respuesta sobreamortiguada: aproximación lenta.}
+    \label{fig:sobreamortiguado}
+  \end{figure}
+  
+  Este comportamiento es generalmente indeseable en instrumentos de medida, ya que obliga al operador a esperar demasiado tiempo para tomar una lectura confiable.
 \end{enumerate}
 
 \subsection{Respuesta a una excitación sinusoidal}
+
+¿Qué sucede si la cupla motora no es constante, sino que varía sinusoidalmente en el tiempo (\(C_m = C_0 \sin(\omega t)\))? Esto ocurre al medir corriente alterna o señales variables. La ecuación diferencial se convierte en:
+
+\[
+  J\ddot{\theta} + D\dot{\theta} + K\theta = C_0 \sin(\omega t)
+\]
+
+La aguja intentará seguir el ritmo de la fuerza externa. Pasado el transitorio inicial, la aguja oscilará a la misma frecuencia \(\omega\) que la señal, pero con dos diferencias fundamentales:
+\begin{enumerate}
+    \item Cambio de Amplitud (\(A\)): La aguja puede moverse más o menos de lo que debería estáticamente.
+    \item Desfase (\(\varphi\)): La aguja se moverá con un retraso respecto a la señal eléctrica.
+\end{enumerate}
+
+La solución estacionaria es:
+\[
+  \theta(t) = \theta_{\text{estática}} \cdot A \cdot \sin(\omega t - \varphi)
+\]
+Donde \(A\) es el \textbf{Factor de Amplificación Dinámica}. Su comportamiento depende de la relación entre la frecuencia de la señal (\(\omega\)) y la frecuencia natural del instrumento (\(\omega_0 = \sqrt{K/J}\)):
+
+\begin{itemize}
+    \item \textbf{Baja frecuencia (\(\omega \ll \omega_0\)):} El factor \(A \approx 1\). El instrumento sigue fielmente a la señal.
+    \item \textbf{Resonancia (\(\omega \approx \omega_0\)):} El factor \(A\) se dispara (\(A \gg 1\)). La aguja oscila exageradamente aunque la señal sea pequeña.
+    \item \textbf{Alta frecuencia (\(\omega \gg \omega_0\)):} El factor \(A \to 0\). La aguja no tiene tiempo de reaccionar debido a su inercia y se queda quieta.
+\end{itemize}
+
+\subsection{Aplicaciones y consecuencias prácticas}
+
+Dependiendo de qué queramos medir, diseñaremos el instrumento para trabajar en una zona u otra de la curva de respuesta.
+
+\subsubsection{1. Instrumentos Registradores (Fidelidad)}
+Si queremos registrar una señal compleja (como un electrocardiograma o una onda sísmica), necesitamos que el dibujo sea una copia fiel de la realidad.
+\begin{itemize}
+    \item \textbf{Requisito:} Necesitamos que \(A \approx 1\) y que el retardo sea constante.
+    \item \textbf{Solución:} El instrumento debe tener una frecuencia natural \(\omega_0\) muy alta (ser muy rápido y ligero) para que todas las frecuencias de la señal sean consideradas ``bajas'' (\(\omega \ll \omega_0\)).
+\end{itemize}
+
+\subsubsection{2. Galvanómetro de Vibración (Selectividad)}
+\emph{Aclaración conceptual:} Imagina un columpio. Si lo empujas justo a su ritmo natural, oscila muy alto con poca fuerza.
+Este instrumento aprovecha la resonancia. Se ajusta mecánicamente (tensando la suspensión) para que su frecuencia natural coincida exactamente con la frecuencia que queremos medir (ej. \qty{50}{\hertz}).
+\begin{itemize}
+    \item \textbf{Efecto:} Amplifica enormemente esa frecuencia específica (\(A \gg 1\)) y atenúa el resto. Funciona como un filtro mecánico de banda muy estrecha de alta sensibilidad.
+\end{itemize}
+
+\subsubsection{3. Distorsión en señales complejas}
+Una señal no senoidal (como una onda cuadrada o triangular) es la suma de muchas ondas senoidales de distintas frecuencias (armónicos).
+Si medimos esto con un instrumento lento:
+\begin{enumerate}
+    \item Los armónicos bajos se medirán bien (\(A \approx 1\)).
+    \item Los armónicos altos se atenuarán (\(A < 1\)) y sufrirán mayor retraso (\(\varphi\)).
+\end{enumerate}
+El resultado es que la aguja dibujará una onda ``suavizada'' o deformada respecto a la original, perdiendo los detalles rápidos, como se ve en la figura \ref{fig:in_vs_out}.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[height=5cm]{chapters/1_unit/media/bin/in_vs_out.png}
+  \caption{Efecto de la inercia del instrumento: la señal de salida (azul/suave) pierde los detalles rápidos y llega retrasada respecto a la entrada (roja/brusca).}
+  \label{fig:in_vs_out}
+\end{figure}
+
+\subsection{El filtrado mecánico en instrumentos de Ley Cuadrática}
+
+\emph{Explicación del fenómeno:} En un instrumento electrodinámico (que mide potencia o corriente eficaz), la fuerza es proporcional al cuadrado de la corriente (\(F \propto i^2\)). Si la corriente es alterna (\(i = \sin(\omega t)\)), la fuerza es:
+\[ i^2 = \sin^2(\omega t) = \frac{1}{2} - \frac{1}{2}\cos(2\omega t) \]
+Esto significa que la fuerza tiene dos partes:
+\begin{enumerate}
+    \item Una componente constante (\(1/2\)): Que empuja la aguja hacia el valor a medir.
+    \item Una componente vibratoria (\(2\omega\)): Que intenta hacer vibrar la aguja al doble de la frecuencia de la red (ej. \qty{100}{\hertz}).
+\end{enumerate}
+
+¿Por qué la aguja no vibra furiosamente? Porque para la aguja (que es un sistema mecánico con masa), \qty{100}{\hertz} es una frecuencia altísima (\(\omega \gg \omega_0\)).
+Estamos en la zona donde \(A \to 0\). La inercia del instrumento filtra mecánicamente la vibración, y la aguja solo responde al componente constante promedio. Es decir, el instrumento calcula ``automáticamente'' el valor medio cuadrático gracias a que es incapaz de seguir la vibración rápida.
