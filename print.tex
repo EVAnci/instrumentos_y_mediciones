@@ -1,0 +1,24 @@
+% This is the standard option. For better reading experience, prefer this.
+% The main.tex file, use this configuration.
+% \documentclass{report}
+
+% For save paper, print with this options if you want
+% Obviosly comment the first line.
+\documentclass[12pt,a4paper]{report}
+\usepackage[left=1.5cm, right=1.5cm, top=2cm, bottom=2cm]{geometry}
+
+\input{preamble.tex}
+
+\title{Instrumentos y mediciones}
+\author{Elio Valentino Anci}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\include{chapters/1_unit/main}
+
+\printbibliography
+
+\end{document}
