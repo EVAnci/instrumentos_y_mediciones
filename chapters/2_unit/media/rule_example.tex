@@ -1,0 +1,14 @@
+\begin{center}
+  \begin{tikzpicture}
+    \shade[ball color=orange] (0.515,1) circle (.515);
+    \shade[top color=white,bottom color=lightgray,opacity=.7] (-0.3,0) rectangle (6.3,1);
+    \draw[thin] (-0.3,0) rectangle (6.3,1);
+    \foreach \x in {0,...,5} {
+      \draw (\x,1) -- (\x,.8) node[below] {\scriptsize\(\x\)};
+      \foreach \m in {1,...,9} {
+        \draw ($(\x+0.\m,1)$) -- ($(\x+0.\m,0.9)$);
+      }
+    }
+    \draw (6,1) -- (6,.8) node[below] {\scriptsize\(6\)};
+  \end{tikzpicture}
+\end{center}

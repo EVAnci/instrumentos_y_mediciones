@@ -75,3 +75,14 @@
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[section]
+
+% Example environment. Follows the structure
+% Ejemplo <chapter><section><A,B,C,...> 
+% A,B,C requieres a new counter.
+\theoremstyle{remark}
+\newtheorem{example}{Ejemplo}[section]
+\renewcommand{\theexample}{\thesection.\Alph{example}}
+
+% Redefinir el cierre para agregar el símbolo de fin
+\let\origendexample\endexample
+\def\endexample{\hfill\diamond\origendexample}

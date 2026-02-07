@@ -1,0 +1,113 @@
+\section{Tipos de error}
+
+Considere una magnitud cuyo valor real es \(x\) y su valor medido es \(X\).
+
+\begin{definition}[Error absoluto]
+  Se define como la diferencia entre el valor exacto y el aproximado:
+  \[
+    \varepsilon_x = x - X
+  \]
+\end{definition}
+
+\begin{example}
+  Supongamos que hemos medido el diámetro de una esfera con una regla y obtenemos \(X=\qty{1}{\centi\meter}\). Si el valor real fuese \(x=\qty{1.03}{\centi\meter}\), el error absoluto sería:
+  \[
+    \varepsilon_x = \qty{1.03} - \qty{1} = +\qty{0.03}{\centi\meter}
+  \]
+  \label{ej_error_absoluto}
+\end{example}
+
+Como es inusual conocer el valor real, se utiliza la Cota de error absoluto (\(\Delta_x^\circ\)), que define un intervalo donde se asegura que está el valor real:
+\begin{equation}
+  x = X \pm \Delta_x^\circ
+\end{equation}
+
+\begin{definition}[Error relativo]
+  Indica la calidad de la medida. Es el cociente entre el error absoluto y el valor exacto:
+  \[
+    \rho_x = \frac{\varepsilon_x}{x} \approx \frac{\varepsilon_x}{X}
+  \]
+  Frecuentemente se expresa como porcentaje: \(\rho\% = \rho_x \cdot 100\).
+\end{definition}
+
+\section{Clasificación general de los errores}
+
+Los errores se clasifican según su origen y comportamiento en tres grandes grupos: groseros, sistemáticos y accidentales.
+
+\subsection{Error Grosero}
+Son equivocaciones graves, generalmente humanas, que producen valores atípicos o ``disparates'' en las mediciones.
+\begin{itemize}
+  \item Mala lectura de escala (ej. leer 100 en lugar de 10).
+  \item Selección incorrecta del instrumento o rango.
+  \item Errores de conexión.
+\end{itemize}
+Solución: Estos errores no se corrigen matemáticamente; la medición debe descartarse y repetirse.
+
+\subsection{Error Sistemático}
+Se caracterizan por repetirse constantemente en magnitud y signo bajo las mismas condiciones. Son predecibles y, por tanto, calculables y corregibles.
+
+\subsubsection*{1. Error sistemático del método (o de inserción)}
+Ocurre porque los instrumentos no son ideales e interactúan con el circuito, modificando la variable que intentan medir.
+
+Analicemos la medición de una resistencia incógnita \(R\) mediante un Voltímetro (con resistencia interna \(R_v\)) y un Amperímetro (con resistencia interna \(R_a\)). Existen dos configuraciones posibles:
+
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \begin{circuitikz}[american]
+      \def\ll{2.5} 
+      \draw (0,0) to[battery2,l=E,invert] (0,3) to[rmeterwa,t=A,l=\(I_m\)] (\ll,3) to[rmeterwa,t=V,l=\(U_m\)] (\ll,0) -- (0,0);
+      \draw (\ll,3) -- (4,3) to[R=\(R\)] (4,0) -- (\ll,0);
+    \end{circuitikz}
+    \caption{Conexión corta.}
+    \label{fig_conexion_corta}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \begin{circuitikz}[american]
+      \def\ll{1.5} 
+      \draw (0,0) to[battery2,l=E,invert] (0,3) -- (\ll,3) to[rmeterwa,t=A,l=\(I_m\)] (4,3) to[R=\(R\)] (4,0) -- (0,0);
+      \draw (\ll,3) to[rmeterwa,t=V,l=\(U_m\)] (\ll,0);
+    \end{circuitikz}
+    \caption{Conexión larga.}
+    \label{fig_conexion_larga}
+  \end{subfigure}
+  \caption{Medición de una resistencia.}
+\end{figure}
+
+\textbf{A) Conexión Corta (Fig. \ref{fig_conexion_corta}):}
+El voltímetro mide bien la tensión sobre \(R\), pero el amperímetro mide la corriente de la resistencia \emph{más} la corriente que se fuga por el voltímetro.
+\[
+  R_{\text{medida}} = \frac{U_m}{I_m} \approx \frac{R}{1 + R/R_v}
+\]
+Como el voltímetro real no tiene resistencia infinita (\(R_v < \infty\)), la resistencia medida será menor a la real. Se recomienda usar esta conexión para medir resistencias pequeñas (\(R \ll R_v\)).
+
+\textbf{B) Conexión Larga (Fig. \ref{fig_conexion_larga}):}
+El amperímetro mide bien la corriente de \(R\), pero el voltímetro mide la caída de tensión en \(R\) \emph{más} la caída en el amperímetro.
+\[
+  R_{\text{medida}} = R + R_a
+\]
+Como el amperímetro real tiene resistencia (\(R_a > 0\)), el valor medido será mayor al real. Se recomienda para medir resistencias grandes (\(R \gg R_a\)).
+
+\subsubsection*{2. Error instrumental y ambiental}
+Son debidos a imperfecciones constructivas (rozamientos, resortes envejecidos) o condiciones externas (temperatura, campos magnéticos). El fabricante suele garantizar un error máximo mediante la Clase del instrumento (ver Cap. \ref{chpt:introduccion}). Si se opera fuera de las condiciones nominales (ej. temperatura excesiva), el error aumentará sistemáticamente.
+
+\subsection{Error Accidental (o Aleatorio)}
+Son pequeñas variaciones impredecibles que ocurren al azar en ambos sentidos (positivo y negativo). A diferencia de los sistemáticos, no se pueden eliminar, pero se pueden minimizar mediante tratamiento estadístico (promedio de múltiples mediciones).
+
+En instrumentos analógicos, los errores accidentales más comunes en la lectura son:
+
+\begin{description}
+  \item[Error de Paralaje:] Ocurre cuando la línea de visión del observador no es perpendicular a la escala, proyectando la aguja en una posición falsa. Se mitiga con el espejo antiparalaje (la imagen reflejada de la aguja debe quedar oculta tras la aguja real) o usando índices luminosos (Fig. \ref{fig_indice_luminoso}).
+  
+  \item[Límite de resolución (Poder separador):] El ojo humano tiene un límite físico. No puede distinguir dos puntos separados por menos de \(\approx \qty{0.1}{\milli\meter}\) a distancia de lectura normal. Esto significa que, aunque la aguja se mueva infinitesimalmente, el ojo la verá quieta. Esto introduce una incertidumbre de lectura inevitable, estimada típicamente en \(1/5\) o \(1/10\) de la división más pequeña de la escala.
+\end{description}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[height=5cm]{chapters/2_unit/media/bin/indice_luminoso.png}
+  \caption{Galvanómetro de índice luminoso, exento de error de paralaje.}
+  \label{fig_indice_luminoso}
+\end{figure}
