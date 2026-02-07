@@ -1,0 +1,271 @@
+\section{Instrumentos IPBM}
+
+Son los llamados comúnmente de ``bobina móvil'' o ``tipo D'Arsonval'' y son los más utilizados en el campo de la corriente continua. Se basan en la acción motriz ejercida por el campo de un imán permanente sobre una bobina recorrida por una corriente continua.
+
+Básicamente el instrumento está constituido por dos sistemas: uno fijo -el circuito magnético- y otro móvil -el cuadro de la bobina-.
+
+El cuadro móvil puede estar sustentado por: pivotes, hilo o bien hilo tensado. Los resortes de bronce fosforoso sirven para llevar la corriente a la bobina móvil y crear la cupla directriz que es proporcional al ángulo de rotación del cuadro.
+
+Los lados activos de la bobina -los paralelos al eje- se encuentran en el entrehierro existente, entre las expansiones polares de un imán permanente y un tambor cilíndrico fijo de hierro dulce. Las superficies enfrentadas de las expansiones polares y del núcleo son cilíndricas, de manera tal de obtener un campo de inducción uniforme y de dirección radial en toda la zona en el cual se puede mover la bobina.
+
+\subsubsection*{Circuito magnético}
+
+Siguiendo la figura \ref{fig:ipbm_esquema} circuito magnético del sistema D'Arsonval está constituido por:
+\begin{enumerate}
+  \item Iman permanente 
+  \item Expansiones polares de hierro dulce
+  \item Núcleo de hierro dulce
+  \item Derivador magnético de hierro dulce % este no entendí muy bien que hace o para qué es
+\end{enumerate}
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[height=5cm]{chapters/3_unit/media/bin/ipbm_esquema.png}
+  \caption{Los números indicados corresponden a cada elemento enumerado.}
+  \label{fig:ipbm_esquema}
+\end{figure}
+
+Téngase presente que todo el circuito magnético es fijo y su misión es la de crear en un entrehierro reducido un flujo radial e inducción constante a fin de obtener una distribución uniforme de escala.
+
+El derivador magnético por el que circula parte del flujo disponible, restándolo del entre hierro en una fracción regulable a voluntad por adecuado desplazamiento, permite llevar la inducción $B$ a un valor perfectamente determinado a los fines de lograr en la fábrica que con la corriente del alcance, la aguja coincida con la última división de la escala.
+
+También sirve para compensar el eventual debilitamiento del imán a través del tiempo: si el derivador se aleja, es menor el flujo que por él deriva, con lo que se refuerza el flujo del entrehierro, restituyéndolo al valor original. Con un circuito magnético que rodea la bobina móvil y el núcleo de hierro dulce, se logra un instrumento de amplia escala de medición, entre \qtyrange{250}{300}{\degree} en lugar de los \qtyrange{90}{120}{\degree} que se obtiene en los instrumentos comunes.
+
+Para esta construcción especial solamente un lado de la bobina móvil es activo.
+
+\subsubsection*{Ventajas de IPBM}
+
+El instrumento de imán permanente y bobina móvil tiene las siguientes cualidades 
+\begin{itemize}
+  \item Elevada sensibilidad
+  \item Consumo bajo
+  \item Alto valor de la cifra de mérito (relación entre la cupla motora y el peso del rotor)
+  \item Escala uniforme y con posibilidades de hacerla extendida (hasta \qty{300}{\degree})
+  \item Poca influencia de los campos magnéticos externos
+  \item Posibilidades de modificar las escalas, ampliar fácilmente el rango de medida.
+\end{itemize}
+
+\subsection{Ley de respuesta}
+
+Para deducir la ley de respuesta del instrumento, consideremos una bobina de $N$ espiras. Al circular una corriente $I$ por el cuadro, aparece una fuerza actuante sobre los lados activos de la bobina:
+\[
+  F=BNIl
+\]
+siendo $l$ el lado activo de la bobina. La figura \ref{fig_par_ipbm} muestra una representación gráfica de la situación.
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[height=5cm]{chapters/3_unit/media/bin/ley_de_respuesta.png}
+  \caption{}
+  \label{fig_par_ipbm}
+\end{figure}
+
+Si $a$ es el ancho de la bobina, la cupla motriz será:
+\[
+  C_m = BNIl\alpha
+\]
+De esta expresión denominamos al producto $BNl\alpha$ constante motora $G$. Como ya se explicó en el estudio de las cuplas, una vez superado el transitorio el equilibrio final se logra cuando $C_m=C_d$. Entonces
+\begin{gather*}
+  GI=Kr\alpha \\ 
+  \alpha= \frac{Gi}{K_r}
+\end{gather*}
+A la relación $G/K_r$ se la llama sensibilidad instrumental $S_i$:
+\[
+  \alpha = S_i I
+\]
+Esta nos dice que ante la presencia de un campo magnético radial y uniforme, la bobina móvil reacciona provocando una cupla y por ende una deflexión que es directamente proporcional a la corriente que circula por ella. Esta conclusión implica además que el instrumento posee una polaridad identificada en los bornes, (cuando opera con corriente continua). Si intencional o accidentalmente se invierte la polaridad, es evidente que la cupla cambiará de sentido, sin poder efectuar lectura alguna si el instrumento no posee escala con cero al centro.
+
+\subsubsection*{Campo uniforme}
+
+Si el campo magnético es constante, uniforme y paralelo el flujo concatenado por el cuadro móvil será función senoidal del ángulo de giro:
+\[
+  \varphi = \psi_\text{max} \sin(\alpha)
+\]
+La expresión general de la deflexión será 
+\[
+  \alpha = \frac{G}{K_r} I\cos(\alpha)
+\]
+como se desprende de la última expresión la ley sigue siendo lineal, es decir que responde proporcionalmente a la corriente. En cuanto a la ley de distribución de la escala dependerá ahora del coseno de la deflexión, obteniéndose una distribución de trazos casi lineal en la primera parte para comprimirse en la segunda.
+
+% El documento presenta un gráfico, pero no logro descifrar que función ha graficado para hacerla en tikz con el entorno axis... Para darte una idea, es como una rama de una parábola (en particular la positiva).
+
+Este tipo de instrumento es utilizado en los llamados de escala ampliada y tienen aplicación cuando se desean medir corrientes o tensiones cuyo valor medio se ubique aproximadamente en la mitad de la escala y con transitorios con picos elevados que por la particularidad constructiva del instrumento es posible detectar sin dañarlo.
+
+\subsubsection*{Escala logarítmica}
+
+Nuevamente la única manera de modificar la escala, apartándola de la linealidad, es hacer que uno de los factores de la constante motora $G$ sea variable. El único factor fácilmente variable es la inducción $B$ en el entrehierro. Así si se desea una escala logarítmica el valor de $B$ deberá ser proporcional a $\ln(i/i)$, lo que se consigue con una forma conveniente de los polos del imán, que hace que para bajos valores de $\alpha$ el valor de $B$ sea grande. % Aquí me parece que \ln(i/i) es un error ¿no?
+
+Este tipo de instrumento con escala logarítmica es utilizado en el campo de las mediciones luminotécnicas y de sonido.
+
+
+\subsubsection*{Amperímetros}
+
+El instrumento de imán permanente y bobina móvil es muy sensible a la corriente. Esta corriente entra y sale del cuadro móvil por los resortes que cumplen la misión de cupla antagónica (espirales o cinta tensada). Con intensidades del orden de los \qtyrange{15}{20}{\milli\ampere} estos resortes alcanzan la temperatura máxima admisible. Por esta razón ese es el valor máximo de la intensidad que puede medirse con un aparato así construido y que se llama miliamperímetro. Si el alcance es del orden de los microamperes, el nombre que recibe es microamperímetro.
+\begin{figure}[!ht]
+  \centering
+  \begin{circuitikz} 
+    \draw (0,0) to[short, i=$I$, -*] (1,0) node[below] {A}
+    (1,0) to[generic, l=$R_\text{shunt}$, i_=$I_s$] (4,0) to[short,-*] node[below] {B}
+      (4,0) -- (5,0);
+    \draw (1,0) -- (1,1.5)
+      (1,1.5) to[rmeterwa, t=A, l=$R_a$, i=$I_a$] (4,1.5)
+      (4,1.5) -- (4,0);
+  \end{circuitikz}
+  \caption{}
+  \label{fig:amperimetro_con_r_shunt}
+\end{figure}
+
+Para alcances más altos se logran con derivadores o shunts dispuestos de modo tal que por la bobina móvil circule el valor nominal o alcance del instrumento. 
+
+Veamos la deducción de como calcular el valor de la resistencia derivadora para un amperímetro de alcance y resistencia interna conocidos. De esquema en la figura \ref{fig:amperimetro_con_r_shunt} la tensión en bornes del instrumento es:
+\[
+  U_{AB} = R_s I_s = R_a I_a
+\]
+Despejando el valor de $R_s$:
+\[
+  R_s=R_a\frac{I_a}{I-I_a}
+\]
+Denominado con $n$ al poder multiplicador del shunt a la relación entre la corriente de línea y corriente a fondo de escala -alcance propiamente dicho del instrumento sin derivador-: 
+\begin{gather*}
+  n=\frac{I}{I_a} \\ 
+  R_s = \frac{R_a}{n-1}
+\end{gather*}
+
+\subsection{Shunts}
+
+Cuando el alcance no es muy grande (hasta los \qty{50}{\ampere} aproximadamente) los shunts pueden disponerse en el interior del instrumento. Para alcances superiores se los coloca exteriormente y con conductores suplementarios se los conecta al instrumento. Para evitar caídas de tensión excesivas por resistencias de contacto, se utilizan resistencias de cuatro terminales. 
+
+Para instrumentos patrones los shunts deben ser externos para cualquier alcance de corriente, además deben poseer un grado de exactitud compatible con la del instrumento; así por ejemplo si el instrumento es de clase 0,2 el error de la resistencia será de 0,2\% como máximo.
+
+Para alcances bajos se utiliza como material alambre de manganina. Para alcances altos los shunts son de barras de cobre en paralelo para lograr una mejor disipación de calor y ajuste. El ajuste fino se logra practicando pequeños orificios o limaduras laterales en las barras.
+
+La caída de tensión en los bornes de la resistencia shunt conectada con el instrumento es:
+\[
+  U=I\frac{R_sR_a}{R_s+R_a}=I\frac{R_s}{\frac{R_s}{R_a}+1}
+\]
+Para alcances superiores a las decenas de amperes $R_s/R_a \ll 1$, de modo que en el denominador el cociente puede despreciarse:
+\[
+  U=IR_s
+\]
+de manera tal que una resistencia shunt queda identificada por dos valores característicos: su caída de tensión y su corriente nominal.
+
+Los valores de caídas de tensión están normalizados en 45 60 75 100 150 300\unit{\milli\volt}.
+
+La conexión del shunt con el instrumento, para corrientes elevadas debe apartarse al instrumento de la influencia del campo magnético generado alrededor del conductor cuya intensidad de corriente quiere medirse, debe tenerse cuidado en el dimensionamiento de los cables de unión, pues su resistencia debe ser despreciable frente a la resistencia del instrumento $R_a$, caso contrario produce un error sistemático provocando una deflexión en menos en el instrumento.
+
+\subsubsection*{Potencia de consumo de los shunts}
+
+La potencia de consumo o disipación por efecto Joule en el shunt viene dada aproximadamente por 
+\[
+  P_s = R_s I^2
+\]
+cuando el poder multiplicador del shunt $n$ es mucho mayor que 1.
+
+El valor de la corriente de línea en función del alcance del instrumento está dado por:
+\[
+  I=nI_a
+\]
+Recordando que $R_s=R_a/(n-1)$, resulta 
+\[
+  P_s = \frac{n^2}{n-1}R_a I^2
+\]
+Por la misma consideración anterior $n\gg 1$, por lo que la última expresión se simplifica a 
+\[
+  P_s\approx nP_a
+\]
+siendo $P_a$ el consumo propio del instrumento.
+
+En consecuencia la potencia de disipación del shunt es $n$ veces la potencia de consumo del instrumento. Así para un miliamperímetro cuyo consumo nominal es de \qty{1}{\milli\watt}, si se lo usa con un derivador para llegar a medir 20.000 veces su alcance, \qty{1000}{\ampere} (siendo \qty{50}{\milli\ampere} el alcance del instrumento), el shunt tendrá una disipación de \qty{20}{\watt}.
+
+Las bobinas móviles de instrumentos a ser usados con shunts para valores altos de corrientes no están devanadas sobre soportes de aluminio para evitar un amortiguamiento excesivo, debido a la corriente de frenado autoinducida en la bobina móvil.
+
+\subsection{Voltímetros}
+
+El instrumento de imán permanente y bobina móvil como medidor de corriente queda definido por su alcance y resistencia interna, por ejemplo \qty{50}{\micro\ampere} - \qty{5000}{\ohm}. El producto de estos dos valores definen el alcance como voltímetro -para el ejemplo, se transforma en un milivoltímetro de \qty{250}{\milli\volt} a fondo de escala. Para mayores alcances se disponen de resistencias adicionales o multiplicadoras en serie con el instrumento, de manera que el nuevo alcance viene dado por la expresión:
+\[
+  U=U_{AB}=I(R_a+R_m)
+\]
+\begin{figure}[!ht]
+  \centering
+  \begin{circuitikz}
+    \draw (0,0) to[short, o-,l=A] (2,0) to[R,l=$R_m$] (2,-1.5) to[rmeterwa,t=V,l=$R_a$] (2,-3) to[short,-o,l=B] (0,-3);
+  \end{circuitikz}
+\end{figure}
+Para determinar $R_m$ para un alcance dado y conociendo los datos $R_a$ e $I$ se plantean las ecuaciones:
+\[
+  U=U_0+IR_m = U_0 + U_0\frac{R_m}{R_a}
+\]
+El poder multiplicador de la resistencia adicional queda definido por 
+\[
+  m=\frac{U}{U_0}
+\]
+Reemplazando en la expresión de $U$:
+\[
+  m=1+\frac{R_m}{R_a} \qquad \therefore R_m = R_a (m-1)
+\]
+La resistencia total $R_m+R_a$ define a $R_v$ la resistencia interna total del instrumento. El cociente entre $Rv/U$ determina una característica importante que diferencia al instrumento con otros de la misma clase. Esta característica es a menudo llamada impropiamente ``sensibilidad del voltímetro \unit{\ohm\per\volt}''. Los valores más comunes son: 1.000, 5.000, 10.000, 25.000, 50.000 \unit{\ohm\per\volt}.
+
+La inversa de los \unit{\ohm\per\volt} nos da el valor de la corriente a fondo de la escala.
+
+En mediciones electrotécnicas las caídas de tensiones son ocasionadas por cargas de bajas resistencias por lo que cualquier instrumento que responda a la característica \unit{\ohm\per\volt} de los valores apuntados resulta admisible. No es así para mediciones electrónicas, ocasionadas por componentes de alto valor resistivo, por lo que un instrumento de más de \qty{25000}{\ohm\per\volt} es lo aconsejable para provocar una menor perturbación en el circuito.
+
+\subsubsection*{Voltímetro para corriente alterna}
+
+Si un instrumento de imán permanente y bobina móvil se conecta a una tensión de corriente alterna, la bobina móvil no provocará ninguna lectura detectable y sólo se observará una vibración del índice para frecuencias bajas. Para evitar esto es necesario modificar la forma de onda. El elemento convertidor no es otra cosa que un rectificador.
+
+Suponiendo que se trata de rectificador ideal y que al conjunto de instrumento-rectificador lo sometemos a una señal de la forma:
+\[
+  u=U_0\sin{\omega t}
+\]
+La corriente será:
+\[
+  i = I_0 \sin(\omega t)
+\]
+El valor medio de la onda vale:
+\begin{gather*}
+  i_med = \frac{1}{2\pi}\int_0^\pi I_0 \sin(\omega t) d(\omega t) = \frac{1}{2\pi}I_0 [-\cos(\omega t)]_{0}^\pi \\ 
+  i_med = \frac{I_0}{\pi}
+\end{gather*}
+o bien por ser:
+\[
+  I_\text{ef} = \frac{I_0}{\sqrt{2}} \qquad \text{entonces} \qquad I_\text{medio}=0.45I_\text{ef}
+\]
+que es el valor que indica el instrumento con rectificador de media onda.
+
+\subsubsection*{Consumo propio}
+
+Cuando se analizó la cupla motora de este instrumento se dedujo que la misma variaba proporcionalmente con la corriente. En la constante de proporcionalidad se incluía a $B$, es decir que a mayor inducción mayor cupla motora. Con los modernos imanes se puede llegar a \qty{0.3}{\tesla} y aún más, mientras que en los instrumentos de hierro móvil y electrodimámicos se crean campos relativamente bajos de solo \qtyrange{0.01}{0.015}{\tesla}. Esta es la razón por la cual con el instrumento de imán permanente y bobina móvil se pueden construir microamperímetros mientras que con los de hierro móvil y electrodinámicos no se puede bajar de los \qtyrange{15}{20}{\milli\ampere}, pues para valores inferiores el consumo se hace inaceptablemente alto. Esto se debe a que si el valor de $B$ es bajo, para mantener valores adecuadamente altos de la cupla motora es necesario aumentar correspondiente el tamaño de la bobina y sobre todo el número de espiras $N$, lo que determina una mayor longitud del alambre y una disminución de la sección, con lo que se incrementa notablemente la resistencia de la bobina. La consecuencia es un aumento de consumo de los miliamperímetros. Cuando estudiamos al instrumento de IPBM como amperímetro, arribamos a la conclusión que al disponer de una resistencia derivadora para aumentar el alcance, la potencia de consumo de la resistencia shunt era $n$ veces la potencia de consumo propio del instrumento. Ahora utilizando el mismo instrumento como voltímetro, deducimos que también el consumo total será $m$ veces el consumo propio del aparato:
+\[
+  P_\text{cp}=U_a I_s = R_a I_a^2
+\]
+La potencia de consumo total:
+\[
+  P_c = R_mI_a^2 + R_a I_a^2 = R_a(m-1)I_a^2+R_aI_s^2 = mR_aI_a^2 
+\]
+así,
+\[
+  P_c = mP_\text{cp}
+\]
+El consumo es pues proporcional al poder multiplicador $m$. Así si por ejemplo un milivoltímetro de alcance \qty{30}{\milli\volt} tiene un consumo de \qty{0.15}{\milli\watt}; al utilizarlo como voltímetro de \qty{1500}{\volt}. ($m=50.000$) el consumo se ampliará a:
+\[
+  P_c = \qty{7.5}{\watt}
+\]
+que es un valor bastante aceptable. Esta es la razón por la cual se pueden usar en instrumentos de imán permanente y bobina móvil poderes multiplicadores tan altos. Compárese con un voltímetro de hierro móvil de solo \qty{600}{\volt} cuyo consumo es de \qty{12}{\watt}.
+
+\subsection{Ohmetro serie}
+
+\subsection{Ohmetro paralelo}
+
+\subsection{Logómetros}
+
+\subsection{Lupa de tensión}
+
+\subsection{IPBM con termocupla}
+
+\subsection{Efecto Hall}
+
+\subsection{Errores sistemáticos}
+
+\subsection{Consideraciones prácticas IPBM con rectificador}
+
+\subsection{Características escala en C.A.}
+
+\subsection{Errores por envejecimiento}
