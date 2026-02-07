@@ -252,7 +252,79 @@ que es un valor bastante aceptable. Esta es la razón por la cual se pueden usar
 
 \subsection{Ohmetro serie}
 
+Un instrumento de imán permanente y bobina móvil de campo radial uniforme en serie con las resistencias $R_i$, $R_1$, $R_2$ y la incógnita $X$ configura básicamente el principio del óhmetro serie:
+\begin{figure}[!ht]
+  \centering
+  \begin{circuitikz}
+    \draw (3,0) to[rmeterwa,t=R,o-] (0,0) to[battery2,l=E] (0,1.5) to[R,l=R_i] (0,3) to[R,l=$R_1$] (1.5,3) to[R,l=$R_2$,-o] (3,3);
+    \draw (3.1,0.1) to[R,l=X] (3.1,2.9);
+  \end{circuitikz}
+  \hfill
+  \begin{circuitikz}
+    \draw (3,0) to[short,o-] (0,0) to[battery2,l=E] (0,3) to[R,l=$R_0$,-o] (3,3);
+  \end{circuitikz}
+\end{figure}
+
+Existe una relación definida entre la corriente $I_x$ y el valor de $X$. En esta relación también entran los restantes parámetros del circuito: $E$, $R_i$ (resistencia interna de la batería), $R_a$ (resistencia del cuadro móvil del instrumento), $R_1$ (resistencia variable, ajuste del cero de escala) y $R_2$ (resistencia fija). Si todos estos parámetros son fijos la escala del instrumento -por ejemplo microamperímetro- puede calibrarse directamente en unidades de \unit{\ohm}.
+
+Supongamos que contamos con un instrumento de IPBM de \qty{50}{\micro\ampere} -valor usual en los multímetros o tester- a fondo de la escala. Para un valor de $X$ igual a cero, cortocircuitando los terminales de entrada, deben seleccionarse los parámetros del circuito $E$, $R_1$, $R_2$ de manera que la aguja del instrumento marque la máxima deflexión (\qty{50}{\micro\ampere}).
+
+Para $X\to\infty$ (terminales desconectados) la corriente será nula.
+
+Los puntos cardinales (extremos) en la escala en ohms estarán invertidos a los correspondientes de la escala en \unit{\micro\ampere}: el ``cero'' estará a la derecha y el ``infinito'' a la izquierda. 
+
+No obstante er la deflexión proporcional a la corriente, la escala no es uniforme. Para su análisis hallaremos un factor $F$ que dependerá de los parámetros del circuito. 
+
+El valor de la corriente $I_x$ para un valor cualquiera $X$ será:
+\[
+  I_x = \frac{E}{R_i+R_1+R_2+R_a+X}=\frac{E}{R_0+X}
+\]
+Con $R_0$ incluimos a todas las resistencias internas del circuito.
+
+Si a la expresión anterior dividimos numerador y denominador por $R_0$
+\[
+  I_x = \frac{\frac{E}{R_0}}{1+\frac{X}{R_0}} = \frac{I_0}{1+\beta}
+\]
+siendo la corriente necesaria para la máxima deflexión, al cociente entre la resistencia incógnita y la total interna la denominaremos $\beta$.
+
+La escala del instrumento como óhmetro puede estudiarse en función del factor $F$ definido como $I_x/I_0$ y $\beta$ que es valor fraccional de $X$ comparado con la resistencia de entrada $R_0$ del óhmetro:
+\[
+  F=\frac{1}{1+\beta}
+\]
+Esta última expresión es una ecuación universal, ya que es válida con independencia de los valores específicos de los parámetros del circuito: $E$, $R_1$, $R_2$, $R_a$.
+
+Del análisis de la expresión de $F$ se determina que para $\beta=1$ vale $0,5$. Esto indica que para una resistencia incógnita $X$ igual a la interna $R_0$ la deflexión acusa la mitad de escala; justamente entre el cero y este punto llamado punto de medio diseño de la escala, pueden efectuarse lecturas sin dificultad, no así en el resto de la escala donde los trazos se comprimen cada vez más, hasta llegar a infinito. %wtf
+
 \subsection{Ohmetro paralelo}
+
+Por lo visto en el circuito anterior -ohmetro serie- el punto medio de diseño de escala queda determinado por $R_0$, aún haciendo mínimas todas las resistencias, queda como importante la propia del cuadro móvil del instrumento de IPBM -para $\qty{50}{\micro\ampere}/\qty{5000}{\ohm}$- Este valor de por sí solo es excesivo para el campo de mediciones pequeñas por lo que el circuito del óhmetro serie es inadmisible para medir con cierta exactitud resistencias bajas.
+
+La otra configuración circuital que nos permite solucionar el inconveniente apuntado, es la del óhmetro shunt: Se lo denomina óhmetro shunt porque la resistencia incógnita, la $X$ a medir se la conecta en paralelo con el instrumento. Como se ve del circuito de la figura () el aparato necesita de una llave interruptora para desconectar la fuente después de efectuada la medición.
+
+Obsérvese que aquí los puntos cardinales de la escala son distintos respecto a los del óhmetro serie. Cuando la incógnita es cero estamos efectuando un cortocircuito en bornes del instrumento, es decir que la única limitación de la corriente está impuesta por la resistencia $R$. Significa pues que para $X$ cero, el índice coincide -con la llave interruptora cerrada- se obtiene el valor máximo de corriente pues para cualquier otro valor de $X$ la misma actúa como resistencia derivadora.
+
+Para analizar la distribución de la escala, repetimos el mismo razonamiento encarado en el óhmetro serie.
+
+El valor de $I_a$ es el de la corriente circulando cuando tenemos conectado al aparato una $X$:
+\[
+  I_a = \frac{E}{R+\frac{R_a X}{R_a+X}} \frac{R_a X}{(R_a+X)R_a} = \frac{EX}{X(R+R_a)+RR_a}
+\]
+El valor máximo de la corriente se obtiene -como dijimos- cuando $X$ es infinito:
+\[
+  I_\infty=\frac{E}{R+R_a}
+\]
+Definiendo al factor de distribución de escala $F$:
+\[
+  F=\frac{I_a}{I_\infty} = \frac{1}{1+\frac{R_\rho}{X}}=\frac{1}{1+\frac{1}{\rho}}
+\]
+
+Nuevamente hemos hallado una ecuación universal para cualquier valor de los parámetros. De la representación gráfica de $F$ se ve que para el óhmetro shunt la distribución de escala es idéntica a la del óhmetro serie con la condición de que en aquella se halla invertida (puntos cardinales: cero a izquierda e infinito derecha).
+
+También y en forma similar al óhmetro serie para $\rho=1$ la deflexión acusa la mitad de la escala, definido como el ``punto medio de diseño de la escala''.
+
+La forma de obtener distintas escalas es variado las tensiones de la fuente o bien modificado las resistencias en serie con el instrumento.
+
+El campo de aplicación del óhmetro shunt se extiende desde resistencias muy bajas del orden de los micro-ohms, hasta las unidades, mientras que con el ohmetro serie el límite superior puede llegar al orden de los megaohms.
 
 \subsection{Logómetros}
 
