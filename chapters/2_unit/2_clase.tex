@@ -64,9 +64,7 @@ El error relativo de indicación (\(e_i\)) es:
 \[
     e_i\% = \frac{E_\text{max}}{X_\text{medido}} \cdot 100
 \]
-Esta relación hiperbólica (Fig. \ref{fig:error_en_funcion_alcance}) demuestra que medir en el inicio de la escala conlleva errores relativos enormes.
-
-\input{chapters/2_unit/media/lineal.tex}
+Esta relación hiperbólica (Fig. \ref{fig:error_no_lineal}) demuestra que medir en el inicio de la escala conlleva errores relativos enormes.
 
 \textbf{Regla práctica:} Se recomienda seleccionar el alcance del instrumento de modo que la lectura se realice siempre en el \textbf{último tercio de la escala}.
 
@@ -101,3 +99,14 @@ Sin embargo, para las operaciones más comunes en ingeniería (productos y cocie
 \end{equation}
 
 Es decir, el error relativo total es la suma de los errores relativos de cada componente. Esto resalta nuevamente la importancia de medir en el tercio superior de la escala para minimizar los errores \(e_X\) y \(e_Y\) individuales antes de que se sumen.
+
+\subsection{Análisis estadístico de los errores}
+
+Una forma útil de minimizar los errores accidentales y garantizar una buena medida, es obtener varias mediciones de la misma magnitud, en las mismas condiciones, ya que es probable, en una serie de mediciones (de acuerdo a las leyes del azar), que exista una compensación de los errores accidentales.
+
+Así, se pueden establecer tres postulados importantes;
+\begin{enumerate}
+  \item El valor verdadero de un número muy grande de mediciones efectuadas en las mismas condiciones, está dada por la media de los mismos.
+  \item Es igualmente probable encontrar errores de igual valor absoluto pero de distinto signo.
+  \item En una serie de mediciones, es tanto más probable cometer errores pequeños que grandes.
+\end{enumerate}

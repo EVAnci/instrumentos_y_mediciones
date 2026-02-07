@@ -5,12 +5,12 @@
         axis lines = middle,
         xlabel = {$V_m$},
         ylabel = {$e_i\%$},
-        domain = 0.3:12,
+        domain = 0.3:10,
         ymin = 0, ymax = 10,
         xmin = 0, xmax = 11,
         samples = 100,
         width=10cm, height=8cm,
-        restrict y to domain=0:12,
+        restrict y to domain=0:10,
         xticklabel=\empty,
         yticklabel=\empty,
     ]
@@ -22,7 +22,7 @@
         \addplot [
             blue,
             thick,
-        ] {9/(x-1.5)};
+        ] {60/(x^2-6)};
         \addlegendentry{Esc. Ampliada}
         \addplot [
           teal,
@@ -30,10 +30,10 @@
         ] {2};
         \addlegendentry{Esc. Logarítmica}
 
-      \draw[black,dotted] (8,2) -- (8, 0) node[above left,black]{\scriptsize{Alcance}};
+      \draw[black,dotted] (10,2) -- (10, 0) node[above left,black]{\scriptsize{Alcance}};
       \draw[black,dotted] (1,10) -- (1, 0);
     \end{axis}
   \end{tikzpicture}
-  \caption{}
+  \caption{Comparación del error en los tres tipos de instrumentos.}
   \label{fig:error_no_lineal}
 \end{figure}
