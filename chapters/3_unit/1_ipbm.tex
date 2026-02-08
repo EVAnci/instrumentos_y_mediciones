@@ -256,7 +256,7 @@ Un instrumento de imán permanente y bobina móvil de campo radial uniforme en s
 \begin{figure}[!ht]
   \centering
   \begin{circuitikz}
-    \draw (3,0) to[rmeterwa,t=R,o-] (0,0) to[battery2,l=E] (0,1.5) to[R,l=R_i] (0,3) to[R,l=$R_1$] (1.5,3) to[R,l=$R_2$,-o] (3,3);
+    \draw (3,0) to[rmeterwa,t=$R$,o-] (0,0) to[battery2,l=$E$] (0,1.5) to[R,l=$R_i$] (0,3) to[R,l=$R_1$] (1.5,3) to[R,l=$R_2$,-o] (3,3);
     \draw (3.1,0.1) to[R,l=X] (3.1,2.9);
   \end{circuitikz}
   \hfill
@@ -328,16 +328,399 @@ El campo de aplicación del óhmetro shunt se extiende desde resistencias muy ba
 
 \subsection{Logómetros}
 
-\subsection{Lupa de tensión}
+Para la obtención de distintas magnitudes eléctricas a veces es necesario efectuar el cociente entre otras dos magnitudes. Así si se quiere medir una resistencia conociendo $U$ e $I$ (tensión en bornes y corriente que la circula) se debe efectuar el cociente $U/I$. Por definición diremos que logómetros son aquellos instrumentos susceptibles de medir la relación de dos corrientes, de ahí el nombre de ``cocientímetros'' o bien instrumentos de ``bobinas cruzadas''.
+
+Analicemos el principio de funcionamiento: En presencia de un campo magnético uniforme $B$, se ubican dos bobinas rectangulares y solidarias a un mismo eje y con sus planos formando un ángulo de \qty{90}{\degree}. Las dos bobinas supuestas iguales están recorridas por dos corrientes $i_1$ e $i_2$ en los sentidos indicados en la figura \ref{fig:logometro}.
+\begin{figure}[!ht]
+  \centering 
+  \includegraphics[height=6cm]{chapters/3_unit/media/bin/logometro.png}
+  \caption{}
+  \label{fig:logometro}
+  % La verdad esta figura no la entiendo. Te comento como está compuesta. 
+  % Parecen dos barras formando una cruz con un angulo theta, atravesado por un campo magnético B. De las puntas de cada palo la cruz salen fuerzas opuestas... no entiendo.
+\end{figure}
+
+Las fuerzas $F_1$ y $F_2$ que actúan sobre los lados activos de las bobinas, perpendiculares a la dirección del campo son:
+\[
+  F_1 = KBi_1 \qquad \text{y}\qquad F_2=KBi_2
+\]
+siendo $K$ una constante que depende de la longitud de los lados activos de las bobinas y del número de espiras. Si el plano de la bobina recorrida por la corriente $i$ forma un ángulo $\theta$ con un eje normal al campo y si $a$ es el ancho de las bobinas, las cuplas motoras actuantes serán:
+\[
+  C_1 = af_1 K'i_1 \sin\theta \qquad \text{y} \qquad C_2 = af_2 K'i_2 \cos\theta
+\]
+Puesto que las dos cuplas tienen sentido contrario y como las bobinas no están sometidas a ninguna cupla recuperadora, el sistema gira hasta que ambas cuplas sean iguales:
+\[
+  i_1\sin\theta = i_2 \cos \theta \qquad \therefore \tan\theta = \frac{i_2}{i_1}
+\]
+de manera que la desviación de las bobinas medida a partir de una cierta posición inicial de referencia, estará directamente vinculada con la relación entre las dos corrientes.
+
+\subsubsection*{Óhmetro de imán permanente y bobinas cruzadas}
+
+Si una de las bobinas se coloca en serie con una resistencia $R$ conocida y la otra bobina en serie con una resistencia $R_x$ a medir, al alimentar los dos circuitos en paralelo con una misma tensión continua $U$ se tendrá:
+\[
+  \frac{I_2}{I_1}=\frac{R_x}{R}
+\]
+despreciando las pequeñas resistencias internas de las bobinas.
+\[
+  R_x = R\tan\theta \quad \therefore \theta \approx R_x
+\]
+Es decir que la escala del instrumento puede calibrarse directamente en ohm, resultando la indicación independiente de la tensión $U$.
+
+Una manera sencilla de interpretar el funcionamiento de este tipo particular de óhmetro es considerar al sistema conformado por un voltímetro -el campo y una de las bobinas- que mide la tensión en bornes de $R_x$ y por un amperímetro -el campo y la otra bobina- que mide la corriente circulante por la resistencia incógnita.
+
+Desde el punto de vista constructivo no es necesario que el campo sea rectilíneo y uniforme, ni que las dos bobinas estén colocadas en ángulo recto.
+
+Basta solamente una disposición tal que a una rotación del sistema móvil corresponda un aumento de una de las cuplas y una disminución de la otra. Obviamente la ley de respuesta del instrumento no será tan simple como la del caso teórico ya considerado y deberá ser determinada experimentalmente; pero la desviación $\theta$ del sistema móvil será siempre una función unívoca de la relación entre las dos corrientes. Además con la calibración experimental se podrá tener en cuenta las resistencias propias de las bobinas que en una primera aproximación se supuso despreciables y que tienen importancias cuando se miden resistencias pequeñas. Sin embargo la principal aplicación de este tipo de óhmetro está sumamente difundida en las mediciones de resistencias elevadas de aislación de máquinas eléctricas, cables conductores, aisladores, etc.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=4cm]{chapters/3_unit/media/bin/ohmetro.png}
+    \caption{}
+    \label{fig:ohmetro_x}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=5cm]{chapters/3_unit/media/bin/manivela.png}
+    \caption{}
+    \label{fig:ohmetro_manivela}
+  \end{subfigure}
+  \caption{}
+\end{figure}
+En la figura \ref{fig:ohmetro_x} se ha representado el esquema de funcionamiento de este instrumento que recibe el nombre de ``megóhmetro'' o vulgarmente conocido como ``megger''. Puesto que en este caso particular las mediciones deben efectuarse con las tensiones de servicio o mayor según las disposiciones de las normas, se utiliza incorporado al aparato un generador manual o bien un dispositivo electrónico capaz de suministrar tensiones de hasta \qty{5000}{\volt}. La escala, que no es lineal, tiene sus puntos cardinales en cero e infinito, midiendo valores intermedios entre décimas a centenares de megohm. En la figura \ref{fig:ohmetro_manivela} se ha dibujado un generador a manivela, este tipo de megger es el del tipo convencional. Los hay con baterías comunes que con la aplicación de circuitos electrónicos adecuados son capaces de generar tensiones elevadas, aptas para la medición de resistencias de aislación.
+% No he entendido bien este apartado la verdad. No se ni que preguntar...
+
+\subsection{Lupa de tensión (con diodo zener)}
+
+Así se denomina al instrumento de IPBM con diodo zener. El diodo zener actúa como un dispositivo intermedio entre la cantidad a medir y el dispositivo final: el instrumento.
+
+Antes de analizar el funcionamiento en conjunto daremos unas nociones elementales respecto al zener.
+
+La característica de los mismos varían respecto del diodo común en lo siguiente: Actuando con polarización inversa circula una corriente muy pequeña -del orden de los microamperes- hasta llegar a llamada ``tensión de ruptura'' o ``tensión zener'' que junto con la disipación, son los dos valores característicos del diodo. Aclaremos que el término ruptura es impropiamente llamado, por cuanto el comportamiento es reproducible siempre que el calentamiento térmico no dañe la estructura cristalina del diodo; esta limitación viene representada por la potencia de disipación, admisible y su corriente máxima inversa nominal. Con esta precaución, el proceso es reversible y repetible con alto grado de exactitud. El circuito utilizado como lupa de tensión es el de la figura \ref{fig:zener_arriba}, para expandir la última parte de la escala y la variante dibujada en la figura \ref{fig:zener_abajo} para ampliar el inicio de la escala.
+% estoy más perdido que un niño de primaria leyendo un texto de cálculo. Pido disculpas pero ya no estoy entendiendo lo que el libro me quiere transmitir.
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \begin{circuitikz}
+      \draw (0,0) to[short,o-] (3,0) to[rmeterwa] (3,1.5) to[R] (3,3) to[zzD*] (1.5,3) to[R,-o] (0,3);
+      \draw (1.5,0) to[R,*-*] (1.5,3);
+    \end{circuitikz}
+    \caption{}
+    \label{fig:zener_arriba}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \begin{circuitikz}
+      \draw (0,0) to[short,o-] (3,0) to[rmeterwa] (3,1.5) to[R] (3,3) -- (1.5,3) to[R,-o] (0,3);
+      \draw (1.5,0) to[zzD*,*-] (1.5,1.5) to[R,-*]  (1.5,3);
+    \end{circuitikz}
+    \caption{}
+    \label{fig:zener_abajo}
+  \end{subfigure}
+  \caption{}
+\end{figure}
+
+Mientras la tensión que cae sobre la resistencia $R_2$ es inferior a la tensión Zener $U_z$ la resistencia que ofrece el diodo es del orden de las megohm es decir que para el instrumento es casi como si actuara un interruptor abierto. A partir de $U_z$ pequeñas variaciones de tensión repercuten con grandes variaciones de corriente que circulan a través del instrumento. Con una adecuada selección de las resistencias $R_1$ y $R_2$, la escala queda calibrada.
+
+En la disposición circuital de la figura \ref{fig:zener_abajo}, el diodo Zener conectado en paralelo con el instrumento no influye en las indicaciones de éste, siempre que la tensión esté por debajo de $U_z$. Cuando se sobrepasa ésta, el diodo actúa como una resistencia ``shunt'' variable y decreciente con la tensión, de manera que la corriente $I$ se deriva a partir de dicha tensión casi totalmente por la rama que lleva incorporado el diodo. Este tipo de circuito es utilizado para proteger de sobretensiones al instrumento de medida.
 
 \subsection{IPBM con termocupla}
 
+Cuando dos alambres que están compuestos de metales diferentes se unen en ambos extremos y se calienta en una de las puntas, se hace presente una corriente continua que fluye en el circuito. Este efecto recibe el nombre de Seebeck, su descubridor en 1821. Si el circuito de la figura 26, se abre en el centro, la tensión de circuito abierto, llamada ``tensión Seebeck'' es una función de la temperatura del punto de unión de los metales y de la composición de los mismos. Todos los metales que sean distintos exhiben este fenómeno. Las combinaciones más comunes de dos metales que se usan para fabricar termocuplas son las siguientes:
+\begin{itemize}
+  \item Fe-Constantan: \qty{58.5}{\micro\volt\per\degreeCelsius}
+  \item Ni con 10\% de cromo: \qty{39.4}{\micro\volt\per\degreeCelsius}
+  \item Platino con 10\% de rodio: \qty{10.3}{\micro\volt\per\degreeCelsius}
+\end{itemize}
+% Aquí no he puesto la supuesta figura 26. Esta figura es un "circuito" que parecen dos cables de metal distinto unidos, y en un extremo se calientan con una vela. 
+
+Para pequeños cambios de temperatura la tensión de Seebeck es linealmente proporcional a la temperatura:
+\[
+  e=\alpha T
+\]
+en realidad, la ley es:
+\[
+  e=\alpha\Delta t + \beta\Delta t^2
+\]
+siendo $\alpha$ el coeficiente de Seebeck, es decir, la constante de proporcionalidad.
+
+\subsubsection*{Aplicaciones}
+
+La disposición típica de este instrumento analizado funcionalmente consta de:
+\begin{enumerate}
+  \item Detector primario: compuesto por un elemento calefactor circulado por la corriente a ser medida.
+  \item Termocupla: con su juntura caliente en contacto térmico con el calefactor y con su juntura fría a la temperatura ambiente.
+  \item Instrumento: de imán permanente y bobina móvil, actuando como milivoltímetro, cuya ley de respuesta será proporcional a la f.e.m. generada por la termocupla.
+\end{enumerate}
+Puesto que la f.e.m. es proporcional a la elevación de la temperatura en el elemento calefactor la desviación del instrumento será proporcional a la pérdida:
+\[
+  P=I^2 R
+\]
+Por esta razón un instrumento con termocupla tiene escala cuadrática midiendo siempre el valor eficaz de la corriente. Por lo tanto es un instrumento apto para mediciones en corriente continua y en corriente alterna, midiendo valores eficaces independientemente de la forma de onda y de la frecuencia.
+
+\subsubsection*{Elemento calefactor}
+
+Es sabido que la resistencia de un conductor es función de la frecuencia -efecto pelicular o Skin-. Este efecto será menor para conductores muy delgados de materiales de alta resistividad. Por ejemplo para conductores de cobre de \qty{0.025}{\milli\meter} de diámetro, el incremento de resistencia es del 1\% para \qty{20}{\mega\hertz}, mientras que para un conductor de constantan del mismo diámetro el aumento de resistencia es del 0,0015\% para \qty{20}{\mega\hertz}. Se concluye que estos últimos conductores pueden ser usados como elementos calefactores hasta frecuencias muy altas sin que introduzcan errores apreciables (frecuencias de 50 y hasta 80 MHz). Si el diseño es apropiado, su impedancia es casi puramente resistiva, aún para altas frecuencias.
+
+\subsubsection*{Termoelemento}
+
+Está constituido por la combinación del elemento calefactor y la termocupla, en el cual se produce la transformación de la energía térmica en eléctrica. Hay diversas formas constructivas de termoelementos: Una de las formas más simples es la de contacto. La juntura está soldada al elemento calefactor y se halla en contacto eléctrico con él. Tiene la ventaja de una respuesta rápida a los cambios de corrientes producidos en el circuito a medir. En corriente alterna, y para frecuencias superiores a la industrial aparecen efectos capacitivos. Para eliminar esto se separa la termocupla del elemento calefactor, encerrando ambos en una ampolla de vidrio. El termoelemento se usa combinado con un milivoltímetro de baja resistencia, tratando de cumplir con la máxima transferencia de energía, obtenida cuando la resistencia del instrumento iguale aproximadamente a la resistencia interna de la termocupla. El inconveniente principal es su baja capacidad a las sobrecargas -inferior al 50\% para no quemar al elemento calefactor. Se puede llegar a obtener combinado con un buen instrumento una clase final igual a 1 con una frecuencia límite de 50 MHz. Consumo: utilizado como amperímetro en alcance de 100 mA (resistencia del elemento calefactor 1 ohm) el consumo es de 10 mW. Para un alcance de 500 mA el consumo se eleva a 50 mW. De las dos últimas aplicaciones del IPBM, se desprende que la denominada "lupa de tensión" tiene uso en el campo de las mediciones eléctricas -por ejemplo medición de tensión a la salida de un generador-; mientras que el IPBM con termocupla se lo usa en el campo de las mediciones electrónicas en alta frecuencia.
+
 \subsection{Efecto Hall}
+
+En el campo de las mediciones de corriente continua el uso del efecto Hall ha encontrado un gran campo de aplicación. Este fenómeno electromagnético se produce cuando un campo magnético y un conductor plano se disponen perpendicularmente. El generador de Hall se usa para efectuar -de forma relativamente sencilla- medición de corriente, tensión y potencia. Las ventajas de este método son numerosas, especialmente cuando se operan en el campo de corrientes elevadas y al actuar como transductor magnético no es necesaria la inserción directa sobre el circuito a medir. En el campo de las mediciones de tensiones altas el uso del generador de Hall permite efectuar las mismas en forma indirecta, evitando al operador todo peligro debido a las tensiones de contacto.
+
+De física sabemos que al pasar una corriente en sentido longitudinal a través de una placa de material conductor o semiconductor, que está sometida a la acción de un campo magnético normal con el plano de la placa, se establece entre los lados de la placa una diferencia de potencial llamada "tensión de Hall".
+\[
+  U_{ab} = \frac{K_1 K_h B i}{d}
+\]
+En la última expresión, $B$ representa el valor de la inducción en Tesla, $i$ es el valor de la corriente de control en amperes, $K_1$ es el valor de una constante que depende de la relación entre el largo y el ancho de la placa y que normalmente asume valores comprendidos entre 0,7 y 0,8 Kh es la constante de Hall cuyo valor dependerá del material utilizado y $d$ el espesor de la placa en milímetros.
+
+De la expresión de la tensión $U_{ab}$ surgen las siguientes aplicaciones:
+\begin{enumerate}
+\item Aplicaciones basadas en la proporcionalidad entre la tensión y el producto $Bi$.
+\item Aplicaciones basadas en la proporcionalidad entre la tensión y la inducción $B$, manteniendo constante la corriente de control $i$.
+\item Aplicaciones basadas entre la proporcionalidad entre la tensión y la corriente de control, manteniendo constante la inducción.
+\end{enumerate}
+
+Para obtener una tensión de Hall que a igualdad de otras condiciones, resulta elevada, es necesario recurrir a materiales semiconductores tales como el Antimoniuro de Indio y el Arseniuro de Indio.
+
+\subsubsection*{Medición de corriente}
+
+Si indicamos con $I$ el valor de la corriente continua que circula por la línea -y que se desea medir-, con $N$ el número de espiras (para este caso igual a uno), con $\mu$ la permeabilidad en el entrehierro y con $B$ el valor de la inducción en entrehierro, podemos escribir:
+\[
+  B=\mu N I
+\]
+por lo que la tensión generada será:
+\[
+  e=KI
+\]
+siendo
+\[
+  K=\frac{K_1 K_h \mu_0 N}{d} i
+\]
+Las resistencias $R_1$ y $R_2$ colocadas en serie con el circuito de control y de salida respectivamente, tienen la misión de hacer al dispositivo prácticamente independiente de la temperatura.
+
+Tratándose del funcionamiento en corriente continua, el circuito magnético no debe ser necesariamente laminado, y puede estar constituido por un bloque fundido de material magnético. Desde el punto de vista práctico el método ofrece óptimos resultados y particularmente conveniente en el campo de las mediciones de elevadas intensidades de corriente o bien, cuando el circuito está sometido a tensiones altas. En el primer caso, el dispositivo actúa como una pinza amperométrica de las utilizadas en corriente alterna (y que algunas de reciente tecnología incluyen los cristales Hall para la medición en continua) presentando la ventaja de no interrumpir el circuito ni provocar errores de inserción. En el segundo caso la ventaja reside en mantener al operador alejado del conductor en tensión, eliminando así el peligro por contacto accidental.
+
+\subsubsection*{Medición de tensión}
+
+La aplicación del generador Hall en las mediciones de tensiones continuas no es tan frecuente como la descripta para la medición de corriente y tiene interés -como ya se ha dicho- cuando se miden tensiones altas.
+
+El circuito magnético consta de una bobina de $N$ espiras alimentada por la línea cuya tensión se desea medir. La corriente que circula por la bobina creará un campo magnético variable con la tensión. Como en el dispositivo usado para la medición de corriente es necesario que en el campo de funcionamiento no se verifiquen fenómenos de saturación magnética.
+
+\subsubsection*{Medición de potencia}
+
+Se ha citado que en el campo de las aplicaciones están aquellas en que la tensión de Hall es proporcional al producto $Bi$. Esta propiedad resulta de interés cuando se desea medir la potencia en un circuito alimentado con corriente continua.
+
+El campo magnético necesario para el funcionamiento del generador Hall es obtenido por la misma corriente circulante por la línea que constituye la única espira que abraza el núcleo magnético. Si la corriente es débil para la creación de un $B$ útil, será necesario abrazar al núcleo con mayor número de espiras.
+
+La tensión del circuito bajo medida actúa sobre el circuito de control, intercalando una resistencia $R_1$ con funciones limitadoras de corriente. De esta manera la corriente de salida del generador Hall resulta proporcional al producto $UI$, es decir a la potencia.
+
+El grado de exactitud alcanzado con la medición efectuada con este método está relacionado con varios factores como ser la linealidad del circuito magnético, la temperatura, etc., que tomando las precauciones del caso es posible obtener exactitudes próximas al 0,5\%.
 
 \subsection{Errores sistemáticos}
 
+Las causas que dan origen a este tipo de errores pueden resumirse en las siguientes 
+\begin{enumerate}
+  \item Variación de temperatura
+  \item Inestabilidad del imán permanente
+  \item Aparición de los efectos termoeléctricos
+\end{enumerate}
+
+\subsubsection*{Variación de la temperatura}
+
+La mayoría de los instrumentos indicadores tienen como temperatura de referencia, a la cual fueron calibrados, la llamada temperatura de calibración \qtyrange{20}{25}{\degreeCelsius}, para otros valores la indicación se verá afectada por la incidencia en las siguientes partes constitutivas del aparato:
+\begin{description}
+  \item[Modificación de la constante motora ($G$)]
+Esta es producida en razón de que el aumento de temperatura desmagnetiza el imán permanente reduciendo su flujo y consecuentemente la pérdida de inducción en el entrehierro hace que la constante motora disminuya proporcionalmente. En forma experimental se ha logrado determinar que la reducción del par motor es lineal y con coeficiente porcentual de -0.02\% por cada grado de variación positiva de la temperatura. Este valor porcentual se obtiene considerando la diferencia de deflexión referida a la obtenida para la temperatura de referencia.
+  \item[Modificación de la constante elálstica]
+    Los muelles en espiral por su característica metálica, si son sometidos al aumento de temperatura reducen su elasticidad en un valor aproximadamente constante en +0.04\%\unit{degreeCelsius} para un determinado rango de temperatura. Esta pérdida de elasticidad es temporal ya que desaparecida la causa el espiral retoma su características originales.
+  \item[Variación de la resistencia de la bobina móvil]
+    Analicemos este caso en el amperímetro, es decir el cuadro móvil en paralelo con la resistencia shunt. Cuando la conexión del shunt es externa debe tenerse cuidado de efectuar las conexiones como se indicó en el análisis de las características del shunt.Siempre los conductores de linea deben conectarse directamente al shunt y los que unen al instrumento deben ser de dimensiones lo suficientemente cortas para no aumentar la resistencia propia del cuadro móvil, provocando un error de inserción. En condiciones ideales de funcionamiento debe cumplirse para las dos ramas Rs y Ra el mismo coeficiente de temperatura y la misma temperatura de funcionamiento. Para que las dos ramas tengan el mismo coeficiente de temperatura (si la resistencia shunt es de manganina, por ejemplo) se compensa la variación de resistencias agregando en serie con la bobina un resistor de manganina de resistencia r. Analicemos con esta disposición la variación porcentual de resistencia:
+    \[
+      R=R_a +r 
+    \]
+    Cuando se produce un aumento de temperatura la $R$ resulta
+    \[
+      R'=R_a(1+\alpha_{Cu}\Delta t) + r(1+\alpha_{Mn}\Delta t)
+    \]
+    Para una temperatura de \qty{20}{\degreeCelsius}:
+    \[
+      \alpha_{Cu} = 4\times 10^{-3} \unit{\ohm\per \degreeCelsius} \quad \text{y} \quad 
+      \alpha_{Mn} = 6\times 10^{-6} \unit{\ohm\per \degreeCelsius}
+    \]
+  Como se observa esta variación es tan poco perceptible frente a la del cobre que la última expresión puede simplificarse:
+  \[
+    R'=R_a + R_a\alpha_{Cu}+\Delta t +r_{Mn}
+  \]
+  La variación de resistencia será:
+  \[
+    \Delta R = R' - R = R_a \alpha_{Cu} \Delta t
+  \]
+  La variación relativa:
+  \[
+    \frac{\Delta R}{R} = \frac{R_a}{R_a+r} \alpha_{Cu} \Delta t
+  \]
+  Si se elige el valor de la resistencia adicional $r = 9R_a$, la variación de resistencia se reduce a un 10\%. Debe tenerse presente que para mantener el mismo poder multiplicador $n$, habrá que aumentar 10 veces el valor de $R_s$ ocasionando un consumo diez veces mayor:
+  \[
+    n=\frac{R_a + 9R_a}{10R_s}
+  \]
+  El otro inconveniente es el aumento con esta disposición del error sistemático de inserción al intercalar en la línea una resistencia que perturbara al circuito. En la práctica existe pues, una solución de compromiso adoptándose un valor de $r$ aproximadamente igual a cinco veces el valor de la resistencia del cuadro móvil. Ahora bien antes de analizar esta solución, el efecto total dará una deflexión en defecto por grado centígrado (sumando la variación de la constante elástica $K_r$, la de la constante motora $G$ y la de la resistencia interna $R_a$):
+  \begin{gather*}
+    \Delta K_r + \Delta G + \Delta r_a = At \\ % Aquí estimo que ha habido un error tipográfico. Sumado a que estoy algo perdido, he vuelto a perderme... 
+    +0.04\%/\unit{\degreeCelsius} -0.02 \%/\unit{\degreeCelsius} - 0.4 \%/\unit{\degreeCelsius} = -0.38 \%/\unit{\degreeCelsius}
+  \end{gather*}
+  Si en cambio se opta por la solución antes citada y adoptando $r=9R_a$ el coeficiente de temperatura pasa a $0.04\%/\unit{\degreeCelsius}$, por lo que la incidecia total se reduce a:
+  \[
+    +0.04\%/\unit{\degreeCelsius} -0.02 \%/\unit{\degreeCelsius} - 0.04 \%/\unit{\degreeCelsius} = -0.02 \%/\unit{\degreeCelsius}
+  \]
+\end{description}
+
+\subsubsection*{Estabilidad del imán}
+
+La estabilidad del imán permanente depende entre otras cosas del diseño y tratamiento para su envejecimiento -sometiéndolo a temperaturas de \qty{100}{\degreeCelsius} durante horas-. A pesar de esto el imán con el correr del tiempo sufre una lenta desmagnetización que se traduce en una pérdida de la exactitud del instrumento. Una forma de corregir el problema es actuando sobre el shunt magnético.
+
+\subsubsection*{Influencia de los campos externos}
+
+Si bien la incidencia de los campos extraños no es tan importante como en instrumentos de otro tipo de funcionamiento, la indicación se ve afectada más aun cuando el aparato no posee blindaje. En este caso el mayor error es producido cuando la dirección del campo exterior resulta normal a la dirección de la línea de fuerza simétrica en el entrehierro.
+
+\subsubsection*{Aparición de efectos termoeléctricos}
+
+Esta influencia aparece cuando se efectúan conexiones entre elementos constitutivos de distinto material -como por ejemplo cuando se conecta el cuadro de la bobina móvil, de cobre, con una resistencia adicional de manganina-. Esto trae aparejado los mismos efectos (Seebeck) ya analizados en los instrumentos de IPBM con termocupla. La aparición de esta f.e.m. espurias provocan perturbaciones en las indicaciones tanto más importante cuanto más sensible sea el instrumento.
+
 \subsection{Consideraciones prácticas IPBM con rectificador}
+
+Supongamos a título de ejemplo un multímetro comercial de IPBM que en la función de tensión en continua posee una característica ohm/volt de 20.000. Cuando este mismo instrumento pasa a la función de medir tensiones en corriente alterna su resistencia interna disminuye a 5.000 ohm/volt. Estos valores característicos son fácilmente detectables pues figuran inscriptos en el cuadrante del instrumento.
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}[>=stealth, scale=1.2]
+
+    % --- Configuración de Ejes ---
+    % Eje X (Voltaje)
+    \draw[->, thick] (-4,0) -- (4,0) node[right] {$V$ (Voltios)};
+    % Eje Y (Corriente)
+    \draw[->, thick] (0,-3) -- (0,4) node[above] {$I$ (mA)};
+
+    % --- Curva del Diodo de Germanio ---
+    % Usamos el color azul para destacar la curva
+    % Polarización Inversa (Breakdown + Fuga)
+    \draw[blue, very thick, smooth] 
+        (-3.5, -2.8) -- (-3.5, -0.2) % Región de ruptura (Zener/Avalancha)
+        .. controls (-3.0, -0.1) and (-1, -0.05) .. (0,0); % Corriente de fuga (pequeña pendiente)
+
+    % Polarización Directa (Exponencial)
+    % El codo empieza notablemente antes (0.3V) que un diodo de Silicio
+    \draw[blue, very thick, smooth] 
+        (0,0) .. controls (0.2, 0.05) and (0.25, 0.1) .. (0.3, 0.5) % Inicio del codo
+        .. controls (0.35, 1.5) and (0.4, 3) .. (0.5, 3.8); % Crecimiento exponencial
+
+    % --- Etiquetas y Ayudas Visuales ---
+    
+    % 1. Voltaje de Codo (0.3V para Germanio)
+    \draw[dashed, gray] (0.3, 0) -- (0.3, 0.5);
+    \node[below, text=red] at (0.3, 0) {\small $0.3$ V};
+    \node[right, text=red, font=\footnotesize] at (0.35, 0.8) {Región de conducción (Ge)};
+
+    % 2. Voltaje de Ruptura
+    \draw[dashed, gray] (-3.5, 0) -- (-3.5, -0.2);
+    \node[above, text=black] at (-3.5, 0) {\small $V_{BR}$};
+
+    % 3. Corriente de Fuga
+    \node[below, font=\footnotesize, text=gray] at (-1.5, -0.1) {Corriente de fuga $I_S$};
+
+    % --- Títulos de Cuadrantes (Opcional) ---
+    \node[align=center, font=\small] at (2.5, -1) {Polarización\\Directa};
+    \node[align=center, font=\small] at (-2, 2) {Polarización\\Inversa};
+
+  \end{tikzpicture}
+  \caption{}
+  \label{fig:caracteristica_diodo_germanio}
+\end{figure}
+
+Veamos la razón de esta disminución. Tomemos como ejemplo un modelo de multímetro comercial (marca Triplett). Este posee 20.000 ohm/volt en c.c. y 5.000 ohm/volt en c.a. En la figura \ref{fig:caracteristica_diodo_germanio} tenemos representada la característica estática del elemento rectificador: diodo de germanio. En la figura \ref{fig:esquema_triplett} tenemos representado el circuito simplificado del Triplett para el alcance de \qty{3}{\volt} en corriente alterna.
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+    % Todos estos esquemas en tikz los he realizado para que puedas visualizar las conexiones del circuito. El libro real tiene esquemas en formato png o svg que no resulta útil extraer.
+    % Se que no son los mejores esquemas del segmento pero espero que sean de utilidad.
+    \draw (0,-1) to[rmeterwa,l=$5K2$] (0,2) to[D*,l=$D_1$,invert] (0,3) to[R,l=$R_1$] (0,5);
+    \draw (0,-.5) -- (-2,-.5) to[R,l=$R_2$] (-2,1.5) to[short,-*] (0,1.5);
+    \draw (0,-.5) to[short,*-] (2,-.5) to[D*,l=$D_2$] (2,3) to[short,-*] (0,3);
+  \end{tikzpicture}
+  \caption{}
+  \label{fig:esquema_triplett}
+\end{figure}
+Antes de seguir el análisis de este circuito conviene destacar la gran importancia que reviste el hecho de trabajar con una corriente directa en el diodo comprendida en la zona lineal de la curva característica del diodo. Las características del instrumento son las siguientes:
+\begin{itemize}
+  \item Alcance: \qty{50}{\micro\ampere}
+  \item Resistencia cuadro móvil:\qty{5000}{\ohm}
+\end{itemize}
+
+Simplifiquemos aún más el circuito de la figura \ref{fig:esquema_triplett} con un solo diodo el $D_1$ (descartando $D_2$ y la $R_2$). De esta manera nos queda una configuración circuital serie.
+
+Para obtener los \qty{250}{\milli\volt} de tensión media en bornes del instrumento debería circular 50 microamperes con lo cual $R_1$ debería aumentar considerablemente. Pero aún así, para una corriente tan baja entramos en la curva inicial de la característica del diodo en una zona donde no hay conducción posible. Obsérvese que recién para una corriente del orden de la décima del miliampere y una caída de tensión de \qty{0.15}{\volt} entramos recién en la zona de conducción con características aproximadamente lineal. Esto de por si constituye una razón más que suficiente para comprender la imposibilidad de medir tensiones alternas de valores muy bajos.
+
+La resistencia $R_2$ de valor muy bajo (\qty{3}{\ohm}) tiene por misión hacer derivar la intensidad de corriente que excede al alcance del microamperímetro, es decir su función es similar a la resistencia shunt ya estudiada, actuando el instrumento como milivoltímetro. Aún resta el análisis de la inclusión del diodo $D_2$. La necesidad de este diodo se debe a que en el circuito con un solo rectificador, durante el semiciclo con polarización inversa su resistencia a la corriente es grande por lo que soporta la tensión completa del circuito, lo que conduciría a la eventualidad de una perforación, ya que los diodos de germanio la tensión inversa de ``ruptura'' es pequeña.-
 
 \subsection{Características escala en C.A.}
 
+La escala de este instrumento viene calibrada directamente en valores eficaces basados en la suposición de medir ondas sinusoidales es decir que a las divisiones de escala se incorporan el factor de forma de una onda sinusoidal igual a 1,11. Si la forma de onda se aparta de la sinusoidal aparecen errores en las lecturas. Analicemos el problema tomando la ley de deflexión y considerando el factor de forma 1,11 por el que se multiplica a las divisiones de la lectura:
+\[
+  I_m = \alpha \frac{1.11}{G}
+\]
+$I_m$ es el valor medido y $G$ la constante motora.
+
+Si el multímetro tuviera un rectificador puente y si la tensión aplicada responde a una sinusoide de valor pico $I_p$, el valor medio de la corriente será:
+\[
+  I=2\frac{I_p}{\pi}
+\]
+Como
+\[
+  \alpha= GI=G 2 \frac{I_p}{\pi}
+\]
+Finalmente el valor de la corriente medida será:
+\[
+  I_m = 0.707 I_p
+\]
+Para este caso el resultado es correcto, la lectura es igual al valor eficaz y es porque así se ha diseñado el instrumento. Pero si la corriente no es sinusoidal podemos tener errores de lectura superiores o inferiores al valor eficaz, dependiendo de la forma de onda que estamos midiendo. Por ejemplo si tenemos una corriente continua $i(t) = I$, la corriente medida será:
+\[
+  I_m = 1.11  I
+\]
+Esto significa que tenemos un error en exceso del 11\%. Otro ejemplo lo constituye la onda triangular cuyo valor medio es la mitad del valor pico y el eficaz es $1/\sqrt{3}$ del valor pico. El valor medido será:
+\[
+  I_m = 1.11 \frac{I_p}{2} = 0.555 I_p
+\]
+Es decir aproximadamente el 4\% más bajo que el valor eficaz de la onda triangular.
+
 \subsection{Errores por envejecimiento}
+
+Todo óhmetro tiene lo que se denomina ``ajuste de cero'' que no es otra cosa que un resistor variable a efectos de hacer coincidir la aguja con la indicación cero ohm previo cortocircuito de los terminales. Con el desgaste de la batería incorporada, disminuye su tensión en bornes y consecuentemente aumenta su resistencia interna. Es evidente que a medida que la tensión baja irá disminuyendo la resistencia de ajuste de cero. En todos los casos la aguja coincidirá con el cero, a menos que la batería se envejezca tanto que ya sea imposible hacer llegar a fondo de la escala el índice del instrumento. Vamos a demostrar con un ejemplo que una variación excesiva de la tensión de la batería provoca un error de lectura -que se suma al de la exactitud propia del instrumento-, aún cuando hagamos coincidir al cero el índice del óhmetro. En el diseño del óhmetro de la figura se ha utilizado un miliamperímetro de resistencia interna de 50 ohm, de alcance 1 mA, una resistencia fija de 3.000 ohm y la variable ajuste de cero de 2.000 ohm. La batería seccionada es de 4.5 V. Con estos parámetros la resistencia de diseño de punto medio de escala es de 4.500 ohm. Con la batería nueva el valor de la corriente será a fondo de escala:
+\[
+  I_0 = \frac{\qty{4.5}{\volt}}{\qty{4500}{\ohm}}=\qty{1}{\milli\ampere}
+\]
+Al conectar en los terminales una resistencia de valor conocido $X=\qty{5000}{\ohm}$ la corriente que circula por el instrumento será:
+\[
+  I_x = \frac{\qty{4.5}{\volt}}{(4500+5000)\unit{\ohm}}=\qty{0.47}{\milli\ampere}
+\]
+Ahora analicemos que pasa ante un desgaste de la batería, cuya tensión baja a \qty{4}{\volt} con un incremento de su resistencia interna, el nuevo valor de $R_0$ hará obtener el valor final de \qty{1}{\milli\ampere}.
+\[
+  I_0 =\frac{\qty{4}{\volt}}{\qty{4000}{\ohm}} = \qty{1}{\milli\ampere}
+\]
+Cuando se conecte la resistencia de \qty{5000}{\ohm}, el valor de la corriente en el miliamperímetro será:
+\[
+  I_{x1}=\frac{\qty{4}{\volt}}{(4000+5000)\unit{\ohm}}=\qty{0.44}{\milli\ampere}
+\]
+Esta disminución de la corriente provoca un error de lectura, que será tanto mayor cuanto menor sea la deflexión angular del cuadro móvil.
+
+El valor que indicará la escala del óhmetro para la corriente $I_{x1}$ será:
+\[
+  F=\frac{I_{x1}}{I_0}=0.44=\frac{1}{1+\frac{X_m}{4500}}\quad \therefore X_m=\qty{5700}{\ohm}
+\]
+cometiéndose un error del 14\%.
+
+Para tratar de minimizar este error, algunos óhmetros llevan una resistencia de ajuste en paralelo con el instrumento de manera tal que se logra una menor variación de $R_0$, pues el instrumento es más sensible a la variación de $R_s$.
