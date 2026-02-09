@@ -1,0 +1,94 @@
+\section{El Instrumento como Voltímetro}
+
+Hasta ahora hemos estudiado el instrumento PMMC (D'Arsonval) como un dispositivo que reacciona a la corriente. Sin embargo, gracias a la Ley de Ohm, sabemos que corriente y tensión son proporcionales.
+Si conocemos la resistencia interna de la bobina ($R_a$) y su corriente a fondo de escala ($I_a$), el instrumento ya es, intrínsecamente, un milivoltímetro.
+
+\begin{example}
+Un instrumento con $I_a = \qty{50}{\micro\ampere}$ y $R_a = \qty{5000}{\ohm}$ ya mide tensiones de:
+\[ U = I_a \cdot R_a = \qty{50e-6}{\ampere} \cdot \qty{5000}{\ohm} = \qty{250}{\milli\volt} \]    
+\end{example}
+
+\subsection{Ampliación de Alcance: Resistencia Multiplicadora}
+
+Para medir tensiones superiores a esos pocos milivoltios (por ejemplo, para medir \qty{100}{\volt}), no podemos aplicar la tensión directamente a la bobina, ya que la quemaríamos instantáneamente.
+La solución consiste en conectar una resistencia de alto valor en \textbf{serie} con el instrumento, denominada \textbf{Resistencia Multiplicadora} ($R_m$). Esta resistencia se encarga de absorber la mayor parte de la tensión.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{circuitikz}[american voltages]
+    \draw (0,0) to[short, o-, l=A] (1,0)
+    to[R, l=$R_m$, v=$U_{Rm}$] (3,0)
+    to[rmeterwa, t=V, l=$R_a$, v=$U_a$] (5,0)
+    to[short, -o, l=B] (6,0);
+  \end{circuitikz}
+  \caption{Esquema de conexión de un voltímetro con resistencia serie.}
+  \label{fig:voltimetro_serie}
+\end{figure}
+
+Analizando la Figura \ref{fig:voltimetro_serie}, la tensión total $U$ que queremos medir se reparte entre la resistencia adicional y el instrumento:
+\[ U = I (R_a + R_m) \]
+
+Para calcular el valor de $R_m$, definimos primero el factor de multiplicación $m$, que es la relación entre la tensión que queremos medir ($U$) y la tensión original del instrumento ($U_a$):
+\[ m = \frac{U}{U_a} \]
+
+Operando matemáticamente:
+\[ U = U_a + I \cdot R_m = U_a + U_a \left( \frac{R_m}{R_a} \right) \]
+\[ m = 1 + \frac{R_m}{R_a} \implies R_m = R_a (m-1) \]
+
+Nótese la simetría con el amperímetro: allí usábamos $(n-1)$ dividiendo, aquí usamos $(m-1)$ multiplicando.
+
+\subsection[Cifra de mérito]{Cifra de Mérito o Sensibilidad ($\Omega/V$)}
+
+Una característica fundamental de los voltímetros es cuánto ``cargan'' o afectan al circuito que están midiendo. Idealmente, un voltímetro debería tener resistencia infinita para no derivar corriente.
+Para cuantificar esto, se utiliza la llamada \textbf{Cifra de Mérito} o Sensibilidad del voltímetro ($S_v$), que se mide en Ohmios por Voltio (\unit{\ohm\per\volt}).
+
+\[ S_v = \frac{R_{\text{total}}}{U_{\text{fondo escala}}} = \frac{1}{I_{\text{fondo escala}}} \]
+
+Este valor es constante para un instrumento dado, independientemente del rango que seleccionemos.
+\begin{itemize}
+    \item La inversa de la sensibilidad nos da la corriente necesaria para deflexión completa. Por ejemplo, una sensibilidad de \qty{20000}{\ohm\per\volt} implica que el instrumento consume \qty{50}{\micro\ampere} a plena escala.
+\end{itemize}
+
+\textbf{Importancia práctica:}
+\begin{itemize}
+    \item \textbf{En Electrotecnia (Instalaciones de potencia):} Las fuentes tienen baja impedancia. Un voltímetro estándar (\qty{1000}{\ohm\per\volt}) es suficiente y no introduce error.
+    \item \textbf{En Electrónica:} Los circuitos manejan corrientes muy bajas y altas impedancias. Si conectamos un voltímetro de baja resistencia, este actúa como una carga extra, alterando el voltaje que queríamos medir. Por ello, se recomiendan instrumentos de alta sensibilidad (mínimo \qty{20000}{\ohm\per\volt}) para minimizar este error de carga.
+\end{itemize}
+
+\subsection{Medición de Corriente Alterna}
+
+El instrumento D'Arsonval es polarizado. Si lo conectamos directamente a una red de Corriente Alterna (CA) de \qty{50}{\hertz}:
+\begin{enumerate}
+    \item En el semiciclo positivo, la aguja intenta ir a la derecha.
+    \item En el semiciclo negativo, intenta ir a la izquierda.
+    \item Debido a la inercia mecánica, la aguja no puede seguir esa velocidad y se queda quieta en el cero (que es el valor medio de una sinusoide pura).
+\end{enumerate}
+
+Para poder medir CA, es necesario interponer un \textbf{rectificador} (diodos) que convierta la CA en una corriente pulsante unidireccional.
+
+\subsubsection{Relación entre Valor Eficaz y Lectura}
+Supongamos un rectificador de media onda ideal. El instrumento recibirá corriente solo durante los semiciclos positivos.
+Si la tensión de entrada es $u(t) = U_{max} \sin(\omega t)$, el instrumento (que responde al valor promedio) indicará:
+\[ U_{\text{medio}} = \frac{1}{2\pi} \int_0^{\pi} U_{max} \sin(\alpha) d\alpha = \frac{U_{max}}{\pi} \]
+
+Sin embargo, en ingeniería nos interesa conocer el \textbf{Valor Eficaz} (RMS) de la tensión alterna, no su promedio rectificado. Sabiendo que para una senoidal $U_{max} = \sqrt{2} \cdot U_{RMS}$:
+\[ U_{\text{medio}} = \frac{\sqrt{2} \cdot U_{RMS}}{\pi} \approx 0.45 \cdot U_{RMS} \]
+
+\textbf{Conclusión:} Cuando usamos un voltímetro de este tipo en alterna (con rectificador de media onda), la aguja se moverá hasta una posición proporcional a $0.45$ veces el valor eficaz. Para que el usuario lea directamente el valor eficaz, la escala se dibuja ``mentirosa'': se marcan los números multiplicados por $1/0.45 \approx 2.22$.
+\textit{Nota: Esta calibración solo es válida para ondas senoidales puras.}
+
+\subsection{Análisis de Consumo y Eficiencia}
+
+Una de las grandes ventajas del instrumento IPBM frente a otros tipos (como el de Hierro Móvil) es su eficiencia energética.
+Gracias a que posee un imán permanente de alta inducción ($B \approx \qty{0.3}{\tesla}$ o más), se logra una cupla motora fuerte con muy poca corriente.
+\begin{itemize}
+    \item Los instrumentos de \textbf{Hierro Móvil} generan su propio campo magnético débil, requiriendo mucha corriente para funcionar. Su consumo es alto.
+    \item Los instrumentos \textbf{IPBM} aprovechan el campo del imán, permitiendo fabricar microamperímetros de consumo ínfimo.
+\end{itemize}
+
+\textbf{Consumo del Voltímetro:}
+Al agregar una resistencia multiplicadora, la potencia total disipada aumenta proporcionalmente al factor de multiplicación $m$.
+\[ P_{\text{total}} = m \cdot P_{\text{instrumento}} \]
+
+Aun así, debido a la alta sensibilidad base, el consumo total sigue siendo muy bajo comparado con otras tecnologías.
+\textit{Ejemplo:} Un voltímetro IPBM de \qty{1500}{\volt} puede consumir apenas \qty{7.5}{\watt}, mientras que uno de Hierro Móvil para la misma tensión (que consume \qty{12}{\watt} midiendo solo \qty{600}{\volt}) disiparía una cantidad de calor inmanejable.

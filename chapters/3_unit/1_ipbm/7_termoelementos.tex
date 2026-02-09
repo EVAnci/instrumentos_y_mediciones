@@ -1,0 +1,62 @@
+\section{Instrumentos de Termocupla (Termoelementos)}
+
+Los instrumentos de bobina móvil estudiados hasta ahora poseen una limitación física inherente: su incapacidad para responder correctamente a frecuencias elevadas. Para superar esta barrera y medir con precisión corrientes de radiofrecuencia, es necesario cambiar el enfoque, convirtiendo la energía eléctrica en térmica antes de medirla.
+
+\subsection{Principio Físico: El Efecto Seebeck}
+
+El fundamento de estos instrumentos reside en el descubrimiento realizado por Thomas Seebeck en 1821. Este fenómeno establece que si se forma un circuito cerrado uniendo dos metales de distinta naturaleza química y se aplica calor a una de las uniones (juntura caliente) mientras la otra se mantiene a temperatura ambiente (juntura fría), se genera una fuerza electromotriz (f.e.m.) continua. Esta tensión es función directa de la diferencia de temperatura y de los coeficientes termoeléctricos de los materiales empleados.
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=6cm]{chapters/3_unit/media/bin/termopar.png}
+  \caption{}
+\end{figure}
+Metales como el Hierro-Constantan o el Platino-Rodio son combinaciones habituales debido a su estabilidad y sensibilidad, generando tensiones del orden de los microvolts por cada grado de temperatura.
+
+\subsection{Funcionamiento del Termoelemento}
+
+La magia ocurre en la conversión de energía. El instrumento se compone de un calefactor, una termocupla y el medidor propiamente dicho.
+La corriente a medir (sea continua, alterna de \qty{50}{\hertz} o radiofrecuencia de \qty{50}{\mega\hertz}) circula a través de un filamento calefactor extremadamente fino. Debido a la resistencia óhmica del material, la energía eléctrica se disipa en forma de calor según la Ley de Joule ($P = I^2 R$).
+
+Este calor eleva la temperatura de la juntura caliente de la termocupla, la cual se encuentra en contacto térmico (y a menudo eléctrico) con el calefactor. Como respuesta, la termocupla genera una pequeña tensión continua proporcional a dicho calor. Finalmente, esta tensión alimenta a un instrumento clásico de imán permanente y bobina móvil (milivoltímetro) que indica la medición.
+
+\subsubsection{La Ventaja del verdadero Valor Medio Eficaz}
+
+Lo fascinante de este proceso es que el calentamiento del filamento no depende del sentido de la corriente ni de su forma de onda, sino exclusivamente de su valor eficaz al cuadrado. Por tanto, el instrumento de termocupla indica siempre el Verdadero Valor Eficaz.
+Esto lo convierte en el único instrumento electromecánico capaz de medir con exactitud corrientes no senoidales o de muy alta frecuencia, donde otros principios (como el hierro móvil) fallarían estrepitosamente debido a las pérdidas por histéresis y corrientes parásitas.
+
+\section{Transductores de Efecto Hall}
+
+Mientras que la termocupla nos permite conquistar las altas frecuencias, el Efecto Hall nos permite dominar la medición de campos magnéticos y corrientes intensas sin necesidad de contacto físico ni interrupción del circuito.
+
+\subsection{Física del Fenómeno: La Fuerza de Lorentz}
+
+Para entender cómo se genera el potencial Hall, imaginemos una placa plana de material semiconductor (como el Arseniuro de Indio) por la cual hacemos circular una corriente auxiliar constante, denominada corriente de control ($I_c$). Los portadores de carga (electrones) viajan en línea recta a lo largo de la placa.
+
+Si en ese momento acercamos un campo magnético externo $B$ de forma perpendicular a la placa, entra en juego la Fuerza de Lorentz. Esta fuerza física desvía a las cargas en movimiento hacia un lateral de la placa.
+\[ \vec{F} = q (\vec{v} \times \vec{B}) \]
+
+Esta desviación provoca una acumulación de electrones en un borde de la placa y un déficit en el opuesto. Esta separación de cargas crea un campo eléctrico interno y, por ende, una diferencia de potencial transversal conocida como Tensión de Hall ($U_H$).
+\[
+  U_H = \frac{K_H \cdot B \cdot I_c}{d}
+\]
+Donde $d$ es el espesor de la placa y $K_H$ la constante de sensibilidad del material.
+
+\subsection{Diferencia Fundamental con la Inducción (Antenas)}
+
+Es crucial distinguir el Efecto Hall de la inducción electromagnética clásica (Ley de Faraday) que rige a las antenas y transformadores.
+\begin{itemize}
+    \item Antena o Bobina (Faraday): Genera tensión solo si hay una \textit{variación} del flujo magnético ($e = -d\Phi/dt$). Si acercamos un imán y lo dejamos quieto, la tensión cae a cero. Por eso un transformador no funciona con corriente continua.
+    \item Sensor Hall (Lorentz): Genera tensión basándose en la desviación de cargas que \textit{ya están en movimiento} (la corriente de control). No necesita que el campo magnético varíe, solo que esté presente.
+\end{itemize}
+
+Esta característica única permite que los sensores Hall midan campos magnéticos estáticos y, por extensión, corrientes continuas (CC).
+
+\subsection{Aplicaciones en Medición}
+
+La capacidad de generar una tensión proporcional al producto de dos magnitudes ($B$ e $I_c$) abre un abanico de posibilidades instrumentales:
+
+Pinzas Amperométricas de CC:
+Al rodear un conductor con un núcleo magnético, concentramos el campo $B$ producido por la corriente de línea sobre el sensor Hall. Manteniendo la corriente de control $I_c$ constante, la tensión de salida $U_H$ será una fiel representación de la corriente del conductor, sin necesidad de abrir el circuito.
+
+Vatímetros (Medición de Potencia):
+Si configuramos el sensor tal que el campo magnético $B$ sea proporcional a la corriente de la carga, y la corriente de control $I_c$ sea proporcional a la tensión de la carga, la tensión Hall resultante será proporcional al producto $V \times I$, es decir, a la Potencia instantánea.

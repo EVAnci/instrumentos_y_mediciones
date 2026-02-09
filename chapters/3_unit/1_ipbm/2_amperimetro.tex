@@ -1,0 +1,87 @@
+\section{Amperímetros y Ampliación de Alcance}
+
+Como analizamos anteriormente, el instrumento de Bobina Móvil es un dispositivo extremadamente sensible. La corriente debe atravesar los resortes espirales para llegar a la bobina, y estos componentes tienen una capacidad de corriente muy limitada. Si superamos los \qtyrange{15}{20}{\milli\ampere}, los resortes podrían calentarse excesivamente, perdiendo su temple elástico o incluso fundiéndose.
+
+Por esta razón, el instrumento básico por sí solo funciona únicamente como \textbf{microamperímetro} o \textbf{miliamperímetro}. Para medir corrientes de mayor magnitud (Amperímetros industriales), es necesario desviar la mayor parte de la corriente fuera del delicado mecanismo de medida. Esto se logra mediante una resistencia en paralelo denominada \textbf{Shunt} (o derivador).
+
+\subsection{Principio del Shunt y Análisis Matemático}
+
+La técnica consiste en conectar una resistencia calibrada de bajo valor óhmico ($R_s$) en paralelo con la bobina móvil. De esta forma, la corriente total $I$ que queremos medir se divide: una pequeña fracción $I_a$ (corriente de alcance) atraviesa el instrumento para mover la aguja, mientras que el resto ($I_s$) se deriva por el shunt sin causar daño.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{circuitikz}[american voltages]
+    \draw (0,0) to[short, i=$I$, -*] (1,0) node[below] {A}
+    (1,0) to[generic, l=$R_s$, i_=$I_s$] (4,0) to[short,-*] node[below] {B}
+      (4,0) -- (5,0);
+    \draw (1,0) -- (1,1.5)
+      (1,1.5) to[rmeterwa, t=A, l=$R_a$, i=$I_a$] (4,1.5)
+      (4,1.5) -- (4,0);
+  \end{circuitikz}
+  \caption{Conexión de la resistencia Shunt para ampliación de alcance.}
+  \label{fig:amperimetro_shunt}
+\end{figure}
+
+Para calcular el valor necesario de $R_s$, analizamos el circuito de la figura \ref{fig:amperimetro_shunt}. Al estar en paralelo, la caída de tensión en el instrumento es igual a la caída en el shunt:
+\[
+  R_s \cdot I_s = R_a \cdot I_a
+\]
+Sabemos por la Ley de Kirchhoff de corrientes que la corriente por el shunt es la diferencia entre la total y la del instrumento: $I_s = I - I_a$. Reemplazando esto en la ecuación anterior:
+\[
+  R_s (I - I_a) = R_a I_a \implies R_s = R_a \frac{I_a}{I - I_a}
+\]
+
+Para simplificar el cálculo y el diseño, definimos el \textbf{Poder Multiplicador} ($n$). Este valor adimensional nos indica cuántas veces es mayor la corriente que queremos medir respecto al alcance original del instrumento:
+\[
+  n = \frac{I}{I_a}
+\]
+Sustituyendo $n$ en la ecuación de resistencia, obtenemos la fórmula de diseño fundamental:
+\begin{equation}
+  R_s = \frac{R_a}{n-1}
+\end{equation}
+
+Esta expresión nos dice que si queremos multiplicar el alcance por $n$, la resistencia del shunt debe ser $n-1$ veces menor que la resistencia interna del instrumento.
+
+\subsection{Aspectos Constructivos de los Shunts}
+
+La construcción física del shunt varía según la magnitud de la corriente a medir y la precisión requerida.
+
+\subsubsection{Ubicación y Materiales}
+\begin{itemize}
+    \item \textbf{Shunts Internos:} Para corrientes bajas y medias (generalmente hasta \qty{50}{\ampere}), el shunt suele alojarse dentro de la carcasa del propio instrumento.
+    \item \textbf{Shunts Externos:} Para intensidades superiores, el calor generado sería peligroso para el mecanismo. Se utilizan bloques resistivos externos que se conectan al instrumento mediante cables calibrados.
+\end{itemize}
+
+El material preferido para su fabricación es la \textbf{Manganina}, debido a su bajo coeficiente de temperatura (su resistencia casi no varía con el calor). En shunts de muy alta corriente, se utilizan barras de cobre en paralelo para mejorar la disipación térmica, realizándose el ajuste fino mediante limaduras o perforaciones que modifican su sección transversal efectiva.
+
+\subsubsection{Resistencias de Cuatro Terminales}
+Un problema crítico en medición de altas corrientes es la resistencia de contacto en los bornes de conexión. Si el shunt tuviera solo dos terminales, la resistencia de unión de los cables de línea se sumaría a $R_s$, introduciendo un error significativo.
+
+Para evitar esto, los shunts de precisión se construyen con cuatro terminales (conexión Kelvin):
+\begin{enumerate}
+    \item \textbf{Bornes de Corriente (Exteriores):} Son grandes y robustos. Por aquí circula la corriente de línea $I$.
+    \item \textbf{Bornes de Potencial (Interiores):} Son pequeños y tornillos calibrados. De aquí se toman los cables finos que van hacia el instrumento medidor.
+\end{enumerate}
+De esta forma, la caída de tensión se mide exactamente entre los puntos calibrados, sin verse afectada por la resistencia de los contactos de potencia.
+
+\subsection{Normalización por Caída de Tensión}
+
+En la práctica industrial, los shunts no se suelen catalogar por su valor de resistencia (que es muy bajo y difícil de medir, por ejemplo \qty{0.0006}{\ohm}), sino por su \textbf{Caída de Tensión Nominal}.
+Esto significa que los fabricantes diseñan los shunts para que, al circular su corriente nominal, produzcan una caída de tensión estandarizada. Los valores normalizados más comunes son:
+\[ \qtylist{45;60;75;100;150;300}{\milli\volt} \]
+
+Esto simplifica enormemente el intercambio de instrumentos. Por ejemplo, si tenemos un instrumento base calibrado para deflectar a fondo de escala con \qty{60}{\milli\volt}, podemos conectarle cualquier shunt de \qty{60}{\milli\volt} (sea de \qty{100}{\ampere} o de \qty{1000}{\ampere}) y la escala será válida simplemente cambiando la numeración del dial.
+
+\subsection{Consideraciones de Potencia y Amortiguamiento}
+
+\subsubsection{Disipación de Potencia}
+El shunt debe ser capaz de disipar el calor generado por el efecto Joule. Si el factor de multiplicación $n$ es grande ($n \gg 1$), prácticamente toda la potencia del circuito de medida se disipa en el shunt. La relación de potencias es aproximadamente:
+\[ P_s \approx n \cdot P_a \]
+Donde $P_a$ es el consumo propio del instrumento.
+Esto implica que para medir grandes corrientes, el shunt debe ser físicamente grande. Por ejemplo, para un miliamperímetro pequeño de \qty{1}{\milli\watt}, si queremos medir 20.000 veces su corriente nominal, el shunt deberá disipar \qty{20}{\watt} de calor.
+
+\subsubsection{Amortiguamiento Electromagnético}
+Un detalle constructivo importante es el efecto del shunt sobre el movimiento de la aguja. Al conectar una resistencia de muy bajo valor ($R_s$) en paralelo con la bobina, estamos cerrando el circuito de la bobina sobre una impedancia casi nula.
+Cuando la bobina se mueve, genera una fuerza contraelectromotriz que induce una corriente de frenado. Si el shunt tiene una resistencia extremadamente baja, esta corriente de frenado es muy alta, pudiendo provocar un \textbf{sobreamortiguamiento} (la aguja se mueve demasiado lenta).
+
+Por esta razón, en instrumentos destinados a usarse con shunts de alta potencia, las bobinas móviles a menudo \textbf{no} se devanan sobre marcos de aluminio (que ya de por sí amortiguan), sino sobre materiales no conductores, dejando que el efecto eléctrico del shunt provea el amortiguamiento necesario.

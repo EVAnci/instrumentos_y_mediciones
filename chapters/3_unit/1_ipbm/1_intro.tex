@@ -1,0 +1,111 @@
+Los instrumentos de Imán Permanente y Bobina Móvil o PMMC de sus siglas en inglés, conocidos técnicamente como de tipo \textbf{D'Arsonval}, constituyen la tecnología más utilizada para la medición en corriente continua.
+
+Su principio de funcionamiento se basa en la interacción electromagnética entre un campo magnético fijo y una corriente eléctrica que circula por una bobina móvil. Esta interacción genera una fuerza de origen magnético (Fuerza de Lorentz) que tiende a desplazar el cuadro móvil buscando alinear su propio campo con el del imán permanente.
+
+\section{Constitución del Instrumento}
+
+Desde el punto de vista constructivo, podemos dividir el instrumento en dos sistemas principales: el circuito magnético (estator) y el sistema móvil (rotor).
+
+\subsection{El Circuito Magnético y el Campo Radial}
+
+El sistema fijo tiene la misión crítica de generar un campo de inducción magnética $B$ en la zona donde se moverá la bobina. Está compuesto por un imán permanente, expansiones polares y un núcleo central, ambos de hierro dulce.
+
+\begin{tcolorbox}[
+    sidebyside, sidebyside align=top, sidebyside gap=0.5cm,
+    lower separated=false, lefthand width=0.55\textwidth,
+    frame empty, colback=white, sharp corners, boxrule=0pt,
+    left=0pt, right=0pt, top=0pt
+  ]
+  Siguiendo la figura \ref{fig:ipbm_esquema} que representa un esquema del sistema D'Arsonval, este está constituido por:
+  \begin{enumerate}
+    \item Iman permanente 
+    \item Expansiones polares de hierro dulce
+    \item Núcleo de hierro dulce
+    \item Derivador magnético de hierro dulce
+  \end{enumerate}
+  \tcblower
+    \centering
+    \includegraphics[height=4cm]{chapters/3_unit/media/bin/ipbm_esquema.png}
+    \captionsetup{hypcap=false} % Disable hycap for this fig
+    \captionof{figure}{}
+    \label{fig:ipbm_esquema}
+\end{tcolorbox}
+
+Un detalle fundamental del diseño D'Arsonval es la geometría de estas piezas. Tanto las expansiones polares como el núcleo son cilíndricos y concéntricos. Esta disposición obliga a las líneas de campo a atravesar el entrehierro de manera \textbf{radial}.
+Esto garantiza que, sin importar el ángulo de giro de la bobina, los conductores siempre corten las líneas de campo perpendicularmente. Como veremos en la deducción matemática, esta característica es la responsable de que la escala del instrumento sea \textbf{lineal} (divisiones iguales).
+
+Dentro del circuito magnético existe un componente ajustable denominado \textit{derivador magnético}. Funciona como una vía alternativa para el flujo magnético. Es una pieza de hierro móvil que permite regular qué cantidad del flujo total del imán llega efectivamente a la bobina y cuánto se desvía.
+Su función es doble:
+\begin{enumerate}
+    \item \textbf{Ajuste de fábrica:} Permite calibrar el instrumento para que la aguja llegue exactamente al fondo de escala con la corriente nominal, compensando las tolerancias de fabricación de los imanes.
+    \item \textbf{Compensación por envejecimiento:} Con los años, los imanes pierden fuerza. Ajustando la posición del derivador, se puede redirigir más flujo hacia la bobina para recuperar la sensibilidad original del instrumento.
+\end{enumerate}
+
+\subsection{El Sistema Móvil}
+
+El cuadro móvil consta de una bobina ligera (generalmente de hilo de cobre sobre marco de aluminio) suspendida mediante pivotes o hilo tensado.
+La corriente llega a la bobina a través de dos resortes de bronce fosforoso en forma de espiral. Estos resortes cumplen la función eléctrica de conductores y la función mecánica de generar la cupla antagónica necesaria para el equilibrio.
+
+\section{Ventajas del sistema IPBM}
+
+Debido a su construcción y principio físico, estos instrumentos presentan cualidades muy superiores a otros sistemas (como el de hierro móvil) cuando se trabaja en corriente continua:
+
+\begin{itemize}
+    \item \textbf{Alta sensibilidad y bajo consumo:} Aprovechan muy eficientemente la energía.
+    \item \textbf{Escala uniforme:} La lectura es lineal en casi todo el rango (típicamente abarca \qtyrange{90}{120}{\degree}, extensible hasta \qty{300}{\degree} con diseños especiales).
+    \item \textbf{Amortiguamiento eficaz:} El propio marco de aluminio de la bobina actúa como freno electromagnético (corrientes de Foucault), estabilizando la aguja rápidamente.
+    \item \textbf{Insensibilidad a campos externos:} Al poseer un campo magnético interno muy intenso, los campos parásitos externos tienen poca influencia en la lectura.
+\end{itemize}
+
+\section{Ley de Respuesta}
+
+Para determinar la ecuación que gobierna la deflexión de la aguja, retomamos el equilibrio de cuplas estudiado en el Capítulo 1. El sistema alcanzará el reposo cuando la Cupla Motora ($C_m$) iguale a la Cupla Antagónica ($C_r$).
+
+Consideremos una bobina rectangular de $N$ espiras, con altura $l$ y ancho $a$, inmersa en una inducción $B$. La fuerza magnética sobre los lados activos es $F = N \cdot B \cdot l \cdot I$. El par motor resultante es dicha fuerza por el brazo de palanca $a$:
+\[
+  C_m = (N \cdot B \cdot l \cdot a) \cdot I
+\]
+La figura \ref{fig_par_ipbm} muestra una representación gráfica de la situación.
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[height=4cm]{chapters/3_unit/media/bin/ley_de_respuesta.png}
+  \caption{}
+  \label{fig_par_ipbm}
+\end{figure}
+Podemos agrupar todos los parámetros constructivos ($N, B, l, a$) en una única constante instrumental llamada \textbf{Constante Motora} ($G$).
+\[
+  C_m = G \cdot I
+\]
+Por otro lado, la cupla antagónica producida por los resortes es proporcional al ángulo de giro $\alpha$:
+\[
+  C_r = K_r \cdot \alpha
+\]
+En el equilibrio ($C_m = C_r$):
+\[
+  G \cdot I = K_r \cdot \alpha \implies \alpha = \left( \frac{G}{K_r} \right) \cdot I
+\]
+Definiendo la sensibilidad del instrumento como $S_i = G/K_r$, obtenemos finalmente:
+\begin{equation}
+  \alpha = S_i \cdot I
+\end{equation}
+
+Esta expresión confirma la linealidad del instrumento: la deflexión es directamente proporcional a la corriente. Asimismo, indica que el instrumento tiene \emph{polaridad}: si se invierte el sentido de la corriente $I$, el ángulo $\alpha$ será negativo (la aguja intentará girar a la izquierda del cero).
+
+\section{Variantes de la Ley de Respuesta}
+
+Aunque el diseño estándar (D'Arsonval) es lineal, existen modificaciones constructivas para aplicaciones específicas que requieren otras escalas.
+
+\subsection{Campo de líneas paralelas (Escala no lineal)}
+Si se diseñan las expansiones polares para producir un campo de líneas paralelas y rectas (en lugar de radiales), la fuerza efectiva dependerá de la posición angular de la bobina. La ley de respuesta se transforma en:
+\[
+  \alpha \propto I \cdot \cos(\alpha)
+\]
+Esto produce una escala que se comprime a medida que aumenta el ángulo. Se utiliza en instrumentos donde interesa mayor resolución al principio de la escala o para soportar sobrecargas transitorias, ya que, al aumentar el ángulo, la cupla motora disminuye naturalmente.
+
+\subsection{Escala Logarítmica}
+En aplicaciones como la medición de niveles sonoros (decibelios), se requiere una escala logarítmica para abarcar grandes rangos dinámicos.
+Esto se logra perfilando las expansiones polares de forma asimétrica, haciendo que la inducción $B$ no sea constante, sino que disminuya drásticamente al aumentar el ángulo de giro. Se busca que la constante motora varíe tal que:
+\[
+  B(\alpha) \propto \frac{1}{\alpha} \implies \alpha \propto \ln(I)
+\]
+De esta manera, el instrumento puede mostrar variaciones exponenciales de corriente en una escala geométrica manejable.

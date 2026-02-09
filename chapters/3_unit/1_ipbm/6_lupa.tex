@@ -1,0 +1,65 @@
+\section{Lupa de tensión}
+
+Hasta ahora hemos visto instrumentos lineales. Sin embargo, mediante el uso de componentes no lineales como los diodos Zener, podemos modificar la respuesta del instrumento para ``estirar'' (hacer lupa) o ``comprimir'' ciertas partes de la escala según nuestra necesidad.
+
+\subsection{¿Qué es un Diodo Zener?}
+
+Para entender estas aplicaciones, primero debemos visualizar al Zener de forma práctica. A diferencia de un diodo común que bloquea la corriente en sentido inverso, el Zener está diseñado para conducir corriente inversamente, pero solo cuando se supera un voltaje específico llamado Tensión Zener ($U_z$).
+
+A modo de analogía, podemos imaginarlo como una válvula de alivio de presión:
+\begin{itemize}
+    \item Si la tensión es menor a $U_z$: La válvula está cerrada (resistencia infinita, circuito abierto).
+    \item Si la tensión intenta superar a $U_z$: La válvula se abre bruscamente, dejando pasar corriente para mantener la tensión estable en sus bornes.
+\end{itemize}
+
+\subsection{Lupa de Tensión (Escala Expandida)}
+
+Imaginemos que necesitamos monitorear la tensión de una red de \qty{110}{\volt} con mucha precisión. Nos interesan las variaciones entre \qty{100}{\volt} y \qty{120}{\volt}. Si usamos un voltímetro normal de \qty{0}{a}\,\qty{150}{\volt}, esta zona de interés ocupará un sector muy pequeño de la escala. Los primeros \qty{100}{\volt} son ``información inútil'' que ocupa espacio.
+
+Para solucionar esto, utilizamos la configuración de \textbf{Cero Suprimido} o Lupa de Tensión (Figura \ref{fig:zener_arriba}).
+
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \begin{circuitikz}[american voltages]
+      \draw (0,0) to[short, o-] (1,0) -- (3,0)
+      to[rmeterwa, t=V, l=$R_v$] (3,1.5)
+      to[R, l=$R_\text{aj}$] (3,3)
+      to[zzD*, l=$U_z$] (1,3) -- (1,3) to[short, -o] (0,3);
+      % Resistencia bleeder opcional para estabilidad
+      \draw (1,0) to[R, l=$R_p$] (1,3);
+    \end{circuitikz}
+    \caption{Circuito de Lupa (Cero Suprimido). El Zener está en serie.}
+    \label{fig:zener_arriba}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \begin{circuitikz}
+      \draw (0,0) to[short,o-] (3,0) to[rmeterwa] (3,1.5) to[R] (3,3) -- (1.5,3) to[R,-o] (0,3);
+      \draw (1.5,0) to[zzD*,*-] (1.5,1.5) to[R,-*]  (1.5,3);
+    \end{circuitikz}
+    \caption{Circuito de Protección (Compresión). El Zener está en paralelo.}
+    \label{fig:zener_abajo}
+  \end{subfigure}
+  \caption{Aplicaciones del Zener.}
+\end{figure}
+
+En la Figura \ref{fig:zener_arriba}, el diodo Zener se coloca en \textbf{serie} con el instrumento.
+\begin{itemize}
+    \item \textbf{Si $U_\text{entrada} < U_z$:} El Zener bloquea el paso. La corriente es cero. El instrumento marca cero.
+    \item \textbf{Si $U_\text{entrada} > U_z$:} El Zener conduce y ``resta'' un valor constante de voltaje. El instrumento solo ve el excedente: $U_\text{medida} = U_\text{entrada} - U_z$.
+\end{itemize}
+Esto permite que toda la escala del instrumento se dedique a mostrar solo el intervalo superior (ej. de \qtyrange{100}{120}{\volt}), logrando una gran resolución (efecto lupa).
+
+\subsection{Protección y Compresión de Escala}
+
+La segunda configuración (Figura \ref{fig:zener_abajo}) coloca el Zener en \textbf{paralelo} (o derivación) con el instrumento. Su objetivo es proteger al aparato contra sobrecargas o comprimir el final de la escala.
+
+\begin{itemize}
+    \item \textbf{Funcionamiento normal ($U < U_z$):} El Zener no conduce. Todo la corriente pasa por el instrumento. La respuesta es lineal.
+    \item \textbf{Sobrecarga ($U > U_z$):} Al llegar a la tensión de ruptura, el Zener empieza a conducir drásticamente, disminuyendo su resistencia interna. Esto crea un camino de baja resistencia que ``roba'' la corriente, desviándola del instrumento.
+\end{itemize}
+
+El resultado es que, a partir de cierto valor, la aguja deja de subir linealmente y se frena (la escala se comprime). Esto asegura que, aunque haya un pico de tensión peligroso en la entrada, la bobina móvil nunca reciba una corriente destructiva.

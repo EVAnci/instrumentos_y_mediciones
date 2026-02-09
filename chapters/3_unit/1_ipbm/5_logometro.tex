@@ -1,0 +1,94 @@
+\section{Instrumentos de Relación: El Logómetro}
+
+En las secciones anteriores, la deflexión de la aguja dependía de una sola magnitud eléctrica (corriente) equilibrada por un resorte mecánico. Sin embargo, existen situaciones donde necesitamos medir el cociente entre dos magnitudes eléctricas, por ejemplo, la relación entre una tensión y una corriente ($U/I = R$).
+
+A los instrumentos diseñados para indicar la proporción entre dos corrientes se les denomina Logómetros, cocientímetros o instrumentos de bobinas cruzadas.
+
+\subsection{Principio de Funcionamiento}
+
+La diferencia fundamental con el sistema D'Arsonval es la ausencia de cupla antagónica mecánica (no tiene resortes ni suspensión de torsión). El control del movimiento lo realiza el propio campo magnético.
+
+El sistema móvil consta de dos bobinas rígidas entre sí, cruzadas con un cierto ángulo (usualmente fijo), que giran sobre un eje común dentro de un campo magnético.
+\begin{itemize}
+    \item La corriente $I_1$ circula por la bobina 1 y genera una cupla que intenta girar el sistema en sentido horario.
+    \item La corriente $I_2$ circula por la bobina 2 y genera una cupla que intenta girarlo en sentido antihorario.
+\end{itemize}
+Analicemos el principio de funcionamiento: En presencia de un campo magnético uniforme $B$, se ubican dos bobinas rectangulares y solidarias (fijas) a un mismo eje y con sus planos formando un ángulo de \qty{90}{\degree} como se muestra en la figura \ref{fig:logometro_dibujo}. Las dos bobinas supuestas iguales están recorridas por dos corrientes $i_1$ e $i_2$ en los sentidos indicados en la figura \ref{fig:logometro_cuerpo_libre}. A partir de estas corrientes, se puede obtener una expresión de la fuerza.
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[height=4cm]{chapters/3_unit/media/bin/logometro.png}
+    \caption{Diagrama de cuerpo libre.}
+    \label{fig:logometro_cuerpo_libre}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[height=4cm]{chapters/3_unit/media/bin/logometro_real.png}
+    \caption{Dibujo técnico del bobinado.}
+    \label{fig:logometro_dibujo}
+  \end{subfigure}
+  \caption{Esquemas representativos del logómetro.}
+\end{figure}
+
+La aguja se detendrá en el punto donde ambas cuplas magnéticas se empaten. Si desconectamos la energía, la aguja queda ``muerta'' en cualquier posición, ya que no hay resorte que la devuelva a cero.
+
+\subsubsection{Análisis Matemático Simplificado}
+Supongamos un campo magnético ideal y uniforme $B$. Las cuplas ($C$) dependen de la corriente y de la posición angular ($\theta$) de la bobina respecto al campo.
+\[
+  C_1 = k \cdot I_1 \cdot f_1(\theta) \quad \text{(Intenta girar a la derecha)}
+\]
+\[
+  C_2 = k \cdot I_2 \cdot f_2(\theta) \quad \text{(Intenta girar a la izquierda)}
+\]
+En el equilibrio ($C_1 = C_2$):
+\[
+  k \cdot I_1 \cdot f_1(\theta) = k \cdot I_2 \cdot f_2(\theta)
+\]
+Reordenando la expresión:
+\[
+  \frac{f_1(\theta)}{f_2(\theta)} = \frac{I_1}{I_2} \implies \theta = F\left( \frac{I_1}{I_2} \right)
+\]
+
+\textbf{Conclusión:} La posición de la aguja depende exclusivamente de la \textbf{relación} entre las corrientes, y no de sus valores absolutos. Si ambas corrientes se duplican, el cociente se mantiene y la aguja no se mueve.
+
+\subsection{El Megóhmetro (Megger)}
+
+La aplicación más importante del principio del logómetro es la medición de resistencias de muy alto valor (Resistencia de Aislamiento), mediante el instrumento conocido como Megóhmetro.
+
+¿Por qué no usar un óhmetro serie común?
+\begin{enumerate}
+    \item \textbf{Necesidad de Alta Tensión:} Para probar el aislamiento de un cable o un motor, no basta con medir su resistencia con una pila de \qty{9}{\volt}. Es necesario aplicar tensiones elevadas (500V, 1000V o más) para estresar el dieléctrico y revelar fugas reales.
+    \item \textbf{Estabilidad de la Fuente:} Estas altas tensiones se generan a menudo con una manivela (dinamo manual). La velocidad de giro de la mano no es constante, por lo que la tensión $U$ fluctúa. Si usáramos un óhmetro normal, la aguja oscilaría con la velocidad de la manivela. El logómetro soluciona esto.
+\end{enumerate}
+
+\subsubsection{Configuración del Circuito}
+
+
+
+El instrumento se conecta de la siguiente manera:
+\begin{itemize}
+    \item \textbf{Bobina de Tensión (o Control):} Se conecta en serie con una resistencia fija $R$ directamente a la salida del generador. Por ella circula una corriente $I_v$ proporcional a la tensión generada ($I_v \propto U$).
+    \item \textbf{Bobina de Corriente (o Deflectora):} Se conecta en serie con la resistencia incógnita $R_x$. Por ella circula la corriente de fuga que atraviesa el aislamiento ($I_c \propto I_{fuga}$).
+\end{itemize}
+
+Como el instrumento mide la relación entre corrientes:
+\[
+  \text{Desviación } \theta \propto \frac{I_v}{I_c} = \frac{k_1 U}{k_2 I_{fuga}} = K \cdot \frac{U}{I_{fuga}}
+\]
+Y por ley de Ohm, $U / I = R$.
+\[ \theta \propto R_x \]
+
+\subsubsection{Interpretación Física}
+\begin{itemize}
+    \item Si la resistencia de aislación es infinita ($R_x \to \infty$), no circula corriente por la bobina deflectora. Solo actúa la bobina de tensión, llevando la aguja al extremo de la escala marcado como $\infty$.
+    \item Si hay un cortocircuito ($R_x = 0$), la corriente por la bobina deflectora es máxima, venciendo a la de tensión y llevando la aguja al 0.
+    \item \textbf{Independencia de la Tensión:} Si el operario gira la manivela más rápido, la tensión $U$ aumenta. Esto hace que aumente la corriente en la bobina de tensión, PERO también aumenta proporcionalmente la corriente en la bobina de corriente. Ambas fuerzas crecen igual, su relación se mantiene constante y la aguja permanece estable marcando el valor correcto de resistencia.
+\end{itemize}
+
+\subsection{Consideraciones Constructivas}
+
+En la práctica, para lograr una escala útil (que no se amontone toda en un extremo), los logómetros reales no usan campos uniformes. Utilizan núcleos con formas especiales o núcleos elípticos para hacer que el campo magnético varíe según el ángulo. Esto permite expandir la escala en la zona de interés (por ejemplo, entre \qty{1}{\mega\ohm} y \qty{100}{\mega\ohm}).
+
+Los generadores modernos han sustituido la manivela por elevadores de tensión electrónicos (convertidores DC-DC) alimentados por baterías, pero el principio de medición mediante la relación $V/I$ se mantiene para garantizar la exactitud.

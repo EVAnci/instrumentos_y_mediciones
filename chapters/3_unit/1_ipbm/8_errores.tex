@@ -1,0 +1,82 @@
+\section{Fuentes de Error en Instrumentos IPBM}
+
+Como todo sistema físico, el instrumento de Bobina Móvil no es perfecto. Existen perturbaciones externas e internas que alejan la lectura del valor verdadero. Las clasificamos en tres grupos principales: Temperatura, Envejecimiento y Campos Externos.
+
+\subsection{Influencia de la Temperatura}
+
+Este es el factor más crítico. Los instrumentos suelen calibrarse a una temperatura de referencia (típicamente \qtyrange{20}{25}{\degreeCelsius}). Si operamos fuera de ese rango, el calor afecta a tres componentes clave, produciendo efectos contrapuestos:
+
+\subsubsection{A. Efectos Mecánicos y Magnéticos}
+Aquí ocurre una ``lucha'' entre el imán y el resorte:
+
+\begin{enumerate}
+    \item El Imán ($B$): Al aumentar la temperatura, el imán pierde fuerza (se desordena su estructura interna). Esto reduce la Cupla Motora.
+    \item El Resorte ($K_r$): Al calentarse, el metal pierde elasticidad (se vuelve más blando). Esto reduce la Cupla Antagónica.
+\end{enumerate}
+
+Balance:
+\begin{itemize}
+    \item El imán se debilita aprox. $-0.02\%/\unit{\degreeCelsius}$ (La aguja quiere marcar menos).
+    \item El resorte se ablanda aprox. $0.04\%/\unit{\degreeCelsius}$ (La aguja quiere marcar más, porque el freno es menor).
+\end{itemize}
+El efecto neto mecánico suele ser positivo: el instrumento tiende a marcar ligeramente de más ($\approx +0.02\%/\unit{\degreeCelsius}$).
+
+\subsubsection{B. Efecto Eléctrico (Resistencia de la Bobina)}
+Este es el problema grave. La bobina es de Cobre, cuyo coeficiente de temperatura es muy alto ($\alpha_{Cu} \approx 0.4\%/\unit{\degreeCelsius}$).
+Si la temperatura sube, la resistencia de la bobina ($R_a$) aumenta drásticamente.
+
+El Problema en Amperímetros (con Shunt):
+Si tenemos una bobina de cobre en paralelo con un Shunt de Manganina (que no varía con la temperatura), y la bobina se calienta, su resistencia sube. La corriente, que es ``perezosa'', preferirá irse por el Shunt en lugar de por la bobina.
+Resultado: La corriente por el instrumento disminuye drásticamente, provocando un gran error negativo (lee mucho menos de lo real).
+
+Cálculo del Error Total (Sin compensar):
+\[ E_{total} = (+0.02\% \text{ Mecánico}) + (-0.4\% \text{ Eléctrico}) \approx \mathbf{-0.38\%/\unit{\degreeCelsius}} \]
+Este error es inaceptable para un instrumento de precisión.
+
+\subsubsection{C. Solución: Resistencia de Compensación (Swamping Resistor)}
+
+Para solucionar el problema del cobre, se conecta una resistencia fija de Manganina en serie con la bobina móvil.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{circuitikz}
+    \draw (0,0) to[short, o-] (1,0) -- (1,2)
+    to[R, l=$R_\text{comp}$] (3,2)
+    to[rmeterwa, t=A, l=$R_\text{bobina}$] (5,2) -- (5,0)
+    to[short, -o] (6,0);
+    \draw (1,0) to[R, l=$R_\text{shunt}$] (5,0);
+  \end{circuitikz}
+  \caption{Compensación de temperatura mediante resistencia serie de Manganina.}
+  \label{fig:compensacion_temp}
+\end{figure}
+
+La idea es que la resistencia de Manganina ($R_\text{comp}$) sea mucho mayor que la de la bobina ($R_\text{bobina}$), por ejemplo, unas 9 veces mayor.
+\[ R_\text{total} = R_\text{bobina} + R_\text{comp} \]
+
+Al aumentar la temperatura:
+\begin{itemize}
+    \item $R_\text{bobina}$ sube un 40\% (ejemplo exagerado).
+    \item $R_\text{comp}$ no cambia (0\%).
+\end{itemize}
+Como $R_\text{comp}$ es la parte mayoritaria de la resistencia total, el cambio porcentual del conjunto se diluye. Matemáticamente, el coeficiente de temperatura efectivo baja de $0.4\%$ a apenas $0.04\%$.
+
+El costo de esta solución: Al agregar resistencia extra en serie, aumentamos la caída de tensión total del instrumento. Perdemos sensibilidad o ``cargamos'' más el circuito (Error de inserción), pero ganamos estabilidad térmica. Es una solución de compromiso.
+
+\subsection{Inestabilidad del Imán (Envejecimiento)}
+
+Con el paso de los años, los imanes permanentes tienden a relajarse y perder magnetismo de forma natural, lo que haría que el instrumento marque cada vez menos.
+\begin{itemize}
+    \item Prevención: En fábrica, los imanes se someten a un ``envejecimiento artificial'' (ciclos de calor y campos desmagnetizantes) para estabilizarlos antes de armar el instrumento.
+    \item Corrección: Si el error aparece con los años, se corrige ajustando el derivador magnético (ese tornillo de bypass que vimos al principio) para enviar más flujo a la bobina.
+\end{itemize}
+
+\subsection{Efectos Termoeléctricos (Parásitos)}
+
+Dentro del instrumento hay uniones de metales distintos (ej. la bobina de Cobre soldada a los resortes de Bronce o a resistencias de Manganina).
+Si existe un gradiente de temperatura dentro de la carcasa (un lado más caliente que otro), estas uniones actúan como termocuplas indeseadas, generando pequeñas tensiones (f.e.m. de Seebeck) que se suman o restan a la medición real.
+Solución: Diseño simétrico y evitar fuentes de calor cercanas a los terminales.
+
+\subsection{Campos Magnéticos Externos}
+
+Aunque el instrumento tiene su propio campo interno fuerte, un campo externo potente (transformadores, cables de alta corriente cercanos) puede sumar o restar fuerza a la aguja.
+Solución: Blindaje. El mecanismo se encierra en una carcasa de hierro dulce o acero que actúa como jaula magnética, desviando las líneas de campo externas por las paredes de la carcasa sin que toquen la bobina.
