@@ -68,14 +68,16 @@ Para poder medir CA, es necesario interponer un \textbf{rectificador} (diodos) q
 
 \subsubsection{Relación entre Valor Eficaz y Lectura}
 Supongamos un rectificador de media onda ideal. El instrumento recibirá corriente solo durante los semiciclos positivos.
-Si la tensión de entrada es $u(t) = U_{max} \sin(\omega t)$, el instrumento (que responde al valor promedio) indicará:
-\[ U_{\text{medio}} = \frac{1}{2\pi} \int_0^{\pi} U_{max} \sin(\alpha) d\alpha = \frac{U_{max}}{\pi} \]
+Si la tensión de entrada es $u(t) = U_\text{max} \sin(\omega t)$, el instrumento (que responde al valor promedio) indicará:
+\[ U_{\text{medio}} = \frac{1}{2\pi} \int_0^{\pi} U_\text{max} \sin(\alpha) d\alpha = \frac{U_\text{max}}{\pi} \]
 
-Sin embargo, en ingeniería nos interesa conocer el \textbf{Valor Eficaz} (RMS) de la tensión alterna, no su promedio rectificado. Sabiendo que para una senoidal $U_{max} = \sqrt{2} \cdot U_{RMS}$:
-\[ U_{\text{medio}} = \frac{\sqrt{2} \cdot U_{RMS}}{\pi} \approx 0.45 \cdot U_{RMS} \]
+Sin embargo, en ingeniería nos interesa conocer el \textbf{Valor Eficaz} (RMS) de la tensión alterna, no su promedio rectificado. Sabiendo que para una senoidal $U_\text{max} = \sqrt{2} \cdot U_\text{RMS}$:
+\[ U_{\text{medio}} = \frac{\sqrt{2} \cdot U_\text{RMS}}{\pi} \approx 0.45 \cdot U_\text{RMS} \]
 
 \textbf{Conclusión:} Cuando usamos un voltímetro de este tipo en alterna (con rectificador de media onda), la aguja se moverá hasta una posición proporcional a $0.45$ veces el valor eficaz. Para que el usuario lea directamente el valor eficaz, la escala se dibuja ``mentirosa'': se marcan los números multiplicados por $1/0.45 \approx 2.22$.
 \textit{Nota: Esta calibración solo es válida para ondas senoidales puras.}
+
+Al final del capítulo profundizamos cómo sería si rectificamos la onda completa.
 
 \subsection{Análisis de Consumo y Eficiencia}
 

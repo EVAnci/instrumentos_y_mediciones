@@ -33,7 +33,7 @@ La corriente que circula por el instrumento al conectar una incógnita $R_x$ es:
 Analicemos los casos extremos para entender la escala:
 \begin{enumerate}
     \item \textbf{Cortocircuito ($R_x = 0$):} Si unimos las puntas de prueba, la corriente es máxima.
-    \[ I_{max} = \frac{E}{R_i} \]
+    \[ I_\text{max} = \frac{E}{R_i} \]
     En este punto, ajustamos $R_\text{aj}$ (potenciómetro de ``Ajuste de Cero'') para que la aguja llegue exactamente al fondo de la escala. Por tanto, el \textit{Fondo de Escala corresponde a \qty{0}{\ohm}}.
 
     \item \textbf{Circuito Abierto ($R_x \to \infty$):} Si las puntas están separadas, la corriente es nula ($I=0$). La aguja no se mueve. Por tanto, el \textit{Inicio de la Escala (izquierda) corresponde a $\infty$}.
@@ -43,9 +43,9 @@ Analicemos los casos extremos para entender la escala:
 
 \subsubsection{Forma de la Escala y el Punto Medio}
 
-Si dividimos la ecuación general por la corriente máxima ($I_{max} = E/R_i$), obtenemos la deflexión relativa $F$:
+Si dividimos la ecuación general por la corriente máxima ($I_\text{max} = E/R_i$), obtenemos la deflexión relativa $F$:
 \[
-  F = \frac{I}{I_{max}} = \frac{\frac{E}{R_i+R_x}}{\frac{E}{R_i}} = \frac{R_i}{R_i + R_x} = \frac{1}{1 + \frac{R_x}{R_i}}
+  F = \frac{I}{I_\text{max}} = \frac{\frac{E}{R_i+R_x}}{\frac{E}{R_i}} = \frac{R_i}{R_i + R_x} = \frac{1}{1 + \frac{R_x}{R_i}}
 \]
 Llamando $\beta$ a la relación $R_x/R_i$, tenemos la ecuación universal de la escala:
 \[ F = \frac{1}{1 + \beta} \]
@@ -75,7 +75,7 @@ Si $R_i$ disminuye (porque bajamos $R_\text{aj}$ para compensar la batería), el
 
 \textbf{Ejemplo Numérico:}
 Supongamos un óhmetro diseñado para $E=\qty{4.5}{\volt}$ con una resistencia central de diseño de \qty{4500}{\ohm}.
-\[ I_{max} = \frac{4.5}{4500} = \qty{1}{\milli\ampere} \]
+\[ I_\text{max} = \frac{4.5}{4500} = \qty{1}{\milli\ampere} \]
 Si medimos una resistencia incógnita real de $R_x = \qty{5000}{\ohm}$, la corriente será:
 \[ I_{x} = \frac{4.5}{4500 + 5000} \approx \qty{0.47}{\milli\ampere} \]
 
@@ -110,7 +110,7 @@ Para medir bajas resistencias, se utiliza la configuración \textbf{Shunt}.
 \end{figure}
 
 Aquí, el instrumento actúa esencialmente como un voltímetro que mide la caída de tensión sobre la resistencia incógnita $R_x$. El circuito consta de una fuente $E$ y una resistencia limitadora serie $R_s$, y la incógnita se conecta en \textbf{paralelo} al instrumento.
-Es fundamental incluir un interruptor (normalmente un pulsador) para no descargar la batería, ya que al no medir nada ($R_x = \infty$) el circuito consume corriente máxima.
+Es fundamental incluir un interruptor (normalmente un pulsador) para no descargar la batería, ya que al no medir nada ($R_x = \infty$), sin embargo el circuito consume parte de la corriente que circula por el voltímetro, que mide la tensión de la batería.
 
 Analicemos los extremos:
 \begin{enumerate}
