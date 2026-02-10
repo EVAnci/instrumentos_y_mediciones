@@ -1,7 +1,244 @@
-\section{Instrumentos de hierro móvil}
+\chapter{Instrumentos de hierro móvil}
 
-\subsection{Ley de deflexión}
+En el capítulo \ref{chpt:ipbm} analizamos los instrumentos de IPBM, los cuales presentan una ley de deflexión lineal con la corriente. Como se ha señalado, esto presenta desventajas al medir corriente alterna (utilizando rectificador), ya que la escala está calibrada para señales con un factor de forma de 1.11 (sinusoidal). En consecuencia, al medir ondas no sinusoidales, las lecturas adolecen de un error sistemático que aumenta cuanto más difiera la señal del factor de forma de calibración.
 
-\subsection{Aplicaciones}
+Por el contrario, los instrumentos de hierro móvil, al igual que los electrodinámicos, son sumamente útiles para medir valores eficaces (RMS) de señales con distintas formas de onda, independientemente de su factor de forma.
 
-\subsection{Errores en el instrumento}
+\begin{figure}[!ht]
+  \centering
+  \begin{subfigure}[b]{0.50\textwidth}
+    \centering
+    \includegraphics[height=4.5cm]{chapters/3_unit/media/bin/hierro_movil_repulsion.png}
+    \caption{Tipo de repulsión.}
+    \label{fig:hm_repulsion}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.40\textwidth}
+    \centering
+    \includegraphics[height=5cm]{chapters/3_unit/media/bin/hierro_movil_atraccion.png}
+    \caption{Tipo de Atracción.}
+    \label{fig:hm_atraccion}
+  \end{subfigure}
+  \caption{Tipos de instrumentos de hierro móvil.}
+\end{figure}
+
+\section{Características constructivas}
+
+Los instrumentos de hierro móvil, también llamados ferromagnéticos, basan su funcionamiento en el campo magnético generado por la corriente que circula por una bobina fija. Deflexionan ante la presencia tanto de corriente continua como alterna.
+
+Existen dos variantes constructivas, esquematizadas en las figuras \ref{fig:hm_repulsion} y \ref{fig:hm_atraccion}:
+\begin{itemize}
+  \item Tipo atracción.
+  \item Tipo repulsión.
+\end{itemize}
+
+\subsection{Tipo atracción}
+
+La corriente a medir circula por una bobina fija, generando un campo magnético en su interior cuya intensidad es proporcional a la corriente $I$. Dentro de este campo se ubica una pieza de material ferromagnético (el hierro móvil), sujeta de forma asimétrica al eje de giro.
+
+Por efecto del campo magnético de la bobina, el hierro móvil se magnetiza y es atraído hacia el interior de la bobina (zona de mayor campo). Esta fuerza de atracción $F$ genera una cupla motora $C$ en el eje.
+
+Es fundamental notar que el hierro móvil no posee magnetismo permanente; su polaridad es inducida por el campo de la bobina. Por lo tanto, si se invierte el sentido de la corriente, se invierte simultáneamente la polaridad del campo y la del hierro, resultando siempre en una fuerza de atracción. Esto explica por qué el instrumento responde de igual manera ante corrientes de distinta polaridad o corrientes alternas.
+
+Al igual que en los instrumentos de IPBM, se utiliza un espiral o resorte para generar la cupla antagónica y retornar el sistema a la posición de cero en ausencia de corriente.
+
+Estos aparatos se caracterizan por su robustez. Mecánicamente, el hierro móvil tiene un límite físico de giro (cuando se alinea con el campo); magnéticamente, el material se satura. Esto implica que, ante una sobrecarga de corriente, el sistema móvil no sufre daños mecánicos excesivos por ``pasarse de escala''. Si la bobina se dimensiona con la capacidad térmica suficiente para disipar el calor, el instrumento puede soportar sobrecargas considerables (picos de corriente) sin dañarse, lo cual es una ventaja comparativa frente a otras tecnologías.
+
+\subsection{Tipo repulsión}
+
+En la figura \ref{fig:hm_repulsion} se observa el esquema del tipo denominado repulsión. En este diseño, dentro de la bobina se colocan dos piezas metálicas: una fija, sujeta a la cara interior de la bobina (hierro fijo), y otra solidaria al eje de giro (hierro móvil).
+
+El campo magnético $H$ generado por la bobina imana simultáneamente a ambas piezas con la misma polaridad en sus extremos adyacentes (se comportan como dos imanes enfrentados con polos iguales).
+
+Como es sabido, polos de igual polaridad se repelen. Esta fuerza de repulsión $F$ entre el hierro fijo y el móvil provoca el giro del eje. Al igual que el tipo atracción, este sistema cuenta con su resorte antagónico y un sistema de amortiguamiento para estabilizar la lectura.
+
+\section{Ley de deflexión}
+
+La ley de respuesta del instrumento puede deducirse a partir de la energía almacenada en el campo magnético de la bobina excitadora. Dicha energía $W$ (en Joules) se expresa como:
+\[
+  W=\frac{1}{2}Li^2
+\]
+donde $L$ es el coeficiente de autoinducción (inductancia) de la bobina en Henry, e $i$ la corriente excitadora en Amperios.
+
+Es importante notar que la inductancia $L$ no es constante. Al variar la posición relativa de los hierros (móvil y fijo, o móvil y bobina según el tipo), cambia la reluctancia del circuito magnético, modificando $L$ en función del ángulo de giro $\theta$.
+
+El par motor instantáneo ($C_m$) se origina por la variación de la energía magnética respecto al grado de libertad del sistema móvil (el ángulo $\theta$). Asumiendo que el sistema es lineal y no hay saturación magnética:
+\[
+  C_m = \frac{dW}{d\theta} = \frac{1}{2}i^2 \frac{dL}{d\theta}
+\]
+Esta expresión es válida siempre que la permeabilidad del hierro se considere constante para el rango de operación.
+
+Esta cupla motora debe ser equilibrada por la cupla antagónica ($C_r$) generada por el resorte, la cual responde a la ley de Hooke:
+\[
+  C_r = K_r \theta
+\]
+En el estado de equilibrio, el par motor iguala al par antagónico ($C_m=C_r$):
+\[
+  \frac{1}{2}i^2 \frac{dL}{d\theta} = K_r \theta
+\]
+Despejando la deflexión $\theta$:
+\begin{equation}\label{eq_deflexion_hierro_movil}
+  \theta = \frac{1}{2K_r} \frac{dL}{d\theta} i^2 
+\end{equation}
+La ecuación \eqref{eq_deflexion_hierro_movil} indica que la respuesta del instrumento es proporcional al cuadrado de la corriente y a la tasa de variación de la inductancia con el ángulo ($dL/d\theta$).
+
+\subsection{Respuesta en Corriente Continua y Escala}
+
+Si analizamos el funcionamiento en corriente continua ($i=I$), la ecuación se mantiene. De aquí se desprenden dos conclusiones fundamentales:
+\begin{enumerate}
+    \item Independencia de la polaridad: Dado que la deflexión depende de $I^2$, el sentido de giro es siempre el mismo, independientemente del signo de la corriente. Esto diferencia al hierro móvil del IPBM.
+    \item No linealidad: La escala natural del instrumento es cuadrática, lo que comprime las lecturas en la parte inicial y las expande en la final.
+\end{enumerate}
+
+La escala cuadrática limita la utilidad del instrumento en valores bajos, donde el error de lectura porcentual es muy elevado. Para mitigar esto, se busca constructivamente que la escala sea lo más uniforme posible. 
+
+En los instrumentos de repulsión, esto se logra diseñando la geometría de los hierros (fijo y móvil) para controlar cómo varía $L$ con el giro.
+
+Para obtener una escala perfectamente lineal (donde $\theta \propto I$), el término variable de la ecuación debería compensar al término cuadrático. Matemáticamente, esto implica:
+\[
+  \theta \propto i \implies i \propto \theta
+\]
+Sustituyendo en la ecuación de equilibrio, requerimos que:
+\[
+  \frac{dL}{d\theta} \propto \frac{1}{i} \approx \frac{1}{\theta}
+\]
+Integrando esta expresión para hallar cómo debería comportarse la inductancia $L$:
+\[
+  dL \approx \frac{d\theta}{\theta} \qquad \implies \qquad L(\theta) \approx \ln(\theta) + Cte
+\]
+Esto indica que, para linealizar la escala, la inductancia $L$ debe aumentar logarítmicamente: un crecimiento brusco al inicio de la escala y más suave al final. En la práctica, esto se puede aproximar mediante el diseño de las placas, logrando una escala ``casi'' uniforme, excepto en el primer 10\% del recorrido, donde las lecturas siguen siendo imprecisas (zona muerta).
+
+\subsection{Respuesta en Corriente Alterna}
+
+Si la corriente que circula por la bobina es alterna sinusoidal:
+\[
+  i(t) = I_{\text{pico}} \sin(\omega t)
+\]
+Reemplazando en la ecuación de equilibrio dinámico:
+\[
+  \theta(t) = \frac{1}{2K_r}\frac{dL}{d\theta} \left[ I_{\text{pico}} \sin(\omega t) \right]^2
+\]
+Utilizando la identidad trigonométrica $\sin^2(x) = \frac{1-\cos(2x)}{2}$, la expresión se descompone en dos términos:
+\begin{equation}
+  \theta(t) = \underbrace{\frac{1}{2K_r}\frac{dL}{d\theta}\frac{I_{\text{pico}}^2}{2}}_{\text{Término constante}} - \underbrace{\frac{1}{2K_r}\frac{dL}{d\theta}\frac{I_{\text{pico}}^2}{2}\cos(2\omega t)}_{\text{Término oscilatorio}}
+\end{equation}
+
+Aquí entra en juego la inercia del sistema móvil. La aguja y el hierro tienen una masa física que les impide seguir las variaciones rápidas del término oscilatorio (que vibra al doble de la frecuencia de la red, $2\omega$). El sistema mecánico actúa, en la práctica, como un filtro de paso bajo, integrando la señal.
+
+Por lo tanto, la aguja adopta una posición estable correspondiente al valor medio de la cupla. El término oscilatorio $\cos(2\omega t)$ tiene un valor medio nulo en un período, por lo que desaparece de la lectura final. 
+
+Recordando que para una senoidal $I_{\text{ef}} = I_{\text{pico}} / \sqrt{2}$, y por tanto $I_{\text{ef}}^2 = I_{\text{pico}}^2 / 2$, la deflexión final es:
+\begin{equation*}
+  \theta = \frac{1}{2K_r}\frac{dL}{d\theta} I_{\text{ef}}^2
+\end{equation*}
+Esto demuestra que el instrumento responde al cuadrado del valor eficaz de la corriente.
+
+\subsubsection{Medición de ondas no sinusoidales}
+
+Tal como se mencionó al inicio, una gran ventaja del hierro móvil es su capacidad para medir el valor eficaz verdadero (RMS) de ondas deformadas. Supongamos una corriente compuesta por una fundamental y armónicos:
+\begin{equation}\label{eq:corriente_armonicos}
+  i(t) = I_1\sin(\omega t) + I_2\sin(2\omega t) + I_3 \sin(3\omega t) + \dots
+\end{equation}
+La cupla motora es proporcional al cuadrado de esta suma: $i(t)^2$. Al desarrollar el cuadrado de este polinomio, aparecen dos tipos de términos:
+\begin{enumerate}
+    \item Términos cuadráticos: $I_n^2 \sin^2(n\omega t)$. Su valor medio es distinto de cero (aportan a la deflexión).
+    \item Términos cruzados (productos): $2 \cdot I_n I_m \sin(n\omega t)\sin(m\omega t)$ con $n \neq m$.
+\end{enumerate}
+
+Debido a la propiedad de ortogonalidad de las funciones senoidales armónicas, el valor medio (la integral en un período) de los productos cruzados es nulo. Por ende, no generan cupla motora neta.
+
+El instrumento solo responderá a la suma de los valores medios de los términos cuadráticos:
+\begin{equation}
+  \theta \propto \text{ValorMedio}(i^2) = \frac{I_1^2}{2} + \frac{I_2^2}{2} + \frac{I_3^2}{2} + \dots
+\end{equation}
+Dado que el valor eficaz de cada componente es $I_{n,\text{ef}} = I_n / \sqrt{2}$, llegamos a:
+\[
+  \theta \propto I_{1,\text{ef}}^2 + I_{2,\text{ef}}^2 + I_{3,\text{ef}}^2 + \dots = I_{\text{Total,ef}}^2
+\]
+En conclusión, el instrumento de hierro móvil mide la suma cuadrática de las componentes, que es exactamente la definición del valor eficaz total de una onda compleja.
+
+\section{Aplicaciones: Amperímetro y voltímetro}
+
+Los instrumentos de hierro móvil son, en esencia, amperímetros. Su deflexión depende de la intensidad del campo magnético, el cual es proporcional al producto del número de espiras de la bobina por la corriente que circula por ellas (amper-vueltas).
+
+Generalmente, se construyen para un solo alcance. Un instrumento de hierro móvil típico requiere para su deflexión total una fuerza magnetomotriz de entre 200 y 300 amper-vueltas ($Av$).
+
+Esto define directamente la construcción de la bobina según el alcance deseado. Por ejemplo, si se requieren $300\, Av$ para la deflexión a plena escala:
+\begin{itemize}
+    \item Para un amperímetro de \qty{300}{\ampere}, la bobina estará formada por una única espira ($N=1$) de gran sección.
+    \item Para un miliamperímetro de \qty{100}{\milli\ampere}, se necesitarán entre 2000 y 3000 vueltas de conductor fino.
+\end{itemize}
+
+Aquí surge una limitación importante para medir corrientes muy pequeñas: al aumentar el número de vueltas, la impedancia de la bobina crece considerablemente. Al insertar este miliamperímetro en el circuito, su alta impedancia modifica la corriente original, provocando un gran error de inserción. Por esta razón, rara vez se fabrican miliamperímetros de hierro móvil con alcances menores a \qty{100}{\milli\ampere}.
+
+\subsection{Ampliación de alcance en Amperímetros}
+
+En corriente alterna, para medir corrientes elevadas (superiores a los alcances directos de \qty{100}{\ampere}), se utilizan amperímetros de alcance estándar de \qty{5}{\ampere} conectados a través de transformadores de intensidad (TI). De esta manera, es posible medir corrientes de hasta \qty{10000}{\ampere} o más.
+
+Es fundamental notar que en estos instrumentos no se debe usar shunts resistivos para ampliar el alcance, a diferencia de los instrumentos de bobina móvil (IPBM). Esto se debe a dos razones:
+\begin{enumerate}
+    \item Error de frecuencia: La bobina del instrumento tiene una inductancia significativa, mientras que el shunt es puramente resistivo. La distribución de corriente entre ambos dependería de la frecuencia, introduciendo errores graves.
+    \item Consumo: El consumo de potencia del instrumento de hierro móvil es elevado. Si se usara un shunt, la potencia disipada en el conjunto sería inaceptablemente alta.
+\end{enumerate}
+
+\subsection{Voltímetros}
+
+Los voltímetros de hierro móvil consisten, constructivamente, en un miliamperímetro (la bobina excitadora) conectado en serie con una resistencia adicional no inductiva, generalmente de manganina.
+
+El valor de esta resistencia serie debe ser elevado en comparación con la de la bobina (típicamente mayor a 10 veces). El objetivo es que la caída de tensión en la bobina sea una fracción pequeña de la tensión total a medir. Esto minimiza dos tipos de errores:
+\begin{itemize}
+    \item Error por temperatura: La resistencia de cobre de la bobina varía con la temperatura, pero la resistencia de manganina es estable. Al ser esta última la dominante, el cambio total es despreciable.
+    \item Error por frecuencia: Al aumentar la resistencia óhmica total frente a la reactancia inductiva de la bobina ($R \gg X_L$), la impedancia total del voltímetro se vuelve menos dependiente de la frecuencia.
+\end{itemize}
+
+Cabe destacar que el consumo de los instrumentos de hierro móvil es superior al de los de imán permanente (IPBM). Mientras que un voltímetro de tablero IPBM de \qty{150}{\volt} consume aproximadamente \qty{1}{\watt}, uno de hierro móvil de características similares puede requerir hasta cinco veces esa potencia (\qty{5}{\watt}), dado que la eficiencia en la conversión de energía eléctrica a mecánica es menor.
+
+\subsection{Ventajas constructivas}
+
+A pesar de su mayor consumo y limitaciones en bajos alcances, estos instrumentos gozan de gran difusión debido a su simplicidad, bajo costo y, sobre todo, su robustez.
+
+Una característica clave es que la corriente no circula por los resortes antagónicos (a diferencia del sistema IPBM), lo que evita que se recalienten o destruyan ante una sobrecarga. Además, la bobina posee una gran capacidad térmica y el hierro se satura magnéticamente ante corrientes excesivas, limitando la fuerza mecánica sobre la aguja. Esto permite que soporten sobrecargas momentáneas de hasta 100 veces el valor nominal sin sufrir daños permanentes.
+
+\section{Errores en el instrumento}
+
+Los instrumentos de hierro móvil están sujetos a diversos errores sistemáticos. Los más significativos son aquellos debidos a la temperatura, la influencia de campos magnéticos externos, la histéresis del material ferromagnético, las variaciones de frecuencia y la forma de onda de la señal medida.
+
+\subsection{Errores por temperatura}
+
+Las variaciones de temperatura (ya sean ambientales o por el autocalentamiento de las bobinas debido al efecto Joule) afectan la precisión del instrumento de tres formas principales:
+
+\begin{itemize}
+  \item \textbf{Alteración de la constante elástica:} El módulo de elasticidad de los resortes o espirales disminuye al aumentar la temperatura, reduciendo la cupla antagónica para una misma deflexión.
+  \item \textbf{Dilatación mecánica:} Las expansiones térmicas de los elementos de fijación pueden alterar la alineación entre pivotes y cojinetes, modificando la fricción y la posición del cero.
+  \item \textbf{Variación de la resistencia óhmica:} Este es el efecto más crítico, especialmente en voltímetros. El cobre aumenta su resistencia aproximadamente un \qty{0.4}{\percent} por cada \unit{\degreeCelsius}.
+  \begin{itemize}
+      \item En los \textbf{amperímetros}, este error es despreciable, ya que la corriente es impuesta por el circuito externo y no varía aunque cambie la resistencia interna del instrumento (siempre que esta sea baja frente a la carga).
+      \item En los \textbf{voltímetros}, el error es significativo. Al aumentar la resistencia interna $R_v$ con la temperatura, la corriente que circula por la bobina disminuye para una misma tensión aplicada ($I=V/R_v$), provocando una lectura menor a la real. Para mitigar esto, se conecta en serie una resistencia de aleación (como manganina) con bajo coeficiente de temperatura, que constituye la mayor parte de la resistencia total del instrumento.
+  \end{itemize}
+\end{itemize}
+
+\subsection{Campos magnéticos externos}
+
+Dado que el campo magnético de operación de estos instrumentos es relativamente débil (pocos mili-Tesla), son muy susceptibles a campos externos o parásitos. La magnitud del error depende de la intensidad del campo perturbador, de su dirección relativa al campo interno y del blindaje del aparato.
+
+Este efecto es particularmente crítico en entornos industriales con barras conductoras que transportan altas corrientes. La solución constructiva estándar consiste en encerrar el mecanismo de medida en blindajes de alta permeabilidad magnética (como el Mumetal) que ``apantallan'' el sistema móvil.
+
+\subsection{Errores por histéresis}
+
+El material ferromagnético del hierro móvil presenta histéresis, lo que significa que su magnetización no sigue instantáneamente a la corriente excitadora, sino que depende de su estado magnético previo.
+
+Esto se manifiesta claramente en corriente continua: al calibrar el instrumento, se obtienen lecturas ligeramente diferentes para una misma corriente dependiendo de si se alcanza el valor aumentando (ascendente) o disminuyendo (descendente) la intensidad. Este error se minimiza utilizando aleaciones de muy baja retentividad y reduciendo la masa del hierro móvil.
+
+\subsection{Errores debidos a la variación de frecuencia}
+
+El flujo magnético alterno induce corrientes parásitas (de Foucault) en las partes metálicas cercanas a la bobina. Estas corrientes generan un campo magnético opuesto (ley de Lenz) que debilita el campo principal, reduciendo la deflexión.
+
+Para combatir este efecto desmagnetizante, se evitan los carretes o soportes metálicos para la bobina, prefiriéndose materiales no conductores como plásticos o baquelita.
+
+\subsection{Errores por forma de onda}
+
+Aunque los instrumentos de hierro móvil son teóricamente de ``verdadero valor eficaz'' (True RMS), existe una limitación práctica: la saturación magnética.
+
+La permeabilidad $\mu$ del hierro no es constante, sino que disminuye drásticamente si el material se satura. Si se miden señales con un factor de cresta elevado (picos muy altos respecto al valor eficaz), los picos de corriente pueden llevar al hierro a la zona de saturación. En ese instante, la relación cuadrática se pierde y la lectura será inferior al valor real.
+
+Este error suele ser más crítico en amperímetros, ya que las corrientes de carga en redes modernas (con rectificadores, variadores, etc.) suelen tener mayor distorsión armónica que la tensión de red. Para minimizarlo, se diseñan los instrumentos para que, a plena escala, el hierro trabaje aún en la zona lineal de su curva de magnetización ($B-H$).
