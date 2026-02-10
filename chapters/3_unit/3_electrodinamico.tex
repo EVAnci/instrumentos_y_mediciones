@@ -1,14 +1,149 @@
-\section{Instrumentos electrodinámicos}
+\chapter{Instrumentos electrodinámicos}
 
-\subsection{Ley de deflexión}
+Los instrumentos electrodinámicos están constituidos por dos bobinas cruzadas a \qty{90}{\degree}; una de las cuales es fija y la otra es móvil. La cupla motriz es producida por la interacción de los campos magnéticos producidos en ambas bobinas cuando por ellas circula una corriente.
 
-\subsection{Electrodinámico con hierro}
+Estos instrumentos podrían utilizarse como amperímetros o voltímetros conectando ambas bobinas en serie y los shunt convenientes. Pero sin embargo su utilidad más importante es como \emph{vatímetro} en la medición de la potencia eléctrica $P$ (Potencia Activa).
 
-\subsection{Amperímetro serie}
+En el caso del vatímetro, la bobina fija de baja resistencia interna, se conecta en serie con la carga para que mida la corriente, y se denomina bobina amperométrica. La bobina móvil de elevada resistencia interna, se conecta en paralelo con la carga de tal manera que mida la tensión, y se denomina la bobina voltimétrica.
 
-\subsection{Amperímetro conexión paralelo}
+La cupla amortiguante es provocada por una paleta o émbolo.
 
-\subsection{Voltímetro}
+\section{Ley de deflexión}
+
+El campo magnético formado por la bobina fija es, en todo momento, proporcional al valor instantáneo de la intensidad que la recorre: \(i_A \sim B\). Así mismo, la intensidad en la bobina móvil es proporcional a la tensión \(i_u \sim u\)
+
+En la bobina móvil aparece una cupla cuyos valores instantáneos $C_m$ son proporcionales al producto de la inducción y la intensidad
+\[
+  C_m \sim B\cdot i_u \sim i_A \cdot u \sim p
+\]
+que es proporcional al producto de la intensidad \(i_A\) en la bobina fija y la tensión \(u\) aplicada a la bobina móvil, es decir, a la potencia instantánea \(p\).
+
+Como la potencia activa \(P\) es el valor medio de las potencias instantáneas \(p\), resulta que
+\[
+  P_\text{med} = P=V\cdot I\cdot \cos(\varphi) \sim (C_m)_\text{med}
+\]
+El sistema móvil del instrumento, por su inercia, se comporta como un convertidor de cupla: La cupla entrante, alternativa, asimétrica $C_m$ queda convertida en una cupla de salida de valor constante $(C_m)_\text{med}$ que se aplica sobre los resortes, haciéndolos ceder el ángulo $\alpha$. Llamando $C_r$ a la cupla de los resortes se tiene que:
+\[
+  (C_m)_\text{med} = C_d \sim \alpha
+\]
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{chapters/3_unit/media/bin/electrodinamico.pdf}
+  \caption{Instrumento electrodinámico.}
+\end{figure}
+
+\section{Análisis de la Cupla y Ley de Deflexión}
+
+Para entender el movimiento, partimos de la energía magnética almacenada en el sistema de dos bobinas. La cupla motriz instantánea \(C_m(t)\) que tiende a girar la bobina móvil está dada por la variación de la energía magnética respecto al ángulo de giro \(\alpha\):
+
+\begin{equation}
+    C_m(t) = i_f(t) \cdot i_m(t) \cdot \frac{dM}{d\alpha}
+\end{equation}
+
+Donde:
+\begin{itemize}
+    \item \(i_f, i_m\): Corrientes instantáneas en bobina fija y móvil.
+    \item \(M\): Inductancia mutua entre las bobinas (depende de la posición \(\alpha\)).
+\end{itemize}
+
+Esta cupla motriz se equilibra con la cupla antagonista de los resortes \(C_r = k \cdot \alpha\). Analicemos cómo resulta la deflexión final \(\alpha\) en cada régimen.
+
+\subsection{Caso 1: Corriente Continua (CC)}
+En corriente continua, las intensidades son constantes (\(I_F\) e \(I_M\)). La cupla motriz es constante y la aguja se desplaza hasta que se iguala con el resorte:
+
+\[
+    C_m = I_F \cdot I_M \cdot \frac{dM}{d\alpha} = k \cdot \alpha
+\]
+
+Por lo tanto, la \textbf{ley de deflexión para CC} es:
+\begin{equation}
+    \alpha = \frac{I_F \cdot I_M}{k} \cdot \frac{dM}{d\alpha}
+\end{equation}
+
+\textit{Nota conceptual:} Si se usa como amperímetro (las dos bobinas en serie, \(I_F=I_M=I\)), la escala es cuadrática (\(\alpha \sim I^2\)). Si se usa como vatímetro, es lineal respecto a la potencia.
+
+\subsection{Caso 2: Corriente Alterna (CA)}
+En alterna, las corrientes varían sinusoidalmente con el tiempo. Supongamos que están desfasadas un ángulo \(\phi\) (que corresponde al desfase tensión-corriente de la carga):
+\[
+    i_f(t) = I_{max\_f} \sin(\omega t) \quad \text{y} \quad i_m(t) = I_{max\_m} \sin(\omega t - \phi)
+\]
+
+La cupla instantánea oscila al doble de la frecuencia de la red (100 Hz o 120 Hz). Sin embargo, el sistema móvil tiene \textbf{inercia mecánica} y no puede seguir esas oscilaciones tan rápidas. Por tanto, la aguja toma la posición correspondiente al \textbf{valor medio} de la cupla:
+
+\[
+    (C_m)_{\text{med}} = \frac{1}{T} \int_0^T i_f \cdot i_m \cdot \frac{dM}{d\alpha} \, dt
+\]
+
+Resolviendo la integral del producto de senos, obtenemos que el valor medio depende de los valores eficaces (\(I_{rms}\)) y el coseno del ángulo de desfase:
+
+\[
+    (C_m)_{\text{med}} = I_F \cdot I_M \cdot \cos(\phi) \cdot \frac{dM}{d\alpha}
+\]
+
+Igualando con el resorte (\(k \cdot \alpha\)), obtenemos la \textbf{ley de deflexión para CA}:
+
+\begin{equation}
+    \alpha = \frac{I_F \cdot I_M \cdot \cos(\phi)}{k} \cdot \frac{dM}{d\alpha}
+\end{equation}
+
+\subsection{Conclusión para el Vatímetro}
+Si aplicamos lo anterior al uso como vatímetro:
+\begin{itemize}
+    \item La corriente fija es la de línea: \(I_F = I\).
+    \item La corriente móvil es proporcional a la tensión: \(I_M = \frac{V}{R_V}\).
+\end{itemize}
+
+Sustituyendo en la ecuación de CA:
+\[
+    \alpha = \frac{I \cdot (V/R_V) \cdot \cos(\phi)}{k} \cdot \frac{dM}{d\alpha} = \left( \frac{1}{k \cdot R_V} \frac{dM}{d\alpha} \right) \cdot (V \cdot I \cdot \cos \phi)
+\]
+
+\[
+    \alpha = K \cdot P_{\text{activa}}
+\]
+
+La deflexión es \textbf{linealmente proporcional a la Potencia Activa}.
+
+\section{Aplicación como Amperímetro y Voltímetro}
+
+La característica principal de usar el instrumento electrodinámico para medir corriente o tensión es que permite obtener el \textbf{Valor Eficaz Verdadero} (True RMS), tanto para CC como para CA, incluso si la forma de onda no es senoidal pura.
+
+Esto ocurre porque la deflexión depende del cuadrado de la magnitud medida.
+
+\subsection{Como Amperímetro}
+\textbf{Conexión:}
+Las dos bobinas (fija y móvil) se conectan en \textbf{serie} entre sí y en serie con la carga.
+
+\textbf{¿Por qué?}
+Necesitamos que la misma corriente \(I\) que genera el campo magnético (en la fija) sea la que atraviesa la bobina móvil.
+\[
+    \alpha \propto I_{\text{fija}} \cdot I_{\text{móvil}} = I \cdot I = I^2
+\]
+Al depender de \(I^2\), la aguja siempre deflecta en el mismo sentido (positivo), sin importar si la corriente es positiva o negativa.
+
+\textbf{Características:}
+\begin{itemize}
+    \item Para corrientes pequeñas (miliamperios), pasan directamente por las bobinas.
+    \item Para corrientes grandes, se suelen poner las bobinas en paralelo entre sí (con shunts), pero el principio sigue siendo que ambas reciben una proporción de la corriente total.
+    \item La escala es \textbf{cuadrática} (comprimida al inicio, expandida al final).
+\end{itemize}
+
+\subsection{Como Voltímetro}
+\textbf{Conexión:}
+Las dos bobinas (fija y móvil) se conectan en \textbf{serie} entre sí, y a su vez en serie con una gran resistencia limitadora (R\textsubscript{s}). Todo el conjunto se conecta en paralelo a la fuente o carga a medir.
+
+\textbf{¿Por qué?}
+La resistencia transforma la tensión \(V\) en una corriente pequeña \(i\) proporcional (\(i = V/R\)). Al estar las bobinas en serie, esa misma corriente recorre ambas.
+\[
+    \alpha \propto i \cdot i \propto \left(\frac{V}{R}\right) \cdot \left(\frac{V}{R}\right) \propto V^2
+\]
+De nuevo, al medir \(V^2\), obtenemos el valor eficaz de la tensión.
+
+\textbf{Características:}
+\begin{itemize}
+    \item Consume bastante potencia propia comparado con otros voltímetros (debido a la corriente necesaria para crear el campo magnético).
+    \item Al igual que el amperímetro, tiene una escala cuadrática.
+\end{itemize}
 
 \subsection{Vatímetro}
 
