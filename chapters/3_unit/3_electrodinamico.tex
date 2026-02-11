@@ -2,7 +2,7 @@
 
 Los instrumentos electrodinámicos están constituidos por dos bobinas cruzadas a \qty{90}{\degree}; una de las cuales es fija y la otra es móvil. La cupla motriz es producida por la interacción de los campos magnéticos producidos en ambas bobinas cuando por ellas circula una corriente.
 
-Estos instrumentos podrían utilizarse como amperímetros o voltímetros conectando ambas bobinas en serie y los shunt convenientes. Pero sin embargo su utilidad más importante es como \emph{vatímetro} en la medición de la potencia eléctrica $P$ (Potencia Activa).
+Estos instrumentos podrían utilizarse como amperímetros o voltímetros conectando ambas bobinas en serie y los shunt convenientes. Pero sin embargo su utilidad más importante es como \emph{vatímetro} en la medición de la potencia eléctrica \(P\) (Potencia Activa).
 
 En el caso del vatímetro, la bobina fija de baja resistencia interna, se conecta en serie con la carga para que mida la corriente, y se denomina bobina amperométrica. La bobina móvil de elevada resistencia interna, se conecta en paralelo con la carga de tal manera que mida la tensión, y se denomina la bobina voltimétrica.
 
@@ -10,21 +10,21 @@ La cupla amortiguante es provocada por una paleta o émbolo.
 
 \section{Ley de deflexión}
 
-El campo magnético formado por la bobina fija es, en todo momento, proporcional al valor instantáneo de la intensidad que la recorre: \(i_A \sim B\). Así mismo, la intensidad en la bobina móvil es proporcional a la tensión \(i_u \sim u\)
+El campo magnético formado por la bobina fija es, en todo momento, proporcional al valor instantáneo de la intensidad que la recorre: \(i_A \propto B\). Así mismo, la intensidad en la bobina móvil es proporcional a la tensión \(i_u \propto u\)
 
-En la bobina móvil aparece una cupla cuyos valores instantáneos $C_m$ son proporcionales al producto de la inducción y la intensidad
+En la bobina móvil aparece una cupla cuyos valores instantáneos \(C_m\) son proporcionales al producto de la inducción y la intensidad
 \[
-  C_m \sim B\cdot i_u \sim i_A \cdot u \sim p
+  C_m \propto B\cdot i_u \propto i_A \cdot u \propto p
 \]
 que es proporcional al producto de la intensidad \(i_A\) en la bobina fija y la tensión \(u\) aplicada a la bobina móvil, es decir, a la potencia instantánea \(p\).
 
 Como la potencia activa \(P\) es el valor medio de las potencias instantáneas \(p\), resulta que
 \[
-  P_\text{med} = P=V\cdot I\cdot \cos(\varphi) \sim (C_m)_\text{med}
+  P_\text{med} = P=V\cdot I\cdot \cos(\varphi) \propto (C_m)_\text{med}
 \]
-El sistema móvil del instrumento, por su inercia, se comporta como un convertidor de cupla: La cupla entrante, alternativa, asimétrica $C_m$ queda convertida en una cupla de salida de valor constante $(C_m)_\text{med}$ que se aplica sobre los resortes, haciéndolos ceder el ángulo $\alpha$. Llamando $C_d$ a la cupla de los resortes se tiene que:
+El sistema móvil del instrumento, por su inercia, se comporta como un convertidor de cupla: La cupla entrante, alternativa, asimétrica \(C_m\) queda convertida en una cupla de salida de valor constante \((C_m)_\text{med}\) que se aplica sobre los resortes, haciéndolos ceder el ángulo \(\alpha\). Llamando \(C_d\) a la cupla de los resortes se tiene que:
 \[
-  (C_m)_\text{med} = C_d \sim \alpha
+  (C_m)_\text{med} = C_d \propto \alpha
 \]
 \begin{figure}[!ht]
   \centering
@@ -60,7 +60,7 @@ Por lo tanto, la \textbf{ley de deflexión para CC} es:
     \alpha = \frac{I_F \cdot I_M}{k} \cdot \frac{dM}{d\alpha}
 \end{equation}
 
-\textit{Nota conceptual:} Si se usa como amperímetro (las dos bobinas en serie, \(I_F=I_M=I\)), la escala es cuadrática (\(\alpha \sim I^2\)). Si se usa como vatímetro, es lineal respecto a la potencia.
+\textit{Nota conceptual:} Si se usa como amperímetro (las dos bobinas en serie, \(I_F=I_M=I\)), la escala es cuadrática (\(\alpha \propto I^2\)). Si se usa como vatímetro, es lineal respecto a la potencia.
 
 \subsection{Caso 2: Corriente Alterna (CA)}
 En alterna, las corrientes varían sinusoidalmente con el tiempo. Supongamos que están desfasadas un ángulo \(\phi\) (que corresponde al desfase tensión-corriente de la carga):
@@ -152,6 +152,48 @@ Un vatímetro es un instrumento que presenta cuatro bornes. Dos de ellos corresp
 Los vatímetros son instrumentos caros y su costo se incrementa en función de la clase, siendo común encontrarlos en clases 0,1; 0,2; 0,5; 1 y 2.
 
 En general, se puede apreciar que el principio de funcionamiento de estos instrumentos es muy similar a los de ipbm, salvo que el campo magnético que producía el imán permanente, es ahora producido por otro bobinado, lo cual les da la posibilidad de funcionar tanto en corriente continua como en corriente alterna, por cuanto las polaridades se invierten de forma simultánea en ambos bobinados.
+
+\section*{Notas Conceptuales: Interpretación Física}
+\addcontentsline{toc}{section}{Notas Conceptuales: Interpretación Física}
+
+Para cerrar el tema, es fundamental entender intuitivamente la diferencia entre este instrumento y los de imán permanente (PMMC), y por qué las escalas cambian según el uso.
+
+\subsection*{1. ¿Por qué la escala es cuadrática en Amperímetros y Voltímetros?}
+En un instrumento de imán permanente, el campo magnético \(B\) es fijo (lo genera el imán). La fuerza solo depende de la corriente de la bobina móvil (\(F \propto I\)).
+
+En el \textbf{electrodinámico}, no hay imanes. El campo \(B\) lo genera la corriente que pasa por la bobina fija. Esto crea un ``efecto doble'':
+\begin{enumerate}
+    \item Si aumenta la corriente, aumenta el campo magnético (\(B \propto I\)).
+    \item Si aumenta la corriente, aumenta la fuerza en la bobina móvil.
+\end{enumerate}
+
+Matemáticamente, la deflexión \(\alpha\) responde al producto de ambas corrientes (que en este caso son la misma):
+\[
+    \alpha \propto B_{\text{fija}} \cdot I_{\text{móvil}} \propto I \cdot I = I^2
+\]
+Esto explica por qué la aguja apenas se mueve con corrientes bajas y se dispara con corrientes altas. Además, como el cuadrado de un número negativo es positivo (\((-I) \cdot (-I) = I^2\)), el instrumento siempre deflecta en el mismo sentido, permitiendo medir el valor eficaz (RMS) tanto en CC como en CA.
+
+\subsection*{2. El ``misterio'' de la Inductancia Mutua (\(M\))}
+Aparece el término \(\frac{dM}{d\alpha}\) en todas las ecuaciones. ¿Qué significa físicamente?
+
+Podemos ver a \(M\) como el ``grado de acoplamiento'' entre las dos bobinas.
+\begin{itemize}
+    \item Cuando las bobinas están paralelas, el acoplamiento es máximo.
+    \item La derivada \(\frac{dM}{d\alpha}\) representa la ``intención'' del sistema de buscar esa posición de máximo acoplamiento.
+\end{itemize}
+La aguja se mueve simplemente porque las leyes del electromagnetismo buscan que la energía magnética del sistema sea mínima (o el flujo concatenado sea máximo), alineando los campos de la bobina fija y la móvil.
+
+\subsection*{3. ¿Por qué el Vatímetro SÍ es lineal?}
+A diferencia del amperímetro, en el vatímetro separamos las funciones:
+\begin{itemize}
+    \item La \textbf{Bobina Fija} ve solo la Corriente (\(I\)).
+    \item La \textbf{Bobina Móvil} ve solo la Tensión (\(V\)).
+\end{itemize}
+La aguja responde al producto de estos dos campos independientes:
+\[
+    \alpha \propto I_{\text{fija}} \cdot I_{\text{móvil}} \propto I \cdot V = P
+\]
+Como la deflexión es proporcional a la potencia \(P\) (y no al cuadrado de una sola magnitud), la escala resulta \textbf{lineal} y uniforme.
 
 \subsection{Vatímetro compensado}
 
